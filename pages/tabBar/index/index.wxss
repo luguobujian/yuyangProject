@@ -1,0 +1,144 @@
+/* pages/tabBar/index/index.wxss */
+
+.tab-h-view {
+  width: 100%;
+  height: 92rpx;
+  background-color: #f6f6f6;
+  border-bottom: 1rpx solid #dedede;
+}
+
+.tab-h {
+  width: 100%;
+  padding-left: 16rpx;
+  box-sizing: border-box;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.tab-item {
+  display: inline-block;
+  width: 120rpx;
+  color: #777;
+  font-size: 28rpx;
+  line-height: 90rpx;
+  text-align: center;
+  margin: 0 14rpx;
+  box-sizing: border-box;
+}
+
+.tab-item.active {
+  color: #f90;
+  border-bottom: 4rpx solid #f90;
+}
+
+.car-info-view {
+  border-top: 1rpx solid #fff;
+  background-color: #fff;
+  margin-bottom: 8rpx;
+}
+
+.car-image-view image {
+  display: block;
+  width: 314rpx;
+  height: 180rpx;
+  background: skyblue;
+  margin: 40rpx auto;
+}
+
+.car-txt-info {
+  margin: 0 40rpx;
+}
+
+.car-txt-item {
+  display: inline-block;
+  color: #777;
+  font-size: 28rpx;
+  text-align: center;
+  padding-bottom: 20rpx;
+}
+
+.car-txt-item.one {
+  width: 28%;
+}
+
+.car-txt-item.two {
+  width: 44%;
+}
+
+.car-txt-item view {
+  display: inline-block;
+  color: #343434;
+}
+
+.address-view {
+  margin-bottom: 8rpx;
+}
+
+.address-view view {
+  color: #777;
+  background-color: #fff;
+}
+
+.address-view view image {
+  width: 38rpx;
+  height: 38rpx;
+  padding: 24rpx;
+  vertical-align: middle;
+}
+
+.address-view view view {
+  display: inline-block;
+  font-size: 28rpx;
+}
+
+.address-view view view.address-info {
+  /* line-height: 90rpx; */
+}
+
+.address-view view view.arrow {
+  font-size: 40rpx;
+  line-height: 84rpx;
+  float: right;
+  margin-right: 30rpx;
+}
+
+.rimg {
+  float: right;
+}
+
+.add-info .user-info-con {
+  color: #343434;
+  margin-left: 90rpx;
+}
+
+.add-info .user-info-con.o1 {
+  margin-left: 56rpx;
+}
+
+.btn-view {
+  margin: 26rpx 22rpx 20rpx;
+}
+
+.btn-view button {
+  color: #fff;
+  font-size: 34rpx;
+}
+
+.btn-view button.btn01 {
+  display: inline-block;
+  width: 39%;
+  background-color: #6c3;
+}
+
+.btn-view button.btn02 {
+  float: right;
+  display: inline-block;
+  width: 59%;
+  background-color: #f60;
+}
+
+.btm-info {
+  color: #9f9f9f;
+  font-size: 26rpx;
+  text-align: center;
+}

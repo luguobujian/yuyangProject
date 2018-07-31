@@ -1,0 +1,50 @@
+{
+  "pages": [
+    "pages/tabBar/index/index",
+    "pages/tabBar/order/order",
+    "pages/tabBar/me/me"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#03a9f4",
+    "navigationBarTitleText": "煜阳商配",
+    "navigationBarTextStyle": "light"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#333",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/tabBar/index/index",
+        "iconPath": "image/icon/index.png",
+        "selectedIconPath": "image/icon/index_c.png",
+        "text": "用车",
+        "color": "#ccc"
+      },
+      {
+        "pagePath": "pages/tabBar/order/order",
+        "iconPath": "image/icon/order.png",
+        "selectedIconPath": "image/icon/order_c.png",
+        "text": "订单",
+        "color": "#ccc"
+      },
+      {
+        "pagePath": "pages/tabBar/me/me",
+        "iconPath": "image/icon/me.png",
+        "selectedIconPath": "image/icon/me_c.png",
+        "text": "我的",
+        "color": "#ccc"
+      }
+    ]
+  },
+  "subPackages": [
+    {
+      "root": "pages/index/",
+      "pages": [
+        "pages/getAddress/getAddress"
+      ]
+    }
+  ]
+}
