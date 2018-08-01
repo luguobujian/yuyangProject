@@ -43,7 +43,11 @@
     {
       "root": "pages/index/",
       "pages": [
-        "pages/getAddress/getAddress"
+        "pages/getAddress/getAddress",
+        "pages/contact/contact",
+        "pages/instant/instant",
+        "pages/goOrder/goOrder",
+        "pages/protocol/protocol"
       ]
     }
   ]

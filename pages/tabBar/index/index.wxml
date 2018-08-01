@@ -32,14 +32,14 @@
     </view>
   </view>
   <view class='address-view'>
-    <view class='back bb' bindtap='goGetAddress'>
+    <view class='back bb' bindtap='bindGoGetAddress'>
       <image src='../../../image/icon/car.png'></image>
       <view class="address-info">
         请选择发货地址
       </view>
       <view class='arrow'>›</view>
     </view>
-    <view class='go' bindtap='goGetAddress'>
+    <view class='go' bindtap='bindGoGetAddress'>
       <image src='../../../image/icon/add.png'></image>
       <view class="address-info">
         请选择收货地址
@@ -70,7 +70,7 @@
       <view class='user-info-con'>
         狗蛋啊
       </view>
-      <image class='rimg' src='../../../image/icon/tel_btn.png'></image>
+      <image class='rimg' src='../../../image/icon/tel_btn.png'  bindtap="bindGoGetContact"></image>
     </view>
     <view class=''>
       <image src='../../../image/icon/tel.png'></image>
@@ -83,8 +83,8 @@
     </view>
   </view>
   <view class='btn-view'>
-    <button class='btn01'>一键叫车</button>
-    <button class='btn02'>确认用车</button>
+    <button class='btn01' bindtap='facility'>一键叫车</button>
+    <button class='btn02' bindtap='bindGoOrder'>确认用车</button>
   </view>
   <view class='btm-info'>
     不知道怎样操作？试试“一键叫车”吧。

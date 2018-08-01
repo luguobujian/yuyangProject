@@ -1,0 +1,7 @@
+<!--pages/index/pages/protocol/protocol.wxml-->
+<view class='container'>
+  <view>
+    <view class='tit'>货运托运服务协议</view>
+    <view></view>
+  </view>
+</view>

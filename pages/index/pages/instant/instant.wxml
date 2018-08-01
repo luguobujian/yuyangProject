@@ -1,0 +1,11 @@
+<!--pages/index/pages/instant/instant.wxml-->
+<view class='container'>
+  <view class='box-view'>
+    <image src='../../../../image/icon/sure-logo.png'></image>
+    <view class='box-info'>
+      客服人员马上电话与您联系， 请保持电话畅通！
+    </view>
+    <button bindtap="default" hover-class="other-button-hover">返回</button>
+    <view class='btm-info'>客服电话：400-666-8888</view>
+  </view>
+</view>

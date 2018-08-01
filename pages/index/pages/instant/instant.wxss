@@ -1,0 +1,35 @@
+/* pages/index/pages/instant/instant.wxss */
+
+.box-view {
+  height: 100%;
+  background-color: #fff;
+  /* border-top: 1rpx solid #fff; */
+}
+
+.box-view image {
+  display: block;
+  width: 264rpx;
+  height: 264rpx;
+  margin: 0rpx auto 90rpx;
+  padding-top: 118rpx;
+}
+
+.box-info {
+  width: 440rpx;
+  color: #333;
+  font-size: 34rpx;
+  text-align: center;
+  margin: 0 auto 138rpx;
+}
+
+button {
+  color: #6c3;
+  border: 1rpx solid #6c3;
+  background-color: #fff;
+  margin: 0 30rpx 124rpx;
+}
+.btm-info {
+  color: #BCBCBC;
+  margin: 0 auto;
+  text-align: center;
+}

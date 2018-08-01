@@ -1,0 +1,35 @@
+<!--pages/index/pages/goOrder/goOrder.wxml-->
+<view class='container'>
+  <view>
+    <view class='header-info'>备注说明</view>
+    <view class='textarea-view'>
+      <textarea class='textarea' placeholder="货物是否超长超宽？是否有其他特殊需求？" bindtap="tap"></textarea>
+    </view>
+    <view class='need-info'>
+      <view class='money-info-view clearfix'>
+        <view class='money'>￥108.5</view>
+        <view class='standard'>收费标准</view>
+      </view>
+      <view class='car-money'>
+        <view>起步价（中型货车）</view>
+        <view>￥25</view>
+      </view>
+      <view class='car-money'>
+        <view>起步价（中型货车）</view>
+        <view>￥25.5</view>
+      </view>
+    </view>
+    <view>
+      <view class='info'>若产生高速费、同车费、搬运费，请用户额外支付， 若涉及逾时等候费，请与司机按收费标准结算。
+      </view>
+    </view>
+    <view class='protocol-view'>
+      <icon type="success" size="14" />
+      <view>我已阅读并同意</view>
+      <view class='protocol' bindtap='bindGoProtocol'>《货物托运服务协议》</view>
+    </view>
+    <view class='btn-view'>
+      <button>提交订单</button>
+    </view>
+  </view>
+</view>

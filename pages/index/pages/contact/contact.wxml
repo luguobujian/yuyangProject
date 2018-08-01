@@ -1,0 +1,13 @@
+<!--pages/index/pages/Contact/contact.wxml-->
+<view class='container'>
+  <view>
+    <view class='contact-item bb'>
+      <view class='contact-name'>张大壮</view>
+      <view class='contact-tel'>13866666666</view>
+    </view>
+    <view class='contact-item bb'>
+      <view class='contact-name'>张大壮</view>
+      <view class='contact-tel'>13866666666</view>
+    </view>
+  </view>
+</view>

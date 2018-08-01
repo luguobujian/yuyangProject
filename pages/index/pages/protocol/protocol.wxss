@@ -1,0 +1,7 @@
+/* pages/index/pages/protocol/protocol.wxss */
+.tit {
+  line-height: 90rpx;
+  text-align: center;
+  background-color: #fff;
+  margin-bottom: 8rpx;
+}

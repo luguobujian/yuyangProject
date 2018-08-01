@@ -22,9 +22,24 @@ Page({
   onReady: function() {
 
   },
-  goGetAddress: function () {
+  bindGoGetAddress: function () {
     wx.navigateTo({
       url: '../../index/pages/getAddress/getAddress',
+    })
+  },
+  bindGoGetContact: function () {
+    wx.navigateTo({
+      url: '../../index/pages/contact/contact',
+    })
+  },
+  bindGoOrder: function () {
+    wx.navigateTo({
+      url: '../../index/pages/goOrder/goOrder',
+    })
+  },
+  facility: function () {
+    wx.navigateTo({
+      url: '../../index/pages/instant/instant',
     })
   },
   bindDateChange: function (e) {

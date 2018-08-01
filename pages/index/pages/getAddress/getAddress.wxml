@@ -1,2 +1,34 @@
 <!--pages/index/pages/getAddress.wxml-->
-<text>pages/index/pages/getAddress.wxml</text>
+<view class='container'>
+  <view class='header-view'>
+    <view class='city-info-view'>
+      济南
+      <image src='../../../../image/icon/b_arrow.png'></image>
+    </view>
+    <view class='vertical'></view>
+    <view class='input-view'>
+      <input></input>
+    </view>
+    <view class='clean-view'>
+      <image src='../../../../image/icon/clean.png'></image>
+    </view>
+  </view>
+  <view>
+    <view>
+      <view class='now-item bb'>
+        <image src='../../../../image/icon/address-icon.png'></image>
+        <view>
+          <view class='address-tit'>当前位置</view>
+          <view class='address-info'>山东省济南市历下区甸新东路38号</view>
+        </view>
+      </view>
+      <view class='item now-item bb'>
+        <image src='../../../../image/icon/address-icon.png'></image>
+        <view>
+          <view class='address-tit'>当前位置</view>
+          <view class='address-info'>山东省济南市历下区甸新东路38号</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

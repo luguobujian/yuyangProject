@@ -1,0 +1,21 @@
+/* pages/index/pages/Contact/contact.wxss */
+
+.contact-item {
+  background-color: #fff;
+}
+
+.contact-item view {
+  display: inline-block;
+  color: #333;
+  font-size: 30rpx;
+  line-height: 100rpx;
+}
+
+.contact-name {
+  margin-left: 66rpx;
+}
+
+.contact-tel {
+  float: right;
+  margin-right: 114rpx;
+}

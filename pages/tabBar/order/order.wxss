@@ -1,1 +1,23 @@
 /* pages/tabBar/order/order.wxss */
+
+.tab-h-view {
+  height: 92rpx;
+  background-color: #f6f6f6;
+  border-bottom: 1rpx solid #dedede;
+}
+
+.tab-item {
+  display: inline-block;
+  width: 14%;
+  color: #777;
+  font-size: 28rpx;
+  line-height: 90rpx;
+  text-align: center;
+  margin: 0rpx 40rpx;
+  box-sizing: border-box;
+}
+
+.tab-item.active {
+  color: #f90;
+  border-bottom: 4rpx solid #f90;
+}

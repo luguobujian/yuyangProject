@@ -112,7 +112,8 @@
 }
 
 .add-info .user-info-con.o1 {
-  margin-left: 56rpx;
+  margin-left: 0rpx;
+  padding: 20rpx 56rpx;
 }
 
 .btn-view {

@@ -1,2 +1,9 @@
 <!--pages/tabBar/order/order.wxml-->
-<text>pages/tabBar/order/order.wxml</text>
+<view class='container'>
+  <view class="tab-h-view">
+    <view class="tab-item active">进行中</view>
+    <view class="tab-item">待付款</view>
+    <view class="tab-item">待评价</view>
+    <view class="tab-item">已完成</view>
+  </view>
+</view>
