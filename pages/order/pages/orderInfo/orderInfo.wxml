@@ -1,0 +1,72 @@
+<!--pages/order/orderInfo/orderInfo.wxml-->
+<view class='container'>
+  <view class='box'>
+    <view class='header mb-8'>
+      <view class='clearfix bb'>
+        <view class='car fl'>
+          <view>豫A 88666</view>
+          <view>中型货车</view>
+        </view>
+        <view class='fl'>
+          <image class='avatar'></image>
+        </view>
+        <view class='user fl'>
+          <view>李大宝</view>
+          <view class='grade'>
+            <image src='../../../../image/icon/star.png'></image>
+            <image src='../../../../image/icon/star.png'></image>
+            <image src='../../../../image/icon/star.png'></image>
+            <image src='../../../../image/icon/star.png'></image>
+            <image src='../../../../image/icon/star.png'></image>
+          </view>
+        </view>
+      </view>
+      <view class='something clearfix'>
+        <view class='fl br'>
+          <image src='../../../../image/icon/tel01.png'></image>
+          拨打电话
+        </view>
+        <view class='fl br'>
+          <image src='../../../../image/icon/serv.png'></image>
+          联系客服
+        </view>
+        <view class='fl'>
+          <image src='../../../../image/icon/complain.png'></image>
+          投诉举报
+        </view>
+      </view>
+    </view>
+    <view class='some-address mb-8'>
+      <view class='bb'>
+        <image src='../../../../image/icon/car.png'></image>
+        济南市火车站
+      </view>
+      <view class='bb'>
+        <image src='../../../../image/icon/add.png'></image>
+        济南市开发区物流中心
+      </view>
+    </view>
+    <view class='some-address'>
+      <view class='bb'>
+        <image src='../../../../image/icon/time.png'></image>
+        2018-7016 15:38:07
+      </view>
+      <view class='bb'>
+        <image src='../../../../image/icon/who.png'></image>
+        济南
+      </view>
+      <view class='bb'>
+        <image src='../../../../image/icon/tel.png'></image>
+        济南
+      </view>
+      <view class='info clearfix'>
+        <image class='fl' src='../../../../image/icon/info.png'></image>
+        <view class='fl'>济南</view>
+      </view>
+    </view>
+    <view class='btns'>
+      <button class='go-map'><image src='../../../../image/icon/go-address.png'></image> 查看当前位置</button>
+      <button class='no'>取消订单</button>
+    </view>
+  </view>
+</view>

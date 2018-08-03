@@ -1,4 +1,5 @@
 /**app.wxss**/
+
 page, .container {
   height: 100%;
   color: #777;
@@ -10,6 +11,14 @@ page, .container {
   justify-content: space-between;
   padding: 200rpx 0;
   box-sizing: border-box; */
+}
+
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
 }
 
 .clearfix:after, .clearfix::before {
@@ -27,4 +36,12 @@ page, .container {
 
 .bb {
   border-bottom: 1rpx solid #f8f8f8;
+}
+
+.br {
+  border-right: 1rpx solid #f8f8f8;
+}
+
+.mb-8 {
+  margin-bottom: 8rpx;
 }

@@ -6,4 +6,28 @@
     <view class="tab-item">待评价</view>
     <view class="tab-item">已完成</view>
   </view>
+  <view class='main-item-view'>
+    <view class='item bb' bindtap='bindGoOrderInfo'>
+      <view class='car-menoy-view clearfix'>
+        <view class='fl'>中型货车</view>
+        <view class='fr'>￥100</view>
+      </view>
+      <view class='this_address'>
+        <view>
+          <image src='../../../image/icon/car.png'></image>
+          济南市火车站
+        </view>
+      </view>
+      <view class='go-time-view clearfix'>
+        <view class='fl'>
+          <image src='../../../image/icon/add.png'></image>
+          济南市火车站
+        </view>
+        <view class='fl'>
+          <image src='../../../image/icon/time.png'></image>
+          2018-7-15 10:23:08
+        </view>
+      </view>
+    </view>
+  </view>
 </view>

@@ -1,0 +1,102 @@
+/* pages/order/orderInfo/orderInfo.wxss */
+
+.box {
+  /* padding: 0 32rpx; */
+}
+
+.header > view {
+  padding: 42rpx 32rpx;
+  background-color: #fff;
+}
+
+.header > view > view {
+  width: 33%;
+  text-align: center;
+}
+
+.car view:first-child {
+  color: #fff;
+  font-size: 24rpx;
+  padding: 4rpx 0;
+  margin: 20rpx 40rpx 16rpx;
+  background-color: #0135bd;
+  border-radius: 6rpx;
+}
+
+.avatar {
+  width: 118rpx;
+  height: 118rpx;
+  background-color: skyblue;
+  border-radius: 50%;
+}
+
+.user > view:first-child {
+  color: #000;
+  font-size: 26rpx;
+  margin: 20rpx 40rpx 16rpx;
+}
+
+.grade image {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.header > view.something {
+  padding: 22rpx 0rpx;
+}
+
+.something image {
+  width: 38rpx;
+  height: 38rpx;
+  vertical-align: middle;
+  padding-bottom: 4rpx;
+  padding-right: 8rpx;
+}
+
+.header .something > view {
+  /* text-align: left; */
+}
+
+.some-address > view {
+  line-height: 88rpx;
+  padding: 0 32rpx;
+  background-color: #fff;
+}
+
+.some-address > view:active {
+  background-color: #f5f5f5;
+}
+
+.some-address > view image {
+  width: 38rpx;
+  height: 38rpx;
+  margin-right: 18rpx;
+  vertical-align: middle;
+}
+
+.info image {
+  margin-top: 26rpx;
+}
+
+.btns image {
+  width: 42rpx;
+  height: 42rpx;
+  padding-bottom: 4rpx;
+  vertical-align: middle;
+}
+
+.btns button {
+  color: #fff;
+  font-size: 32rpx;
+  margin: 0rpx 32rpx;
+}
+
+.btns .go-map {
+  background-color: #6c3;
+  margin-top: 62rpx;
+}
+
+.btns .no {
+  background-color: #f90;
+  margin-top: 50rpx;
+}

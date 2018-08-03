@@ -49,6 +49,11 @@
         "pages/goOrder/goOrder",
         "pages/protocol/protocol"
       ]
+    },{
+      "root": "pages/order/",
+      "pages": [
+        "pages/orderInfo/orderInfo"
+      ]
     }
   ]
 }

@@ -2,7 +2,7 @@
 
 .tab-h-view {
   height: 92rpx;
-  background-color: #f6f6f6;
+  background-color: #fff;
   border-bottom: 1rpx solid #dedede;
 }
 
@@ -20,4 +20,47 @@
 .tab-item.active {
   color: #f90;
   border-bottom: 4rpx solid #f90;
+}
+
+.item {
+  padding: 0 50rpx;
+  background-color: #fff;
+}
+
+.item > view {
+  padding-bottom: 10rpx;
+}
+
+.car-menoy-view view {
+  line-height: 90rpx;
+}
+
+.car-menoy-view view:first-child {
+  color: #333;
+  font-size: 34rpx;
+}
+
+.car-menoy-view view:last-child {
+  color: #fff;
+  font-size: 18rpx;
+  line-height: 18rpx;
+  padding: 8rpx 12rpx;
+  margin-top: 32rpx;
+  border-radius: 6rpx;
+  background-color: #f60;
+}
+
+.item image {
+  width: 38rpx;
+  height: 38rpx;
+  padding: 0 10rpx 10rpx 0;
+  vertical-align: middle;
+}
+
+.go-time-view > view {
+  width: 50%;
+}
+
+.go-time-view > view:last-child {
+  font-size: 26rpx;
 }

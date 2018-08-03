@@ -1,1 +1,78 @@
 /* pages/tabBar/me/me.wxss */
+
+.header {
+  background-color: #fff;
+  padding-bottom: 40rpx;
+}
+
+.small-logo-view {
+  padding: 16rpx 32rpx 0 0;
+}
+
+.small-logo {
+  color: #fff;
+  font-size: 24rpx;
+  line-height: 24rpx;
+  padding: 4rpx 8rpx;
+  background-color: #6c0;
+  border-radius: 4rpx;
+}
+
+.avatar-name-something-view {
+  padding: 0 32rpx;
+}
+
+.avatar-name-something-view > view {
+  margin-left: 50rpx;
+  margin-top: 8rpx;
+}
+
+.avatar-name-something-view >image {
+  width: 118rpx;
+  height: 118rpx;
+  background-color: skyblue;
+  border-radius: 50%;
+}
+
+.name {
+  font-size: 34rpx;
+  color: #333;
+  margin-right: 30rpx;
+}
+
+.job {
+  line-height: 44rpx;
+}
+
+.tel {
+  font-size: 32rpx;
+  color: #333;
+  line-height: 32rpx;
+  margin-top: 24rpx;
+}
+
+.arrow {
+  font-size: 60rpx;
+  line-height: 84rpx;
+  float: right;
+  margin-right: 30rpx;
+}
+
+.address-view view {
+  background-color: #fff;
+  line-height: 84rpx;
+}
+
+.address-view view image {
+  width: 38rpx;
+  height: 38rpx;
+  padding: 24rpx;
+  vertical-align: middle;
+}
+
+.address-view view view.arrow {
+  font-size: 40rpx;
+  line-height: 84rpx;
+  float: right;
+  margin-right: 62rpx;
+}
