@@ -1,0 +1,17 @@
+/* pages/me/record/record.wxss */
+
+.item {
+  line-height: 94rpx;
+  background-color: #fff;
+  padding: 0 60rpx;
+}
+
+.item view:first-child {
+  color: #333;
+  font-size: 30rpx;
+}
+
+.item view:last-child {
+  color: #c91111;
+  font-size: 26rpx;
+}

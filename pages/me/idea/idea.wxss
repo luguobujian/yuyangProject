@@ -1,0 +1,27 @@
+/* pages/me/idea/idea.wxss */
+
+.inp-view {
+  background-color: #fff;
+  border-top: 1rpx solid #fff;
+}
+
+.inp-view textarea {
+  width: 650rpx;
+  padding: 20rpx;
+  margin: 26rpx auto 50rpx;
+  background-color: #fff;
+  border: 1rpx solid #dedede;
+  border-radius: 8rpx;
+}
+
+.btn-view {
+  padding: 0 73rpx 70rpx;
+}
+
+button {
+  height: 70rpx;
+  line-height: 70rpx;
+  color: #fff;
+  font-size: 30rpx;
+  background-color: #6c3;
+}

@@ -49,10 +49,24 @@
         "pages/goOrder/goOrder",
         "pages/protocol/protocol"
       ]
-    },{
+    },
+    {
       "root": "pages/order/",
       "pages": [
         "pages/orderInfo/orderInfo"
+      ]
+    },
+    {
+      "root": "pages/me/",
+      "pages": [
+        "edit/edit",
+        "inform/inform",
+        "someInfo/someInfo",
+        "meInfo/meInfo",
+        "record/record",
+        "book/book",
+        "help/help",
+        "idea/idea"
       ]
     }
   ]

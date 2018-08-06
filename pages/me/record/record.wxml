@@ -1,0 +1,8 @@
+<!--pages/me/record/record.wxml-->
+<view class='container'>
+  <view>
+    <view class='item bb clearfix'>
+      <view class='fl'>运输服务（中型货车）</view><view class='money fr'>-160</view>
+    </view>
+  </view>
+</view>

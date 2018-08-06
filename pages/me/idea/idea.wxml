@@ -1,0 +1,12 @@
+<!--pages/me/idea/idea.wxml-->
+<view class='container'>
+  <view>
+    <view class='inp-view'>
+      <textarea></textarea>
+      <view class='btn-view'>
+        <button>提交</button>
+      </view>
+      
+    </view>
+  </view>
+</view>

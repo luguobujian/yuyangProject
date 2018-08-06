@@ -1,0 +1,8 @@
+<!--pages/me/help/help.wxml-->
+<view class='container'>
+  <view>
+    <view class='item bb clearfix'>
+      <view class='fl'>问题</view><view class='fr'>›</view>
+    </view>
+  </view>
+</view>

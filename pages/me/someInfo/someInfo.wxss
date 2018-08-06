@@ -1,0 +1,11 @@
+/* pages/me/someInfo/someInfo.wxss */
+
+.container {
+  background-color: #fff;
+}
+
+.tit {
+  color: #333;
+  line-height: 92rpx;
+  text-align: center;
+}

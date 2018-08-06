@@ -1,0 +1,6 @@
+<!--pages/me/someInfo/someInfo.wxml-->
+<view class='container'>
+  <view>
+    <view class='tit bb'>关于系统升级维护的通知</view>
+  </view>
+</view>

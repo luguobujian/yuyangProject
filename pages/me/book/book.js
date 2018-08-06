@@ -1,4 +1,4 @@
-// pages/tabBar/me/me.js
+// pages/me/book/book.js
 Page({
 
   /**
@@ -21,13 +21,7 @@ Page({
   onReady: function () {
   
   },
-  bindGoItem: function (e) {
-    console.log(e.currentTarget.dataset.item);
-    let item = e.currentTarget.dataset.item;
-    wx.navigateTo({
-      url: '../../me/' + item + '/' + item
-    })
-  },
+
   /**
    * 生命周期函数--监听页面显示
    */

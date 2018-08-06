@@ -5,7 +5,7 @@
       <view class='clearfix small-logo-view'>
         <view class='small-logo fr'>定价</view>
       </view>
-      <view class='avatar-name-something-view clearfix'>
+      <view class='avatar-name-something-view clearfix' data-item='meInfo' bindtap='bindGoItem'>
         <image class='fl'></image>
         <view class='fl'>
           <view class='clearfix'>
@@ -18,42 +18,42 @@
       </view>
     </view>
     <view class='address-view'>
-      <view class='bb clearfix mb-8' bindtap='bindGoGetAddress'>
+      <view class='bb clearfix mb-8' data-item='inform' bindtap='bindGoItem'>
         <image class='fl' src='../../../image/icon/car.png'></image>
         <view class="fl address-info">
           系统通知
         </view>
         <view class='fl arrow'>›</view>
       </view>
-      <view class='bb clearfix bb' bindtap='bindGoGetAddress'>
+      <view class='bb clearfix bb' data-item='record' bindtap='bindGoItem'>
         <image class='fl' src='../../../image/icon/car.png'></image>
         <view class="fl address-info">
           支付记录
         </view>
         <view class='fl arrow'>›</view>
       </view>
-      <view class='bb clearfix mb-8' bindtap='bindGoGetAddress'>
+      <view class='bb clearfix mb-8' data-item="someInfo" bindtap='bindGoItem'>
         <image class='fl' src='../../../image/icon/car.png'></image>
         <view class="fl address-info">
           收费标准
         </view>
         <view class='fl arrow'>›</view>
       </view>
-      <view class='bb clearfix mb-8' bindtap='bindGoGetAddress'>
+      <view class='bb clearfix mb-8' data-item='book' bindtap='bindGoItem'>
         <image class='fl' src='../../../image/icon/car.png'></image>
         <view class="fl address-info">
           联系人管理
         </view>
         <view class='fl arrow'>›</view>
       </view>
-      <view class='bb clearfix bb' bindtap='bindGoGetAddress'>
+      <view class='bb clearfix bb' data-item='help' bindtap='bindGoItem'>
         <image class='fl' src='../../../image/icon/car.png'></image>
         <view class="fl address-info">
           帮助中心
         </view>
         <view class='fl arrow'>›</view>
       </view>
-      <view class='bb clearfix mb-8' bindtap='bindGoGetAddress'>
+      <view class='bb clearfix mb-8' data-item='idea' bindtap='bindGoItem'>
         <image class='fl' src='../../../image/icon/car.png'></image>
         <view class="fl address-info">
           意见反馈
