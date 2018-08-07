@@ -68,5 +68,9 @@
       <button class='go-map'><image src='../../../../image/icon/go-address.png'></image> 查看当前位置</button>
       <button class='no'>取消订单</button>
     </view>
+    <view class='grade-box'>
+    
+    
+    </view>
   </view>
 </view>
