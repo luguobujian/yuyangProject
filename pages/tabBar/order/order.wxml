@@ -1,10 +1,10 @@
 <!--pages/tabBar/order/order.wxml-->
 <view class='container'>
   <view class="tab-h-view">
-    <view class="tab-item active">进行中</view>
-    <view class="tab-item">待付款</view>
-    <view class="tab-item">待评价</view>
-    <view class="tab-item">已完成</view>
+    <view class="tab-item {{current == 1? 'active': ''}}" data-index="1" bindtap='navSwitch'>进行中</view>
+    <view class="tab-item {{current == 2? 'active': ''}}" data-index="2" bindtap='navSwitch'>待付款</view>
+    <view class="tab-item {{current == 3? 'active': ''}}" data-index="3" bindtap='navSwitch'>待评价</view>
+    <view class="tab-item {{current == 4? 'active': ''}}" data-index="4" bindtap='navSwitch'>已完成</view>
   </view>
   <view class='main-item-view'>
     <view class='item bb' bindtap='bindGoOrderInfo'>

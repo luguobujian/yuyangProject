@@ -69,7 +69,7 @@
       <button class='no'>取消订单</button>
     </view>
     <view class='grade-box'>
-    
+      <view></view>
     
     </view>
   </view>

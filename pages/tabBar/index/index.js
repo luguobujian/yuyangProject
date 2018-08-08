@@ -6,6 +6,7 @@ Page({
    */
   data: {
     currentTab: 1,
+    scrollLeft: 0,
     date: '2016-09-01',
   },
 
@@ -22,27 +23,45 @@ Page({
   onReady: function() {
 
   },
-  bindGoGetAddress: function () {
+  swichNav: function(e) {
+
+    this.setData({
+      currentTab: e.currentTarget.dataset.current
+    })
+    this.checkCor();
+  },
+  checkCor: function() {
+    if (this.data.currentTab > 4) {
+      this.setData({
+        scrollLeft: 300
+      })
+    } else {
+      this.setData({
+        scrollLeft: 0
+      })
+    }
+  },
+  bindGoGetAddress: function() {
     wx.navigateTo({
       url: '../../index/pages/getAddress/getAddress',
     })
   },
-  bindGoGetContact: function () {
+  bindGoGetContact: function() {
     wx.navigateTo({
       url: '../../index/pages/contact/contact',
     })
   },
-  bindGoOrder: function () {
+  bindGoOrder: function() {
     wx.navigateTo({
       url: '../../index/pages/goOrder/goOrder',
     })
   },
-  facility: function () {
+  facility: function() {
     wx.navigateTo({
       url: '../../index/pages/instant/instant',
     })
   },
-  bindDateChange: function (e) {
+  bindDateChange: function(e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value

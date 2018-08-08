@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    current: '1'
   },
 
   /**
@@ -13,6 +13,12 @@ Page({
    */
   onLoad: function(options) {
 
+  },
+  navSwitch: function (e) {
+    console.log(e);
+    this.setData({
+      current: e.currentTarget.dataset.index
+    })
   },
   bindGoOrderInfo: function() {
     wx.navigateTo({

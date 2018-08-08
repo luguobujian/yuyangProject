@@ -12,7 +12,7 @@
       <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">小型货车</view>
       <view class="tab-item {{currentTab==4?'active':''}}" data-current="4" bindtap="swichNav">中型货车</view>
       <view class="tab-item {{currentTab==5?'active':''}}" data-current="5" bindtap="swichNav">小型板车</view>
-      <view class="tab-item {{currentTab==5?'active':''}}" data-current="5" bindtap="swichNav">中型板车</view>
+      <view class="tab-item {{currentTab==6?'active':''}}" data-current="6" bindtap="swichNav">中型板车</view>
     </scroll-view>
   </view>
   <view class='car-info-view'>
