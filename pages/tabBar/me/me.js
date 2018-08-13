@@ -1,10 +1,16 @@
 // pages/tabBar/me/me.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    userInfo: "",
+
+    logModalShow: "false",
+    telModalShow: "",
+
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
@@ -12,6 +18,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(this.data.canIUse)
+    let that = this
     wx.getSetting({
       success: function(res) {
         if (res.authSetting['scope.userInfo']) {
@@ -19,7 +27,15 @@ Page({
           wx.getUserInfo({
             success: function(res) {
               console.log(res.userInfo)
+              that.setData({
+                userInfo: res.userInfo,
+                logModalShow: true
+              })
             }
+          })
+        } else {
+          that.setData({
+            logModalShow: false
           })
         }
       }
@@ -27,6 +43,11 @@ Page({
   },
   bindGetUserInfo: function (e) {
     console.log(e)
+    let that = this
+    that.setData({
+      userInfo: e.detail.userInfo,
+      logModalShow: true
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

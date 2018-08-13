@@ -2,12 +2,12 @@
 <view class='container'>
   <view class='header-view'>
     <view class='city-info-view'>
-      济南
+      <view class='city'>{{ city }}</view>
       <image src='../../../../image/icon/b_arrow.png'></image>
     </view>
     <view class='vertical'></view>
     <view class='input-view'>
-      <input></input>
+      <input bindinput='bindKeyInput'></input>
     </view>
     <view class='clean-view'>
       <image src='../../../../image/icon/clean.png'></image>
@@ -19,16 +19,25 @@
         <image src='../../../../image/icon/address-icon.png'></image>
         <view>
           <view class='address-tit'>当前位置</view>
-          <view class='address-info'>山东省济南市历下区甸新东路38号</view>
+          <view class='address-info'>{{ address.formatted_address }}</view>
         </view>
       </view>
-      <view class='item now-item bb'>
+      <view wx:for="{{ sugData }}" wx:key="{{ item.uid }}" class='item now-item bb'>
         <image src='../../../../image/icon/address-icon.png'></image>
         <view>
-          <view class='address-tit'>当前位置</view>
-          <view class='address-info'>山东省济南市历下区甸新东路38号</view>
+          <view class='address-tit'>{{ item.name }}</view>
+          <view class='address-info'>{{ item.province }}{{ item.city }}{{ item.name }}</view>
         </view>
       </view>
     </view>
   </view>
+  <!-- <view class='modal' wx:if="{{ !logModalShow }}">
+    <view>
+      <view class='info bb'>是否授权获取当前位置？</view>
+      <view class='btns'>
+        <button>取消</button>
+        <button open-type="openSetting" bindgetuserinfo="bindGetLocation">授权</button>
+      </view>
+    </view>
+  </view> -->
 </view>

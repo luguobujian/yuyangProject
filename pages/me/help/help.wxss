@@ -1,6 +1,14 @@
 /* pages/me/help/help.wxss */
+
 .item {
   padding: 0 32rpx;
   line-height: 92rpx;
   background-color: #fff;
+}
+
+.item>view:first-child {
+  width: 96%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

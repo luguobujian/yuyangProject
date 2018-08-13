@@ -1,20 +1,38 @@
 // pages/me/inform/inform.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    server: app.globalData.server,
+    data: "",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let that = this
+    wx.request({
+      url: this.data.server + 'api/Notice?Title=&Notes=&pageIndex=0&pageSize=9999',
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          data: res.data.Results
+        })
+      }
+    })
   },
-
+  bindOpenInfo: (e) => {
+    wx.navigateTo({
+      url: '../someInfo/someInfo?id=' + e.target.id,
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

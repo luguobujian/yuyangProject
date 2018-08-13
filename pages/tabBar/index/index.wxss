@@ -58,11 +58,11 @@
 }
 
 .car-txt-item.one {
-  width: 28%;
+  width: 27%;
 }
 
 .car-txt-item.two {
-  width: 44%;
+  width: 46%;
 }
 
 .car-txt-item view {
@@ -142,4 +142,45 @@
   color: #9f9f9f;
   font-size: 26rpx;
   text-align: center;
+}
+
+.modal {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.modal > view {
+  width: 60%;
+  text-align: center;
+  padding: 0 40rpx;
+  background-color: #fff;
+  border-radius: 12rpx;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.info {
+  font-size: 30rpx;
+  padding: 40rpx 0;
+}
+
+.btns button {
+  display: inline-block;
+  width: 50%;
+  font-size: 32rpx;
+  background-color: #fff;
+}
+
+.btns button:last-child {
+  color: #6c3;
+}
+
+.btns button::after {
+  border: none;
 }

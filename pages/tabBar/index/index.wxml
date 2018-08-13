@@ -1,92 +1,95 @@
 <!--pages/tabBar/index/index.wxml-->
 <view class='container'>
-  <view class='tab-h-view'>
-    <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
-      <!-- <view class="tab-item {{currentTab==0?'active':''}}" data-current="0">推荐</view>
-    <block wx:for="{{ menuList }}">
-      <view class="tab-item" data-category-id="{{ item.category_id }}" bindtap="swichNav">{{ item.cmscategory.title }}</view>
-    </block> -->
-
-      <view class="tab-item {{currentTab==1?'active':''}}" data-current="1" bindtap="swichNav">小面包车</view>
-      <view class="tab-item {{currentTab==2?'active':''}}" data-current="2" bindtap="swichNav">中面包车</view>
-      <view class="tab-item {{currentTab==3?'active':''}}" data-current="3" bindtap="swichNav">小型货车</view>
-      <view class="tab-item {{currentTab==4?'active':''}}" data-current="4" bindtap="swichNav">中型货车</view>
-      <view class="tab-item {{currentTab==5?'active':''}}" data-current="5" bindtap="swichNav">小型板车</view>
-      <view class="tab-item {{currentTab==6?'active':''}}" data-current="6" bindtap="swichNav">中型板车</view>
-    </scroll-view>
-  </view>
-  <view class='car-info-view'>
-    <view class='car-image-view'>
-      <image src=''></image>
+  <view>
+    <view class='tab-h-view'>
+      <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
+        <block wx:for="{{ carData }}" wx:key="{{ carData.ID }}">
+          <view class="tab-item {{currentTab==index?'active':''}}" data-current="{{ index }}" bindtap="swichNav">{{ item.Name }}</view>
+        </block>
+      </scroll-view>
     </view>
-    <view class='car-txt-info'>
-      <view class='car-txt-item one'>
-        <view>载重 : </view>1.5吨
+    <view class='car-info-view'>
+      <view class='car-image-view'>
+        <image src='{{ carInfo.Image }}'></image>
       </view>
-      <view class='car-txt-item two'>
-        <view>尺寸 : </view>1.5m*1.5m*1.5m
-      </view>
-      <view class='car-txt-item one'>
-        <view>体积 : </view>19方
+      <view class='car-txt-info'>
+        <view class='car-txt-item one'>
+          <view>载重 : </view> {{ carInfo.ZaiZhong }}
+        </view>
+        <view class='car-txt-item two'>
+          <view>尺寸 : </view> {{ carInfo.ChiCun }}
+        </view>
+        <view class='car-txt-item one'>
+          <view>体积 : </view> {{ carInfo.TiJi }}
+        </view>
       </view>
     </view>
-  </view>
-  <view class='address-view'>
-    <view class='back bb' bindtap='bindGoGetAddress'>
-      <image src='../../../image/icon/car.png'></image>
-      <view class="address-info">
-        请选择发货地址
+    <view class='address-view'>
+      <view class='back bb' bindtap='bindGoGetAddress'>
+        <image src='../../../image/icon/car.png'></image>
+        <view class="address-info">
+          请选择发货地址
+        </view>
+        <view class='arrow'>›</view>
       </view>
-      <view class='arrow'>›</view>
-    </view>
-    <view class='go' bindtap='bindGoGetAddress'>
-      <image src='../../../image/icon/add.png'></image>
-      <view class="address-info">
-        请选择收货地址
+      <view class='go' bindtap='bindGoGetAddress'>
+        <image src='../../../image/icon/add.png'></image>
+        <view class="address-info">
+          请选择收货地址
+        </view>
+        <view class='arrow'>›</view>
       </view>
-      <view class='arrow'>›</view>
     </view>
-  </view>
-  <view class='add-info address-view'>
-    <view class='bb'>
-      <image src='../../../image/icon/time.png'></image>
-      <view class="address-info">
-        <picker mode="date" value="{{time}}" start="2015-09-01" end="2099-09-01" bindchange="bindDateChange">
-          <view class="picker">
-            选择发货时间
-            <view class='user-info-con o1'>
-              {{date}}
+    <view class='add-info address-view'>
+      <view class='bb'>
+        <image src='../../../image/icon/time.png'></image>
+        <view class="address-info">
+          <picker mode="date" value="{{time}}" start="2015-09-01" end="2099-09-01" bindchange="bindDateChange">
+            <view class="picker">
+              选择发货时间
+              <view class='user-info-con o1'>
+                {{date}}
+              </view>
             </view>
-          </view>
-        </picker>
+          </picker>
+        </view>
+        <image class='rimg' src='../../../image/icon/time_btn.png'></image>
       </view>
-      <image class='rimg' src='../../../image/icon/time_btn.png'></image>
+      <view class='bb'>
+        <image src='../../../image/icon/who.png'></image>
+        <view class="address-info">
+          联系人姓名
+        </view>
+        <view class='user-info-con'>
+          狗蛋啊
+        </view>
+        <image class='rimg' src='../../../image/icon/tel_btn.png' bindtap="bindGoGetContact"></image>
+      </view>
+      <view class=''>
+        <image src='../../../image/icon/tel.png'></image>
+        <view class="address-info">
+          联系人姓名
+        </view>
+        <view class='user-info-con'>
+          13899999999
+        </view>
+      </view>
     </view>
-    <view class='bb'>
-      <image src='../../../image/icon/who.png'></image>
-      <view class="address-info">
-        联系人姓名
-      </view>
-      <view class='user-info-con'>
-        狗蛋啊
-      </view>
-      <image class='rimg' src='../../../image/icon/tel_btn.png'  bindtap="bindGoGetContact"></image>
+    <view class='btn-view'>
+      <button class='btn01' bindtap='facility'>一键叫车</button>
+      <button class='btn02' bindtap='bindGoOrder'>确认用车</button>
     </view>
-    <view class=''>
-      <image src='../../../image/icon/tel.png'></image>
-      <view class="address-info">
-        联系人姓名
-      </view>
-      <view class='user-info-con'>
-        13899999999
-      </view>
+    <view class='btm-info'>
+      不知道怎样操作？试试“一键叫车”吧。
     </view>
   </view>
-  <view class='btn-view'>
-    <button class='btn01' bindtap='facility'>一键叫车</button>
-    <button class='btn02' bindtap='bindGoOrder'>确认用车</button>
-  </view>
-  <view class='btm-info'>
-    不知道怎样操作？试试“一键叫车”吧。
+  <view class='modal' wx:if="{{ !logModalShow }}">
+    <view>
+      <view class='info bb'>检测到您未登录，是否登陆？</view>
+      <view class='btns'>
+        <!-- <button>取消</button> -->
+        <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+      </view>
+    </view>
   </view>
 </view>

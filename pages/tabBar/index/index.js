@@ -1,11 +1,21 @@
 // pages/tabBar/index/index.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    currentTab: 1,
+    server: app.globalData.server,
+    logModalShow: "false",
+    telModalShow: "",
+
+    userInfo: "",
+
+    carData: "",
+    carInfo: "",
+
+    currentTab: 0,
     scrollLeft: 0,
     date: '2016-09-01',
   },
@@ -14,9 +24,58 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    let that = this
+    wx.getSetting({
+      success: function(res) {
+        if (res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+          wx.getUserInfo({
+            success: function(res) {
+              console.log(res.userInfo)
+              that.setData({
+                userInfo: res.userInfo,
+                logModalShow: true
+              })
+            }
+          })
+        } else {
+          that.setData({
+            logModalShow: false
+          })
+        }
+      }
+    })
+    // 处理方法
+    that.getCarCls()
   },
-
+  bindGetUserInfo: function(e) {
+    console.log(e)
+    let that = this
+    that.setData({
+      userInfo: e.detail.userInfo,
+      logModalShow: true
+    })
+  },
+  getCarCls: function() {
+    let that = this
+    wx.request({
+      url: that.data.server + 'api/TruckType?Name=',
+      data: '',
+      header: {},
+      method: 'GET',
+      dataType: 'json',
+      responseType: 'text',
+      success: function(res) {
+        console.log(res)
+        that.setData({
+          carData: res.data,
+          carInfo: res.data[0]
+        })
+      },
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -24,14 +83,14 @@ Page({
 
   },
   swichNav: function(e) {
-
     this.setData({
-      currentTab: e.currentTarget.dataset.current
+      currentTab: e.currentTarget.dataset.current,
+      carInfo: this.data.carData[e.currentTarget.dataset.current],
     })
     this.checkCor();
   },
   checkCor: function() {
-    if (this.data.currentTab > 4) {
+    if (this.data.currentTab > 3) {
       this.setData({
         scrollLeft: 300
       })

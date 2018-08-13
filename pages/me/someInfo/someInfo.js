@@ -1,18 +1,28 @@
 // pages/me/someInfo/someInfo.js
+let WxParse = require('../../../wxParse/wxParse.js');
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    server: app.globalData.server,
+    info: '',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let that = this
+    wx.request({
+      url: this.data.server + 'api/Faq/' + options.id,
+      success: function (res) {
+        console.log(res)
+        let content = WxParse.wxParse('article', 'html', res.data.Answer, that, 5);
+      }
+    })
   },
 
   /**
