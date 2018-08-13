@@ -18,8 +18,8 @@
       <view class='now-item bb'>
         <image src='../../../../image/icon/address-icon.png'></image>
         <view>
-          <view class='address-tit'>当前位置</view>
-          <view class='address-info'>{{ address.formatted_address }}</view>
+          <view class='address-tit'>{{ addressName }}</view>
+          <view class='address-info'>{{ address }}</view>
         </view>
       </view>
       <view wx:for="{{ sugData }}" wx:key="{{ item.uid }}" class='item now-item bb'>

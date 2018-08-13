@@ -12,6 +12,8 @@ Page({
 
     latitude: "",
     longitude: "",
+    addressName: "当前位置",
+    tempAddress: "",
     address: "",
     city: "",
     sugData: ''
@@ -92,7 +94,8 @@ Page({
         console.log(res)
         let address = res.data.result;
         that.setData({
-          address,
+          tempAddress: address.formatted_address,
+          address: address.formatted_address,
           city: address.addressComponent.city.substr(0, 2)
         });
       },
@@ -107,9 +110,16 @@ Page({
     let that = this;
     if (e.detail.value === '') {
       that.setData({
-        sugData: ''
+        sugData: '',
+        addressName: "当前位置",
+        address: that.data.tempAddress
       });
       return;
+    } else {
+      that.setData({
+        addressName: "位置",
+        address: e.detail.value
+      });
     }
     let BMap = new bmap.BMapWX({
       ak: 'F2HqMyAayTiaaxYOHeagngK4Ck3nLxeH'
@@ -129,14 +139,14 @@ Page({
       //         name: data.result[i].name,
       //         address: res.data.result.formatted_address
       //       })
-            that.setData({
-              sugData: data.result
-            });
+      that.setData({
+        sugData: data.result
+      });
       //     },
       //     fail: function () {},
       //   })
       // }
-      
+
       console.log(that.data.sugData)
     }
     BMap.suggestion({
