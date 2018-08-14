@@ -80,5 +80,9 @@ input {
   color: #6c3;
   background: #fff;
   border: 1rpx solid #6c3;
-  margin-right: 30rpx;
+  margin-right: 26rpx;
+}
+
+.btns button:last-child {
+  border: 1rpx solid #f60;
 }

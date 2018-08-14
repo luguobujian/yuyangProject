@@ -47,7 +47,8 @@
         "pages/contact/contact",
         "pages/instant/instant",
         "pages/goOrder/goOrder",
-        "pages/protocol/protocol"
+        "pages/protocol/protocol",
+        "pages/city/city"
       ]
     },
     {

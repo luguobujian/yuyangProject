@@ -15,9 +15,13 @@ Page({
     carData: "",
     carInfo: "",
 
+    back: "请选择发货地址",
+    go: "请选择收货地址",
+    callName: "",
+    callTel: "",
     currentTab: 0,
     scrollLeft: 0,
-    date: '2016-09-01',
+    date: '',
   },
 
   /**
@@ -36,6 +40,7 @@ Page({
                 userInfo: res.userInfo,
                 logModalShow: true
               })
+        
             }
           })
         } else {
@@ -66,7 +71,7 @@ Page({
       dataType: 'json',
       responseType: 'text',
       success: function(res) {
-        console.log(res)
+        // console.log(res)
         that.setData({
           carData: res.data,
           carInfo: res.data[0]
@@ -100,9 +105,9 @@ Page({
       })
     }
   },
-  bindGoGetAddress: function() {
+  bindGoGetAddress: function(e) {
     wx.navigateTo({
-      url: '../../index/pages/getAddress/getAddress',
+      url: '../../index/pages/getAddress/getAddress?form=' + e.currentTarget.dataset.form,
     })
   },
   bindGoGetContact: function() {

@@ -1,2 +1,16 @@
 <!--pages/me/meInfo/meInfo.wxml-->
-<text>pages/me/meInfo/meInfo.wxml</text>
+<view class='container'>
+  <view class='name clearfix bb'>
+    <view class='fl'>姓名:</view>
+    <input class='fr' value='掏粪'></input>
+  </view>
+  <view class='tel clearfix bb'>
+    <view class='fl'>电话:</view>
+    <input class='fr'value='133333333333'></input>
+  </view>
+  <view class='company clearfix bb'>
+    <view class='fl'>公司:</view>
+    <input class='fr' value='掏粪'></input>
+  </view>
+  <button class='btn'>保存</button>
+</view>

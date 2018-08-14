@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    star: 3,
   },
 
   /**
@@ -14,7 +14,11 @@ Page({
   onLoad: function (options) {
   
   },
-
+  geiStar: function (e) {
+    this.setData({
+      star: e.currentTarget.dataset.star
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

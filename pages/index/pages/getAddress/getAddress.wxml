@@ -1,7 +1,7 @@
 <!--pages/index/pages/getAddress.wxml-->
 <view class='container'>
   <view class='header-view'>
-    <view class='city-info-view'>
+    <view class='city-info-view' bindtap='bindChosCity'>
       <view class='city'>{{ city }}</view>
       <image src='../../../../image/icon/b_arrow.png'></image>
     </view>
@@ -15,18 +15,18 @@
   </view>
   <view>
     <view>
-      <view class='now-item bb'>
+      <view class='now-item bb' data-address="{{ address }}" bindtap='bindAddress'>
         <image src='../../../../image/icon/address-icon.png'></image>
         <view>
           <view class='address-tit'>{{ addressName }}</view>
           <view class='address-info'>{{ address }}</view>
         </view>
       </view>
-      <view wx:for="{{ sugData }}" wx:key="{{ item.uid }}" class='item now-item bb'>
+      <view wx:for="{{ sugData }}" data-address="{{ item.address }}" wx:key="{{ item.uid }}" class='item now-item bb' bindtap='bindAddress'>
         <image src='../../../../image/icon/address-icon.png'></image>
         <view>
           <view class='address-tit'>{{ item.name }}</view>
-          <view class='address-info'>{{ item.province }}{{ item.city }}{{ item.name }}</view>
+          <view class='address-info'>{{ item.address }}</view>
         </view>
       </view>
     </view>

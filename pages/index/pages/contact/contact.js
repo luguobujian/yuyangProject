@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-  
+    
   },
 
   /**
@@ -14,7 +14,17 @@ Page({
   onLoad: function (options) {
   
   },
-
+  bindChsWho: function (e) {
+    let pages = getCurrentPages()
+    let prevPages = pages[pages.length - 2]
+    prevPages.setData({
+      callName: e.currentTarget.dataset.name,
+      callTel: e.currentTarget.dataset.tel
+    })
+    wx.navigateBack({
+      delta: 1,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

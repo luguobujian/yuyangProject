@@ -19,42 +19,42 @@
     </view>
     <view class='address-view'>
       <view class='bb clearfix mb-8' data-item='inform' bindtap='bindGoItem'>
-        <image class='fl' src='../../../image/icon/car.png'></image>
+        <image class='fl' src='../../../image/icon/1.png'></image>
         <view class="fl address-info">
           系统通知
         </view>
         <view class='fl arrow'>›</view>
       </view>
       <view class='bb clearfix bb' data-item='record' bindtap='bindGoItem'>
-        <image class='fl' src='../../../image/icon/car.png'></image>
+        <image class='fl' src='../../../image/icon/2.png'></image>
         <view class="fl address-info">
           支付记录
         </view>
         <view class='fl arrow'>›</view>
       </view>
       <view class='bb clearfix mb-8' data-item="someInfo" bindtap='bindGoItem'>
-        <image class='fl' src='../../../image/icon/car.png'></image>
+        <image class='fl' src='../../../image/icon/3.png'></image>
         <view class="fl address-info">
           收费标准
         </view>
         <view class='fl arrow'>›</view>
       </view>
       <view class='bb clearfix mb-8' data-item='book' bindtap='bindGoItem'>
-        <image class='fl' src='../../../image/icon/car.png'></image>
+        <image class='fl' src='../../../image/icon/4.png'></image>
         <view class="fl address-info">
           联系人管理
         </view>
         <view class='fl arrow'>›</view>
       </view>
       <view class='bb clearfix bb' data-item='help' bindtap='bindGoItem'>
-        <image class='fl' src='../../../image/icon/car.png'></image>
+        <image class='fl' src='../../../image/icon/5.png'></image>
         <view class="fl address-info">
           帮助中心
         </view>
         <view class='fl arrow'>›</view>
       </view>
       <view class='bb clearfix mb-8' data-item='idea' bindtap='bindGoItem'>
-        <image class='fl' src='../../../image/icon/car.png'></image>
+        <image class='fl' src='../../../image/icon/6.png'></image>
         <view class="fl address-info">
           意见反馈
         </view>

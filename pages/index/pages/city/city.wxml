@@ -1,0 +1,19 @@
+<!--pages/index/pages/city/city.wxml-->
+<view class='container'>
+  <scroll-view scroll-y="true" style="height: {{winHeight}}px;" scroll-into-view="{{ scrollTopId }}" class="city_list">
+    <view class='item-box' wx:for="{{city}}" wx:for-index="idx" wx:for-item="cityName" id="{{idx}}">
+      <view class="list_tit">{{idx}}</view>
+      <view wx:for="{{cityName}}">
+        <view class="list_con" data-city="{{item.name}}" bindtap="bindCity">{{item.name}}</view>
+      </view>
+    </view>
+  </scroll-view>
+  <view class="scroll_list" bindtouchstart="chStart" bindtouchend="chEnd" catchtouchmove="chMove" style="background: rgba(0,0,0,{{trans}});">
+    <view wx:for="{{city}}" wx:for-index="idx" wx:for-item="cityName">
+      <view wx:if="{{idx != '热门城市'}}">
+        <view data-id="{{idx}}" class="scroll_list_chi" style="line-height:{{lineHeight}}px ; height:{{lineHeight}}px ;font-size:{{lineHeight/1.7}}px;" bindtouchstart="getWords" bindtouchend="setWords">{{idx}}</view>
+      </view>
+    </view>
+  </view>
+  <view hidden="{{hidden}}" class="showwords"> {{showwords}}</view>
+</view>

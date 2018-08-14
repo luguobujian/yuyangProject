@@ -1,1 +1,26 @@
 /* pages/me/meInfo/meInfo.wxss */
+
+.container > view {
+  font-size: 32rpx;
+  line-height: 84rpx;
+  background-color: #fff;
+}
+
+.container > view > view {
+  width: 164rpx;
+  text-align: center;
+}
+
+.container > view > input {
+  width: 480rpx;
+  margin-top: 16rpx;
+  margin-right: 90rpx;
+  text-align: right;
+}
+
+.btn {
+  margin: 30rpx;
+  color: #fff;
+  line-height: 84rpx;
+  background-color: #f60;
+}

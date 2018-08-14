@@ -8,6 +8,7 @@ Page({
    */
   data: {
     server: app.globalData.server,
+    form: "",
     logModalShow: 1,
 
     latitude: "",
@@ -23,9 +24,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    let pages = getCurrentPages();
-    console.log(pages)
+    console.log(options)
     let that = this
+    that.setData({
+      form: options.form
+    })
     wx.getSetting({
       success: function(res) {
         console.log(res)
@@ -94,8 +97,8 @@ Page({
         console.log(res)
         let address = res.data.result;
         that.setData({
-          tempAddress: address.formatted_address,
-          address: address.formatted_address,
+          tempAddress: address.formatted_address + address.sematic_description,
+          address: address.formatted_address + address.sematic_description,
           city: address.addressComponent.city.substr(0, 2)
         });
       },
@@ -108,7 +111,7 @@ Page({
   },
   bindKeyInput: function(e) {
     let that = this;
-    if (e.detail.value === '') {
+    if (e.detail.value == '') {
       that.setData({
         sugData: '',
         addressName: "当前位置",
@@ -120,42 +123,77 @@ Page({
         addressName: "位置",
         address: e.detail.value
       });
-    }
-    let BMap = new bmap.BMapWX({
-      ak: 'F2HqMyAayTiaaxYOHeagngK4Ck3nLxeH'
-    });
-    let fail = function(data) {
-      console.log(data)
-    };
-    let success = function(data) {
-      console.log(data)
-      // let sugData = []
-      // for (let i = 0; i < data.result.length; i ++) {
-      //   wx.request({
-      //     url: 'https://api.map.baidu.com/geocoder/v2/?ak=F2HqMyAayTiaaxYOHeagngK4Ck3nLxeH&location=' + data.result[i].location.lat + ',' + data.result[i].location.lng + '&output=json',
-      //     success: function (res) {
-      //       // console.log(res)
-      //       sugData.push({
-      //         name: data.result[i].name,
-      //         address: res.data.result.formatted_address
-      //       })
-      that.setData({
-        sugData: data.result
+      let BMap = new bmap.BMapWX({
+        ak: 'F2HqMyAayTiaaxYOHeagngK4Ck3nLxeH'
       });
-      //     },
-      //     fail: function () {},
-      //   })
-      // }
+      let fail = function(data) {
+        console.log(data)
+      };
+      let success = function(data) {
+        // console.log(data)
+        let sugData = []
+        for (let i = 0; i < data.result.length; i++) {
+          if (data.result[i].location) {
+            wx.request({
+              url: 'https://api.map.baidu.com/geocoder/v2/?ak=F2HqMyAayTiaaxYOHeagngK4Ck3nLxeH&location=' + data.result[i].location.lat + ',' + data.result[i].location.lng + '&output=json',
+              success: function(res) {
+                // console.log(res)
+                sugData.push({
+                  name: data.result[i].name,
+                  address: res.data.result.formatted_address + res.data.result.sematic_description
+                })
+                if (data.result.length - 1 == sugData.length) {
+                  that.setData({
+                    sugData
+                  });
+                  // console.log(that.data.sugData)
+                }
+              },
+              fail: function() {},
+            })
+          }
 
-      console.log(that.data.sugData)
+        }
+
+
+      }
+      BMap.suggestion({
+        query: e.detail.value,
+        region: that.data.city,
+        city_limit: true,
+        fail: fail,
+        success: success
+      });
     }
-    BMap.suggestion({
-      query: e.detail.value,
-      region: that.data.city,
-      city_limit: true,
-      fail: fail,
-      success: success
-    });
+
+  },
+  bindChosCity: function() {
+    wx.navigateTo({
+      url: '../city/city',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    })
+  },
+  bindAddress: function(e) {
+    let pages = getCurrentPages();
+    console.log(e.currentTarget.dataset.address)
+
+    let prevPage = pages[pages.length - 2]
+    console.log(this.data.form)
+    if (this.data.form == "back") {
+      prevPage.setData({
+        back: e.currentTarget.dataset.address
+      })
+    } else if (this.data.form == "go") {
+      prevPage.setData({
+        go: e.currentTarget.dataset.address
+      })
+    }
+    console.log(prevPage)
+    wx.navigateBack({
+      delta: 1,
+    })
   },
   // bindGetLocation: function(e) {
   //   console.log(e)

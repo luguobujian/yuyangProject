@@ -65,12 +65,31 @@
       </view>
     </view>
     <view class='btns'>
-      <button class='go-map'><image src='../../../../image/icon/go-address.png'></image> 查看当前位置</button>
+      <button class='go-map'>
+        <image src='../../../../image/icon/go-address.png'></image> 查看当前位置</button>
       <button class='no'>取消订单</button>
     </view>
     <view class='grade-box'>
-      <view></view>
-    
+      <view class='star-view clearfix'>
+        <view class='fl'>评分:</view>
+        <view class='stars fl clearfix'>
+          <view data-star='1' class="fl {{ star >= 1? 'on': '' }}" bindtap="geiStar"></view>
+          <view data-star='2' class="fl {{ star >= 2? 'on': '' }}" bindtap="geiStar"></view>
+          <view data-star='3' class="fl {{ star >= 3? 'on': '' }}" bindtap="geiStar"></view>
+          <view data-star='4' class="fl {{ star >= 4? 'on': '' }}" bindtap="geiStar"></view>
+          <view data-star='5' class="fl {{ star >= 5? 'on': '' }}" bindtap="geiStar"></view>
+        </view>
+      </view>
+      <view class='textarea-view'>
+        <textarea class='textarea' placeholder='待评价。。。'></textarea>
+      </view>
+      <button class='grade'>评价</button>
+    </view>
+    <view class='over-order'>
+      <view class='btns'>
+        <button class='go-map'>立即支付</button>
+        <button class='no'>完成订单</button>
+      </view>
     </view>
   </view>
 </view>

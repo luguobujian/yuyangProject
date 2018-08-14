@@ -25,19 +25,19 @@
       </view>
     </view>
     <view class='address-view'>
-      <view class='back bb' bindtap='bindGoGetAddress'>
-        <image src='../../../image/icon/car.png'></image>
-        <view class="address-info">
-          请选择发货地址
+      <view class='back clearfix bb' data-form="back" bindtap='bindGoGetAddress'>
+        <image class='fl' src='../../../image/icon/car.png'></image>
+        <view class="address-view address-info fl">
+          {{ back }}
         </view>
-        <view class='arrow'>›</view>
+        <view class='arrow fl'>›</view>
       </view>
-      <view class='go' bindtap='bindGoGetAddress'>
-        <image src='../../../image/icon/add.png'></image>
-        <view class="address-info">
-          请选择收货地址
+      <view class='go clearfix' data-form="go" bindtap='bindGoGetAddress'>
+        <image class='fl' src='../../../image/icon/add.png'></image>
+        <view class="address-view address-info fl">
+          {{ go }}
         </view>
-        <view class='arrow'>›</view>
+        <view class='arrow fl'>›</view>
       </view>
     </view>
     <view class='add-info address-view'>
@@ -61,7 +61,7 @@
           联系人姓名
         </view>
         <view class='user-info-con'>
-          狗蛋啊
+          {{ callName }}
         </view>
         <image class='rimg' src='../../../image/icon/tel_btn.png' bindtap="bindGoGetContact"></image>
       </view>
@@ -71,7 +71,7 @@
           联系人姓名
         </view>
         <view class='user-info-con'>
-          13899999999
+          {{ callTel }}
         </view>
       </view>
     </view>
