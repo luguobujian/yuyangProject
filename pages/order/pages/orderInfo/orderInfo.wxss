@@ -36,7 +36,7 @@
   margin: 20rpx 40rpx 16rpx;
 }
 
-.grade image {
+.header-grade image {
   width: 32rpx;
   height: 32rpx;
 }

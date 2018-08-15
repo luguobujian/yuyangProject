@@ -52,6 +52,7 @@ input {
   width: 396rpx;
   height: 52rpx;
   margin-left: 86rpx;
+  padding-left: 30rpx;
   border: 1rpx solid #dedede;
 }
 

@@ -92,4 +92,19 @@
       </view>
     </view>
   </view>
+  <view class='modal telModal' wx:if="{{ !telModalShow }}">
+    <view>
+      <view class='info bb'>应用：需要获取你的手机号</view>
+      <view>
+        <input class='tel' placeholder='请输入手机号' bindinput='bindTelValue'></input>
+      </view>
+      <view class='sms-view clearfix'>
+        <input class='smsCode fl' placeholder='请输入验证码' bindinput='bindCodeValue'></input>
+        <button class='fr codeBtn' bindtap='getCode' disabled='{{disabled}}'>{{codename}}</button>
+      </view>
+      <view class='btns'>
+        <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">确认</button>
+      </view>
+    </view>
+  </view>
 </view>

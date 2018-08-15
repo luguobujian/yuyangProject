@@ -114,15 +114,15 @@ Page({
     if (e.detail.value == '') {
       that.setData({
         sugData: '',
-        addressName: "当前位置",
-        address: that.data.tempAddress
+        // addressName: "当前位置",
+        // address: that.data.tempAddress
       });
       return;
     } else {
-      that.setData({
-        addressName: "位置",
-        address: e.detail.value
-      });
+      // that.setData({
+      //   addressName: "位置",
+      //   address: e.detail.value
+      // });
       let BMap = new bmap.BMapWX({
         ak: 'F2HqMyAayTiaaxYOHeagngK4Ck3nLxeH'
       });

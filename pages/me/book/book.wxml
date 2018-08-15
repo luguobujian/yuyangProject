@@ -3,19 +3,25 @@
   <view>
     <view class='item bb clearfix'>
       <view class='fl'>张大嘴</view>
-      <image class='fr'></image>
-      <view class='fr'>13866666666</view>    
+      <image class='fr' src='../../../../image/icon/del.png'></image>
+      <view class='fr'>13866666666</view>
     </view>
     <view class='btn-view'>
       <button>添加新联系人</button>
     </view>
     <view class='modal'>
       <view class='inp-view'>
-        <view class='clearfix'><view class='fl'>姓名</view><input class=''></input></view>
-        <view class='clearfix'><view class='fl'>电话</view><input class=''></input></view>
+        <view class='clearfix'>
+          <view class='fl'>姓名</view>
+          <input class='' maxlength="4" bindinput='bindNameValue'></input>
+        </view>
+        <view class='clearfix'>
+          <view class='fl'>电话</view>
+          <input class='' maxlength="11" type="number" bindinput='bindTelValue'></input>
+        </view>
         <view class='btns'>
           <button>返回</button>
-          <button>确认</button>
+          <button bindtap='bindThisMan'>确认</button>
         </view>
       </view>
     </view>

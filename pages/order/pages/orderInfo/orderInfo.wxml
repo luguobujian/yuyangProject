@@ -12,7 +12,7 @@
         </view>
         <view class='user fl'>
           <view>李大宝</view>
-          <view class='grade'>
+          <view class='header-grade'>
             <image src='../../../../image/icon/star.png'></image>
             <image src='../../../../image/icon/star.png'></image>
             <image src='../../../../image/icon/star.png'></image>

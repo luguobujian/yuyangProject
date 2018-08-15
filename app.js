@@ -5,16 +5,18 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-
+    let that = this
     // 登录
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        console.log(res.code)
+        // console.log(res.code)
         wx.request({
           url: this.globalData.server + 'api/XcxUserInfo?js_code=' + res.code,
           success: function(res) {
-            console.log(res)
+            let codeData = JSON.parse(res.data).openid
+            // console.log(codeData)
+            that.globalData.openId = codeData.openid
           },
           fail: function(res) {
             console.log(res)
@@ -46,6 +48,7 @@ App({
   },
   globalData: {
     server: 'http://47.105.122.233/',
-    userInfo: null
+    userInfo: null,
+    openId: null
   }
 })

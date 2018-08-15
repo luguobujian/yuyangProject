@@ -6,7 +6,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    server: App.globalData.server
+    server: App.globalData.server,
+    name: "",
+    ajxNameTrue: "",
+    tel: "",
+    ajxTelTrue: ""
   },
 
   /**
@@ -23,7 +27,51 @@ Page({
     //   complete: function(res) {},
     // })
   },
+  bindNameValue: function(e) {
+    console.log(e)
+    let name = e.detail.value;
+    if (!(/^[u4E00-u9FA5]+$/.test(name))) {
+      this.setData({
+        ajxNameTrue: false,
+        name: ""
+      })
 
+    } else {
+      this.setData({
+        ajxNameTrue: true,
+        name: e.detail.value
+      })
+    }
+  },
+  bindTelValue: function(e) {　
+    let phone = e.detail.value;
+    if (!(/^ 1[34578]\d{ 9 } $ /.test(phone))) {
+      this.setData({
+        ajxTelTrue: false,
+        tel: ""
+      })
+    } else {
+      this.setData({
+        ajxtrue: true,
+        tel: e.detail.value
+      })
+    }
+  },
+  bindThisMan: function() {
+    if (!this.data.ajxNameTrue) {
+      wx.showToast({
+        title: '提示 : 姓名有误',
+        icon: 'none',
+        duration: 2000
+      })
+    } else if (!this.data.ajxTelTrue) {
+      wx.showToast({
+        title: '提示 : 手机号有误',
+        icon: 'none',
+        duration: 2000
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
