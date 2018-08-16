@@ -1,7 +1,7 @@
 <!--pages/me/help/help.wxml-->
 <view class='container'>
   <view>
-    <view wx:for="{{ data }}" wx:key="{{ item.ID }}" id='{{ item.ID }}' class='item bb clearfix' bindtap='bindOpenInfo'>
+    <view wx:for="{{ data }}" wx:key="{{ item.ID }}" data-id='{{ item.ID }}' class='item bb clearfix' bindtap='bindOpenInfo'>
       <view class='fl'>{{ item.Ask }}</view><view class='fr'>›</view>
     </view>
   </view>

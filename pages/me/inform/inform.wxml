@@ -1,9 +1,9 @@
 <!--pages/me/inform/inform.wxml-->
 <view class='container'>
   <view>
-    <view class='item bb'>
-      <view>你有一个订单状态发生了变化,请查看。</view>
-      <view>时间：2018-07-22 16:21</view>
+    <view wx:for="{{ data }}" wx:key="{{item.id}}" data-id='{{ item.ID }}' class='item bb' bindtap='bindOpenInfo'>
+      <view>{{ item.Title }}</view>
+      <view>时间：{{ item.AddTime }}</view>
     </view>
   </view>
 </view>

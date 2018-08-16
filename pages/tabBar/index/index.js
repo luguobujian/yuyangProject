@@ -13,6 +13,7 @@ Page({
 
     tel: '', //手机号
     ajxTelTrue: '',
+    telStatus: '',
     code: '',
     iscode: '',
     codename: '获取验证码',
@@ -48,17 +49,7 @@ Page({
                 logModalShow: true
               })
               // openId查验
-              wx.request({
-                url: that.data.server + 'api/XcxUserInfo?WxOpenID=' + that.data.openId,
-                success: function(res) {
-                  console.log(res)
-                  if (res.data.status) {
-
-                  } else {
-
-                  }
-                }
-              })
+              that.bindVerOpenId(that)
             }
           })
         } else {
@@ -94,25 +85,35 @@ Page({
       complete: function(res) {},
     })
   },
+  bindVerOpenId: function(that) {
+    wx.request({
+      url: that.data.server + 'api/XcxUserInfo?WxOpenID=' + that.data.openId,
+      success: function(res) {
+        console.log(res)
+        if (res.data.status) {
+          that.setData({
+            telModalShow: true,
+          })
+        } else {
+
+        }
+      }
+    })
+  },
   // 获取手机号
   bindTelValue: function(e) {
     let phone = e.detail.value
-    let myreg = /^(14[0-9]|13[0-9]|15[0-9]|17[0-9]|18[0-9])\d{8}$$/;
-    console.log(phone)
     if (!(/^1[34578]\d{9}$/.test(phone))) {
       this.setData({
         ajxTelTrue: false,
         tel: ""
       })
-      console.log(phone)
     } else {
       this.setData({
-        ajxtrue: true,
+        ajxTelTrue: true,
         tel: e.detail.value
       })
-      console.log(phone)
       if (phone.length == 11) {
-        console.log(phone)
         this.verifyTel(phone)
       }
     }
@@ -135,6 +136,7 @@ Page({
   // 获取短信验证码
   getCode: function() {
     let _this = this;
+    console.log(this.data.ajxTelTrue)
     if (!this.data.ajxTelTrue) {
       wx.showToast({
         title: '手机号有误',
@@ -142,30 +144,31 @@ Page({
         duration: 2000
       })
     } else {
+      var num = 61;
+      var timer = setInterval(function() {
+        num--;
+        if (num <= 0) {
+          clearInterval(timer);
+          _this.setData({
+            codename: '重新发送',
+            disabled: false
+          })
+
+        } else {
+          _this.setData({
+            codename: num + "s"
+          })
+        }
+      }, 1000)
       wx.request({
-        url: _this.data.server + 'api/SmsCode?PhoneNum=' + +'&type=change',
+        url: _this.data.server + 'api/SmsCode?PhoneNum=' + _this.data.tel + '&type=change',
         success(res) {
           console.log(res.data.data)
           _this.setData({
-            iscode: res.data.data,
+            // iscode: res.data.data,
             disabled: true
           })
-          var num = 61;
-          var timer = setInterval(function() {
-            num--;
-            if (num <= 0) {
-              clearInterval(timer);
-              _this.setData({
-                codename: '重新发送',
-                disabled: false
-              })
 
-            } else {
-              _this.setData({
-                codename: num + "s"
-              })
-            }
-          }, 1000)
         }
       })
     }
@@ -186,14 +189,47 @@ Page({
       logModalShow: true
     })
   },
+  // 验证手机号
   verifyTel: function(data) {
-    console.log(data)
+    let that = this
+    // console.log(data)
     wx.request({
       url: this.data.server + 'api/XcxUserInfo?PhoneNum=' + data,
       success: function(res) {
         console.log(res)
+        that.setData({
+          telStatus: res.data.status
+        })
+        app.globalData.UserID = res.data.UserID
       }
     })
+  },
+  // 用户处理
+  bindAddUser: function() {
+    let that = this
+    if (this.data.telStatus == 3) {
+      // 注册
+      wx.request({
+        url: this.data.server + 'api/User?PhoneNum=' + this.data.tel + '&SmsCode=' + this.data.code + '&DriverID=0&Company=&WxOpenID=' + app.globalData.openId,
+        success: function(res) {
+          console.log(res)
+        }
+      })
+    } else if (this.data.telStatus == 2) {
+      wx.showToast({
+        title: '手机已被其他用户绑定',
+      })
+    } else if (this.data.telStatus == 1) {
+      // 绑定
+      wx.request({
+        url: this.data.server + "api/User?UserID=" + app.globalData.UserID + "&PhoneNum=" + this.data.tel + "&SmsCode=" + this.data.code + "&WxOpenID=" + app.globalData.openId,
+        method: 'post',
+        success: function(res) {
+          console.log(res)
+          that.bindVerOpenId(that)
+        }
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

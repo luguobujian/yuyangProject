@@ -13,9 +13,14 @@
 
 .container > view > input {
   width: 480rpx;
-  margin-top: 16rpx;
-  margin-right: 90rpx;
+  margin: 16rpx 90rpx 16rpx 0;
   text-align: right;
+}
+
+.avatar image {
+  width: 70rpx;
+  height: 70rpx;
+  margin: 6rpx 90rpx 6rpx 0;
 }
 
 .btn {

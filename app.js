@@ -15,8 +15,8 @@ App({
           url: this.globalData.server + 'api/XcxUserInfo?js_code=' + res.code,
           success: function(res) {
             let codeData = JSON.parse(res.data).openid
-            // console.log(codeData)
-            that.globalData.openId = codeData.openid
+            console.log(codeData)
+            that.globalData.openId = codeData
           },
           fail: function(res) {
             console.log(res)
@@ -48,6 +48,7 @@ App({
   },
   globalData: {
     server: 'http://47.105.122.233/',
+    UserID: null,
     userInfo: null,
     openId: null
   }

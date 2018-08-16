@@ -1,7 +1,7 @@
 <!--pages/me/someInfo/someInfo.wxml-->
 <view class='container'>
   <view>
-    <view class='tit bb'>关于系统升级维护的通知</view>
+    <view class='tit bb'>{{ info }}</view>
     <import src="../../../wxParse/wxParse.wxml" />
     <view class="wxParse article content">
       <template is="wxParse" data="{{wxParseData:article.nodes}}" />

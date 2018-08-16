@@ -103,7 +103,7 @@
         <button class='fr codeBtn' bindtap='getCode' disabled='{{disabled}}'>{{codename}}</button>
       </view>
       <view class='btns'>
-        <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">确认</button>
+        <button open-type="getUserInfo" bindgetuserinfo="bindAddUser">确认</button>
       </view>
     </view>
   </view>

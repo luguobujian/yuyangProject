@@ -2,11 +2,10 @@
 <view class='container'>
   <view>
     <view class='inp-view'>
-      <textarea></textarea>
+      <textarea placeholder='感谢您的宝贵意见。。。' bindinput='bindGetValue'></textarea>
       <view class='btn-view'>
-        <button>提交</button>
+        <button bindtap='bindPullIdea'>提交</button>
       </view>
-      
     </view>
   </view>
 </view>
