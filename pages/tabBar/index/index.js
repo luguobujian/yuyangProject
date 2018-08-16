@@ -9,7 +9,7 @@ Page({
     server: app.globalData.server,
     openId: app.globalData.openId,
     logModalShow: false,
-    telModalShow: false,
+    telModalShow: true,
 
     tel: '', //手机号
     ajxTelTrue: '',
@@ -86,16 +86,20 @@ Page({
     })
   },
   bindVerOpenId: function(that) {
+    console.log(that)
     wx.request({
-      url: that.data.server + 'api/XcxUserInfo?WxOpenID=' + that.data.openId,
+      url: that.data.server + 'api/XcxUserInfo?WxOpenID=' + app.globalData.openId,
       success: function(res) {
         console.log(res)
         if (res.data.status) {
           that.setData({
             telModalShow: true,
           })
+          app.globalData.ticket = res.data.Ticket
         } else {
-
+          that.setData({
+            telModalShow: false,
+          })
         }
       }
     })
@@ -136,7 +140,6 @@ Page({
   // 获取短信验证码
   getCode: function() {
     let _this = this;
-    console.log(this.data.ajxTelTrue)
     if (!this.data.ajxTelTrue) {
       wx.showToast({
         title: '手机号有误',
@@ -163,7 +166,7 @@ Page({
       wx.request({
         url: _this.data.server + 'api/SmsCode?PhoneNum=' + _this.data.tel + '&type=change',
         success(res) {
-          console.log(res.data.data)
+          console.log(res)
           _this.setData({
             // iscode: res.data.data,
             disabled: true
@@ -188,6 +191,7 @@ Page({
       userInfo: e.detail.userInfo,
       logModalShow: true
     })
+    that.bindVerOpenId(that)
   },
   // 验证手机号
   verifyTel: function(data) {
@@ -213,11 +217,13 @@ Page({
         url: this.data.server + 'api/User?PhoneNum=' + this.data.tel + '&SmsCode=' + this.data.code + '&DriverID=0&Company=&WxOpenID=' + app.globalData.openId,
         success: function(res) {
           console.log(res)
+          that.bindVerOpenId(that)
         }
       })
     } else if (this.data.telStatus == 2) {
       wx.showToast({
         title: '手机已被其他用户绑定',
+        icon: "none"
       })
     } else if (this.data.telStatus == 1) {
       // 绑定
