@@ -7,6 +7,7 @@ Page({
    */
   data: {
     server: App.globalData.server,
+    isShow: false,
     name: "",
     ajxNameTrue: "",
     tel: "",
@@ -28,9 +29,9 @@ Page({
     // })
   },
   bindNameValue: function(e) {
-    console.log(e)
+    
     let name = e.detail.value;
-    if (!(/^[u4E00-u9FA5]+$/.test(name))) {
+    if (!/^[\u4E00-\u9FA5\uf900-\ufa2d·]*$/.test(name)) {
       this.setData({
         ajxNameTrue: false,
         name: ""
@@ -45,19 +46,22 @@ Page({
   },
   bindTelValue: function(e) {　
     let phone = e.detail.value;
-    if (!(/^ 1[34578]\d{ 9 } $ /.test(phone))) {
+    console.log(phone)
+    console.log(/^1[34578]\d{9}$/.test(phone))
+    if (!(/^1[34578]\d{9}$/.test(phone))) {
       this.setData({
         ajxTelTrue: false,
         tel: ""
       })
     } else {
       this.setData({
-        ajxtrue: true,
+        ajxTelTrue: true,
         tel: e.detail.value
       })
     }
   },
   bindThisMan: function() {
+    let that = this
     if (!this.data.ajxNameTrue) {
       wx.showToast({
         title: '提示 : 姓名有误',
@@ -69,6 +73,33 @@ Page({
         title: '提示 : 手机号有误',
         icon: 'none',
         duration: 2000
+      })
+    } else {
+      wx.request({
+        url: this.data.server + 'api/Contacts',
+        method:"post",
+        data: {
+          Name: this.data.name,
+          PhoneNum: this.data.tel,
+          AddUser: App.globalData.UserID
+        },
+        success: function (res) {
+          console.log(res)
+          if (res.data.msg == "操作成功") {
+            that.bindIsShow()
+          }
+        }
+      })
+    }
+  },
+  bindIsShow: function () {
+    if (this.data.isShow) {
+      this.setData({
+        isShow: false
+      })
+    } else {
+      this.setData({
+        isShow: true
       })
     }
   },

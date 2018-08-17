@@ -64,3 +64,8 @@
 .go-time-view > view:last-child {
   font-size: 26rpx;
 }
+.setAddress {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

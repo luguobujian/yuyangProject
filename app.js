@@ -7,25 +7,25 @@ App({
     wx.setStorageSync('logs', logs)
     let that = this
     // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
-        // console.log(res.code)
-        wx.request({
-          url: this.globalData.server + 'api/XcxUserInfo?js_code=' + res.code,
-          success: function(res) {
-            let codeData = JSON.parse(res.data).openid
+    // wx.login({
+    //   success: res => {
+    //     // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    //     // console.log(res.code)
+    //     wx.request({
+    //       url: this.globalData.server + 'api/XcxUserInfo?js_code=' + res.code,
+    //       success: function(res) {
+    //         let codeData = JSON.parse(res.data).openid
             
-            that.globalData.openId = codeData
-            console.log(that.globalData.openId)
-          },
-          fail: function(res) {
-            console.log(res)
-          },
-          complete: function(res) {},
-        })
-      }
-    })
+    //         that.globalData.WXOpenId = codeData
+    //         console.log(that)
+    //       },
+    //       fail: function(res) {
+    //         console.log(res)
+    //       },
+    //       complete: function(res) {},
+    //     })
+    //   }
+    // })
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -51,7 +51,7 @@ App({
     server: 'http://47.105.122.233/',
     UserID: null,
     userInfo: null,
-    openId: "",
+    WXOpenId: "",
     ticket: ""
   }
 })

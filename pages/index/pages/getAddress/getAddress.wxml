@@ -15,14 +15,14 @@
   </view>
   <view>
     <view>
-      <view class='now-item bb' data-address="{{ address }}" bindtap='bindAddress'>
+      <view class='now-item bb' data-address="{{ address }}" data-lng='{{ longitude }}' data-lat='{{ latitude }}' bindtap='bindAddress'>
         <image src='../../../../image/icon/address-icon.png'></image>
         <view>
           <view class='address-tit'>{{ addressName }}</view>
           <view class='address-info'>{{ address }}</view>
         </view>
       </view>
-      <view wx:for="{{ sugData }}" data-address="{{ item.address }}" wx:key="{{ item.uid }}" class='item now-item bb' bindtap='bindAddress'>
+      <view wx:for="{{ sugData }}" data-address="{{ item.address }}" wx:key="{{ item.uid }}" class='item now-item bb' data-lng='{{ item.lng }}' data-lat='{{ item.lat }}' bindtap='bindAddress'>
         <image src='../../../../image/icon/address-icon.png'></image>
         <view>
           <view class='address-tit'>{{ item.name }}</view>

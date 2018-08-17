@@ -1,70 +1,175 @@
 // pages/index/pages/goOrder/goOrder.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-  
+    server: app.globalData.server,
+    orderData: "",
+    Notes: "",
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-  
+  onLoad: function(options) {
+    let that = this
+    console.log(options)
+    this.setData({
+      orderData: options
+    })
+    let jl = (that.getFlatternDistance(options.SendLat, options.SendLong, options.ReciveLat, options.ReciveLong)).toFixed(3)
+    wx.request({
+      url: that.data.server + 'api/SystemInfo',
+      success: function(res) {
+        console.log(res.data.Price * jl)
+        let str = "orderData.Price"
+        that.setData({
+          [str]: res.data.Price * jl
+        })
+      }
+    })
+    console.log(jl)
   },
+  bindGetNotes: function(e) {
+    console.log(e.detail.value)
+    this.setData({
 
+      Notes: e.detail.value
+
+    })
+  },
+  sure: function(e) {
+    let str = 'orderData.Notes'
+    this.setData({
+      [str]: this.data.Notes
+    })
+    console.log(this.data.orderData)
+    wx.request({
+      url: this.data.server + 'api/Order',
+      method: 'post',
+      data: this.data.orderData,
+      success: function(res) {
+        console.log(res)
+        if (res.data.state) {
+          wx.redirectTo({
+            url: '../instant/instant?page=sure',
+            success: function(res) {},
+            fail: function(res) {},
+            complete: function(res) {},
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
-  
+  onReady: function() {
+
   },
-  bindGoProtocol: function () {
+  bindGoProtocol: function() {
     wx.navigateTo({
       url: '../protocol/protocol'
+    })
+  },
+  bindInstant: function() {
+    wx.navigateTo({
+      url: '../instant/instant'
     })
   },
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  
+  onShow: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
-  
+  onHide: function() {
+
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
-  
+  onUnload: function() {
+
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
-  
+  onPullDownRefresh: function() {
+
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
-  
+  onReachBottom: function() {
+
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-  
-  }
+  onShareAppMessage: function() {
+
+  },
+  getRad: function(d) {
+    var PI = Math.PI;
+    return d * PI / 180.0;
+  },
+  getFlatternDistance: function(lat1, lng1, lat2, lng2) {
+    var EARTH_RADIUS = 6378137.0; //单位M
+    // console.log(lat1)
+    // console.log(lng1)
+    // console.log(lat2)
+    // console.log(lng2)
+
+
+    var f = this.getRad((lat1 - (-lat2)) / 2);
+    var g = this.getRad((lat1 - lat2) / 2);
+    var l = this.getRad((lng1 - lng2) / 2);
+
+    // console.log(f)
+    // console.log(g)
+    // console.log(l)
+
+    var sg = Math.sin(g);
+    var sl = Math.sin(l);
+    var sf = Math.sin(f);
+
+    var s, c, w, r, d, h1, h2;
+    var a = EARTH_RADIUS;
+    var fl = 1 / 298.257;
+
+    sg = sg * sg;
+    sl = sl * sl;
+    sf = sf * sf;
+
+    s = sg * (1 - sl) + (1 - sf) * sl;
+    c = (1 - sg) * (1 - sl) + sf * sl;
+
+    w = Math.atan(Math.sqrt(s / c));
+    r = Math.sqrt(s * c) / w;
+    d = 2 * w * a;
+    h1 = (3 * r - 1) / 2 / c;
+    h2 = (3 * r + 1) / 2 / s;
+
+    // console.log(w)
+    // console.log(r)
+    // console.log(d)
+    // console.log(h1)
+    // console.log(h2)
+
+
+    return d * (1 + fl * (h1 * sf * (1 - sg) - h2 * (1 - sf) * sg)) / 1000;
+  },
 })

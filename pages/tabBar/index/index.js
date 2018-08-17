@@ -7,7 +7,7 @@ Page({
    */
   data: {
     server: app.globalData.server,
-    openId: app.globalData.openId,
+    WXOpenId: app.globalData.WXOpenId,
     logModalShow: false,
     telModalShow: true,
 
@@ -25,11 +25,17 @@ Page({
 
     back: "请选择发货地址",
     go: "请选择收货地址",
+    SendLong: "",
+    SendLat: "",
+    ReciveLong: "",
+    ReciveLat: "",
+    date: '',
     callName: "",
     callTel: "",
+
     currentTab: 0,
     scrollLeft: 0,
-    date: '',
+
   },
 
   /**
@@ -43,13 +49,29 @@ Page({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.getUserInfo({
             success: function(res) {
-              console.log(res.userInfo)
               that.setData({
                 userInfo: res.userInfo,
                 logModalShow: true
               })
-              // openId查验
-              that.bindVerOpenId(that)
+            }
+          })
+          // openId查验
+          wx.login({
+            success: res => {
+              // 发送 res.code 到后台换取 openId, sessionKey, unionId
+              wx.request({
+                url: app.globalData.server + 'api/XcxUserInfo?js_code=' + res.code,
+                success: function(res) {
+                  let codeData = JSON.parse(res.data).openid
+                  app.globalData.WXOpenId = codeData
+                  // console.log(app.globalData.WXOpenId)
+                  that.bindVerOpenId(that)
+                },
+                fail: function(res) {
+                  console.log(res)
+                },
+                complete: function(res) {},
+              })
             }
           })
         } else {
@@ -86,11 +108,16 @@ Page({
     })
   },
   bindVerOpenId: function(that) {
-    console.log(that)
+    // console.log(app.globalData.WXOpenId)
     wx.request({
-      url: that.data.server + 'api/XcxUserInfo?WxOpenID=' + app.globalData.openId,
+      url: that.data.server + 'api/XcxUserInfo',
+      // url: that.data.server + 'api/XcxUserInfo?WxOpenID=' + app.globalData.WXOpenId,
+      method: "post",
+      data: {
+        WxOpenID: app.globalData.WXOpenId
+      },
       success: function(res) {
-        console.log(res)
+        // console.log(res)
         if (res.data.status) {
           that.setData({
             telModalShow: true,
@@ -101,6 +128,9 @@ Page({
             telModalShow: false,
           })
         }
+      },
+      fail: function(res) {
+        console.log(res)
       }
     })
   },
@@ -176,14 +206,6 @@ Page({
       })
     }
   },
-  //获取验证码
-  // getVerificationCode() {
-  //   this.getCode();
-  //   var _this = this
-  //   _this.setData({
-  //     disabled: true
-  //   })
-  // },
   bindGetUserInfo: function(e) {
     console.log(e)
     let that = this
@@ -210,11 +232,13 @@ Page({
   },
   // 用户处理
   bindAddUser: function() {
+    console.log(app.globalData.WXOpenId)
+    console.log(app.globalData.UserID)
     let that = this
     if (this.data.telStatus == 3) {
       // 注册
       wx.request({
-        url: this.data.server + 'api/User?PhoneNum=' + this.data.tel + '&SmsCode=' + this.data.code + '&DriverID=0&Company=&WxOpenID=' + app.globalData.openId,
+        url: this.data.server + 'api/User?PhoneNum=' + this.data.tel + '&SmsCode=' + this.data.code + '&DriverID=0&Company=&WxOpenID=' + app.globalData.WXOpenId,
         success: function(res) {
           console.log(res)
           that.bindVerOpenId(that)
@@ -228,7 +252,7 @@ Page({
     } else if (this.data.telStatus == 1) {
       // 绑定
       wx.request({
-        url: this.data.server + "api/User?UserID=" + app.globalData.UserID + "&PhoneNum=" + this.data.tel + "&SmsCode=" + this.data.code + "&WxOpenID=" + app.globalData.openId,
+        url: this.data.server + "api/User?UserID=" + app.globalData.UserID + "&PhoneNum=" + this.data.tel + "&SmsCode=" + this.data.code + "&WxOpenID=" + app.globalData.WXOpenId,
         method: 'post',
         success: function(res) {
           console.log(res)
@@ -240,9 +264,7 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-
-  },
+  onReady: function() {},
   swichNav: function(e) {
     this.setData({
       currentTab: e.currentTarget.dataset.current,
@@ -272,9 +294,39 @@ Page({
     })
   },
   bindGoOrder: function() {
-    wx.navigateTo({
-      url: '../../index/pages/goOrder/goOrder',
-    })
+    if (this.data.back == "请选择发货地址") {
+      wx.showToast({
+        title: '请输入发货地址',
+        icon: "none",
+        duration: 2000
+      })
+    } else if (this.data.go == "请选择收货地址") {
+      wx.showToast({
+        title: '请输入收货地址',
+        icon: "none",
+        duration: 2000
+      })
+    } else if (this.data.date == "") {
+      wx.showToast({
+        title: '请输入发货时间',
+        icon: "none",
+        duration: 2000
+      })
+    } else if (this.data.callName == "") {
+      wx.showToast({
+        title: '请选择收货人',
+        icon: "none",
+        duration: 2000
+      })
+    } else {
+      wx.navigateTo({
+        url: '../../index/pages/goOrder/goOrder?TruckID=' + this.data.carInfo.ID + '&SendAddr=' + this.data.back + '&ReciveAddr=' + this.data.go + '&ReciveName=' + this.data.callName + '&RecivePhone=' + this.data.callTel + '&SendTime=' + this.data.date + '&SendLong=' + this.data.SendLong + '&SendLat=' + this.data.SendLat + '&ReciveLong=' + this.data.ReciveLong + '&ReciveLat=' + this.data.ReciveLat + '&Notes=&Price=0',
+      })
+    }
+
+
+
+
   },
   facility: function() {
     wx.navigateTo({
@@ -285,6 +337,23 @@ Page({
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       date: e.detail.value
+    })
+  },
+  bindOneKey: function(e) {
+    let that = this
+    wx.request({
+      url: this.data.server + 'api/OneKey',
+      method: 'post',
+      data: {
+        UserID: app.globalData.UserID
+      },
+      success: function(res) {
+        if (res.data.status) {
+          wx.navigateTo({
+            url: '../../index/pages/instant/instant?page=onekey',
+          })
+        }
+      }
     })
   },
   /**

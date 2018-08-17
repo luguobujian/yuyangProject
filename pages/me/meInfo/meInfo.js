@@ -31,7 +31,7 @@ Page({
   },
   bindGetName: function(e) {
     let Name = e.detail.value
-    this.setData.pullData({
+    this.setData({
       Name: e.detail.value
     })
   },
@@ -41,7 +41,6 @@ Page({
       ajxTelTrue01: true,
       Tel1: e.detail.value
     })
-
   },
   bindGetCallTel02: function(e) {
     let phone = e.detail.value
@@ -57,29 +56,28 @@ Page({
       ajxTelTrue03: true,
       Tel3: e.detail.value
     })
-
   },
   bindGetCompany: function(e) {
     let company = e.detail.value
-    this.setData.pullData({
+    this.setData({
       Company: e.detail.value
     })
   },
   bindPullData: function() {
     // console.log(this.data.Tel1)
     // console.log(this.data.Tel2)
-    // console.log(this.data.Tel3)
+    // console.log(app.globalData.ticket)
     let ajxTelTrue01 = (/^1[34578]\d{9}$/.test(this.data.Tel1))
     let ajxTelTrue02 = (/^1[34578]\d{9}$/.test(this.data.Tel2))
     let ajxTelTrue03 = (/^1[34578]\d{9}$/.test(this.data.Tel3))
     // console.log(ajxTelTrue01)
     // console.log(ajxTelTrue02)
-    // console.log(ajxTelTrue03)
+    console.log('BasicAuth ' + app.globalData.ticket)
     if (ajxTelTrue01 && ajxTelTrue02 && ajxTelTrue03) {
       wx.request({
         url: this.data.server + 'api/User/1',
         header: {
-
+          'Authorization': 'BasicAuth ' + app.globalData.ticket
         },
         method: "PUT",
         data: {

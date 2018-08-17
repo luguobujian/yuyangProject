@@ -24,14 +24,14 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options)
+    // console.log(options)
     let that = this
     that.setData({
       form: options.form
     })
     wx.getSetting({
       success: function(res) {
-        console.log(res)
+        // console.log(res)
         if (res.authSetting['scope.userLocation'] !== undefined && res.authSetting['scope.userLocation'] !== true) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.showModal({
@@ -94,7 +94,7 @@ Page({
     wx.request({
       url: 'https://api.map.baidu.com/geocoder/v2/?ak=F2HqMyAayTiaaxYOHeagngK4Ck3nLxeH&location=' + latitude + ',' + longitude + '&output=json',
       success: function(res) {
-        console.log(res)
+        // console.log(res)
         let address = res.data.result;
         that.setData({
           tempAddress: address.formatted_address + address.sematic_description,
@@ -127,7 +127,7 @@ Page({
         ak: 'F2HqMyAayTiaaxYOHeagngK4Ck3nLxeH'
       });
       let fail = function(data) {
-        console.log(data)
+        // console.log(data)
       };
       let success = function(data) {
         // console.log(data)
@@ -140,7 +140,9 @@ Page({
                 // console.log(res)
                 sugData.push({
                   name: data.result[i].name,
-                  address: res.data.result.formatted_address + res.data.result.sematic_description
+                  address: res.data.result.formatted_address + res.data.result.sematic_description,
+                  lng: data.result[i].location.lng,
+                  lat: data.result[i].location.lat
                 })
                 if (data.result.length - 1 == sugData.length) {
                   that.setData({
@@ -177,20 +179,23 @@ Page({
   },
   bindAddress: function(e) {
     let pages = getCurrentPages();
-    console.log(e.currentTarget.dataset.address)
-
+    // console.log(e)
     let prevPage = pages[pages.length - 2]
-    console.log(this.data.form)
+    // console.log(this.data.form)
     if (this.data.form == "back") {
       prevPage.setData({
-        back: e.currentTarget.dataset.address
+        back: e.currentTarget.dataset.address,
+        SendLong: e.currentTarget.dataset.lng,
+        SendLat: e.currentTarget.dataset.lat,  
       })
     } else if (this.data.form == "go") {
       prevPage.setData({
-        go: e.currentTarget.dataset.address
+        go: e.currentTarget.dataset.address,
+        ReciveLong: e.currentTarget.dataset.lng,
+        ReciveLat: e.currentTarget.dataset.lat,
       })
     }
-    console.log(prevPage)
+    // console.log(prevPage)
     wx.navigateBack({
       delta: 1,
     })

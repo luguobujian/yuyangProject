@@ -76,7 +76,7 @@
       </view>
     </view>
     <view class='btn-view'>
-      <button class='btn01' bindtap='facility'>一键叫车</button>
+      <button class='btn01' bindtap='facility' bindtap='bindOneKey'>一键叫车</button>
       <button class='btn02' bindtap='bindGoOrder'>确认用车</button>
     </view>
     <view class='btm-info'>

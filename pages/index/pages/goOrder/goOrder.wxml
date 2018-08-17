@@ -3,11 +3,11 @@
   <view>
     <view class='header-info'>备注说明</view>
     <view class='textarea-view'>
-      <textarea class='textarea' placeholder="货物是否超长超宽？是否有其他特殊需求？" bindtap="tap"></textarea>
+      <textarea class='textarea' placeholder="货物是否超长超宽？是否有其他特殊需求？" bindinput="bindGetNotes"></textarea>
     </view>
     <view class='need-info'>
       <view class='money-info-view clearfix'>
-        <view class='money'>￥108.5</view>
+        <view class='money'>￥{{ orderData.Price }}</view>
         <view class='standard'>收费标准</view>
       </view>
       <view class='car-money'>
@@ -29,7 +29,7 @@
       <view class='protocol' bindtap='bindGoProtocol'>《货物托运服务协议》</view>
     </view>
     <view class='btn-view'>
-      <button>提交订单</button>
+      <button bindtap='sure'>提交订单</button>
     </view>
   </view>
 </view>
