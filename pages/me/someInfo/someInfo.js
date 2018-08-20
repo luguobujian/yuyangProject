@@ -17,24 +17,35 @@ Page({
   onLoad: function(options) {
     console.log(options.pages)
     let that = this
-    wx.request({
-      url: this.data.server + 'api/' + options.pages + '/' + options.id,
-      success: function(res) {
-        console.log(res)
-        if (options.pages == "Notice") {
-          let content = WxParse.wxParse('article', 'html', res.data.Notes, that, 5);
-          that.setData({
-            info: res.data.Title
-          })
-        } else if (options.pages == "Faq") {
-          let content = WxParse.wxParse('article', 'html', res.data.Answer, that, 5);
-          that.setData({
-            info: res.data.Ask
-          })
-        }
+    if (options.pages == "someInfo") {
+      wx.request({
+        url: this.data.server + 'api/' + options.pages + '/' + options.id,
+        success: function(res) {
+          console.log(res)
+          if (options.pages == "Notice") {
+            let content = WxParse.wxParse('article', 'html', res.data.Notes, that, 5);
+            that.setData({
+              info: res.data.Title
+            })
+          } else if (options.pages == "Faq") {
+            let content = WxParse.wxParse('article', 'html', res.data.Answer, that, 5);
+            that.setData({
+              info: res.data.Ask
+            })
+          }
 
-      }
-    })
+        }
+      })
+    } else {
+      wx.request({
+        url: this.data.server + 'api/SystemInfo',
+        success: function(res) {
+          console.log(res)
+          let content = WxParse.wxParse('article', 'html', res.data.FeeScale, that, 5);
+        }
+      })
+    }
+
   },
 
   /**

@@ -75,7 +75,7 @@ Page({
     console.log('BasicAuth ' + app.globalData.ticket)
     if (ajxTelTrue01 && ajxTelTrue02 && ajxTelTrue03) {
       wx.request({
-        url: this.data.server + 'api/User/1',
+        url: this.data.server + 'api/User/' + app.globalData.UserID,
         header: {
           'Authorization': 'BasicAuth ' + app.globalData.ticket
         },

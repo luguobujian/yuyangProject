@@ -7,9 +7,9 @@
     <view class="tab-item {{current == 4? 'active': ''}}" data-index="4" bindtap='navSwitch'>已完成</view>
   </view>
   <view class='main-item-view'>
-    <view wx:for="{{ data }}" wx:key="{{ item.ID }}" class='item bb' data-id='{{ item.ID }}' bindtap='bindGoOrderInfo'>
+    <view wx:for="{{ data }}" wx:key="{{ item.ID }}" class='item bb' data-current='{{ current }}' data-id='{{ item.ID }}' bindtap='bindGoOrderInfo'>
       <view class='car-menoy-view clearfix'>
-        <view class='fl'>中型货车</view>
+        <view class='fl'>{{ item.Name }}</view>
         <view class='fr'>￥{{item.Price}}</view>
       </view>
       <view class='this_address'>

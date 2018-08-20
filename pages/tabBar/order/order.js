@@ -20,7 +20,6 @@ Page({
     that.getData()
   },
   navSwitch: function(e) {
-    console.log(e);
     this.setData({
       current: e.currentTarget.dataset.index
     })
@@ -31,7 +30,7 @@ Page({
     let limit = that.data.limit + 8;
     let State = this.data.current
     wx.request({
-      url: this.data.server + 'api/Order?reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex1&pageSize=' + limit,
+      url: this.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex1&pageSize=' + limit,
       success: function(res) {
         // console.log(res)
         that.setData({
@@ -40,9 +39,9 @@ Page({
       }
     })
   },
-  bindGoOrderInfo: function() {
+  bindGoOrderInfo: function(e) {
     wx.navigateTo({
-      url: '../../order/pages/orderInfo/orderInfo'
+      url: '../../order/pages/orderInfo/orderInfo?id=' + e.currentTarget.dataset.id + '&current=' + e.currentTarget.dataset.current,
     })
   },
   /**
@@ -88,7 +87,7 @@ Page({
     let limit = that.data.limit + 6;
     let State = this.data.current
     wx.request({
-      url: that.data.server + 'api/Order?reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex1&pageSize=' + limit,
+      url: that.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex1&pageSize=' + limit,
       success: function (res) {
         // console.log(res)
         that.setData({

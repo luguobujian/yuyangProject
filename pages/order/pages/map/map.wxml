@@ -1,2 +1,6 @@
 <!--pages/order/pages/map/map.wxml-->
-<text>pages/order/pages/map/map.wxml</text>
+<view class='container'>
+  <view class='box'>
+    <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="12" markers="{{markers}}"></map>
+  </view>
+</view>

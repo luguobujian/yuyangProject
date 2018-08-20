@@ -22,24 +22,25 @@ Page({
       orderData: options
     })
     let jl = (that.getFlatternDistance(options.SendLat, options.SendLong, options.ReciveLat, options.ReciveLong)).toFixed(3)
-    wx.request({
-      url: that.data.server + 'api/SystemInfo',
-      success: function(res) {
-        console.log(res.data.Price * jl)
-        let str = "orderData.Price"
-        that.setData({
-          [str]: res.data.Price * jl
-        })
-      }
-    })
-    console.log(jl)
+    let pri = jl * options.PreviewPrice
+    let str = "orderData.Price"
+    if (pri > options.StartPrice) {
+      let Price = jl * options.PreviewPrice
+      that.setData({
+        [str]: Price
+      })
+    } else {
+      let Price = options.StartPrice
+      that.setData({
+        [str]: Price
+      })
+    }
+
   },
   bindGetNotes: function(e) {
-    console.log(e.detail.value)
+    // console.log(e.detail.value)
     this.setData({
-
       Notes: e.detail.value
-
     })
   },
   sure: function(e) {
@@ -47,13 +48,13 @@ Page({
     this.setData({
       [str]: this.data.Notes
     })
-    console.log(this.data.orderData)
+    // console.log(this.data.orderData)
     wx.request({
       url: this.data.server + 'api/Order',
       method: 'post',
       data: this.data.orderData,
       success: function(res) {
-        console.log(res)
+        // console.log(res)
         if (res.data.state) {
           wx.redirectTo({
             url: '../instant/instant?page=sure',

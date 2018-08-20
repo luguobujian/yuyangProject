@@ -43,10 +43,10 @@
     <view class='add-info address-view'>
       <view class='bb'>
         <image src='../../../image/icon/time.png'></image>
-        <view class="address-info">
-          <picker mode="date" value="{{time}}" start="2015-09-01" end="2099-09-01" bindchange="bindDateChange">
+        <view class="address-info picker-view">
+          <picker mode="date" value="{{date}}" start="2015-09-01" end="2099-09-01" bindchange="bindDateChange">
             <view class="picker">
-              选择发货时间
+              选择发货日期
               <view class='user-info-con o1'>
                 {{date}}
               </view>
@@ -54,6 +54,20 @@
           </picker>
         </view>
         <image class='rimg' src='../../../image/icon/time_btn.png'></image>
+      </view>
+      <view class='bb'>
+        <image src='../../../image/icon/time.png'></image>
+        <view class="address-info picker-view">
+          <picker mode="time" value="{{time}}" start="2015-09-01" end="2099-09-01" bindchange="bindTimeChange">
+            <view class="picker">
+              选择发货时间
+              <view class='user-info-con o1'>
+                {{time}}
+              </view>
+            </view>
+          </picker>
+        </view>
+        <!-- <image class='rimg' src='../../../image/icon/time_btn.png'></image> -->
       </view>
       <view class='bb'>
         <image src='../../../image/icon/who.png'></image>

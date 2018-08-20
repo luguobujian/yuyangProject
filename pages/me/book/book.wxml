@@ -1,10 +1,10 @@
 <!--pages/me/book/book.wxml-->
 <view class='container'>
   <view>
-    <view class='item bb clearfix'>
-      <view class='fl'>张大嘴</view>
-      <image class='fr' src='../../../../image/icon/del.png'></image>
-      <view class='fr'>13866666666</view>
+    <view wx:for="{{ data }}" wx:key="{{ item.ID }}" class='item bb clearfix'>
+      <view class='fl'>{{ item.Name }}</view>
+      <image class='fr' src='../../../../image/icon/del.png' data-id='{{ item.ID }}' bindtap='bindDel'></image>
+      <view class='fr'>{{ item.PhoneNum }}</view>
     </view>
     <view class='btn-view'>
       <button bindtap='bindIsShow'>添加新联系人</button>

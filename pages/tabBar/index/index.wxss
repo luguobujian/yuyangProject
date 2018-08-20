@@ -90,7 +90,9 @@
   display: inline-block;
   font-size: 28rpx;
 }
-
+.picker-view {
+  width: 70%;
+}
 .address-view view view.address-view {
   width: 76%;
   line-height: 86rpx;

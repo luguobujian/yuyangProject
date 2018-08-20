@@ -2,19 +2,19 @@
 <view class='container'>
   <view class='name clearfix bb'>
     <view class='fl'>姓名:</view>
-    <input class='fr' value='' placeholder='{{ Name }}' bindinput='bindGetName'></input>
+    <input class='fr' value='' maxlength='4' placeholder='{{ Name }}' bindinput='bindGetName'></input>
   </view>
   <view class='tel clearfix bb'>
     <view class='fl'>电话:</view>
-    <input class='fr' value='' placeholder='{{ Tel1 }}' bindinput='bindGetCallTel01'></input>
+    <input class='fr' value='' maxlength='11' placeholder='{{ Tel1 }}' bindinput='bindGetCallTel01'></input>
   </view>
   <view class='tel clearfix bb'>
     <view class='fl'></view>
-    <input class='fr' value='' placeholder='{{ Tel2 }}' bindinput='bindGetCallTel02'></input>
+    <input class='fr' value='' maxlength='11' placeholder='{{ Tel2 }}' bindinput='bindGetCallTel02'></input>
   </view>
   <view class='tel clearfix bb'>
     <view class='fl'></view>
-    <input class='fr' value='' placeholder='{{ Tel3 }}' bindinput='bindGetCallTel03'></input>
+    <input class='fr' value='' maxlength='11' placeholder='{{ Tel3 }}' bindinput='bindGetCallTel03'></input>
   </view>
   <view class='company clearfix bb'>
     <view class='fl'>公司:</view>

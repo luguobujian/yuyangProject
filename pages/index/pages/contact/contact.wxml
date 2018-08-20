@@ -1,13 +1,13 @@
 <!--pages/index/pages/Contact/contact.wxml-->
 <view class='container'>
   <view>
-    <view class='contact-item bb' data-name='{{ "张大壮" }}' data-tel='{{ "13866666666" }}' bindtap='bindChsWho'>
+    <view wx:for="{{ data }}" class='contact-item bb' wx:key="{{ item.ID }}" data-name='{{ item.Name }}' data-tel='{{ item.PhoneNum }}' bindtap='bindChsWho'>
+      <view class='contact-name'>{{ item.Name }}</view>
+      <view class='contact-tel'>{{ item.PhoneNum }}</view>
+    </view>
+    <!-- <view class='contact-item bb'>
       <view class='contact-name'>张大壮</view>
       <view class='contact-tel'>13866666666</view>
-    </view>
-    <view class='contact-item bb'>
-      <view class='contact-name'>张大壮</view>
-      <view class='contact-tel'>13866666666</view>
-    </view>
+    </view> -->
   </view>
 </view>
