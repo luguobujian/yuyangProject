@@ -1,8 +1,14 @@
 <!--pages/me/record/record.wxml-->
 <view class='container'>
   <view>
-    <view class='item bb clearfix'>
+    <view wx:if='{{ dataLen != 0 }}' class='item bb clearfix'>
       <view class='fl'>运输服务（中型货车）</view><view class='money fr'>-160</view>
+    </view>
+    <view wx:if='{{ dataLen == 0 }}' class='nodata-view'>
+      <view class='nodata'>
+        <image src='../../../image/icon/norec.png'></image>
+        <view>暂无数据</view>
+      </view>
     </view>
   </view>
 </view>

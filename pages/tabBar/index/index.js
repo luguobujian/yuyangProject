@@ -42,14 +42,14 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
     let that = this
     wx.getSetting({
-      success: function (res) {
+      success: function(res) {
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.getUserInfo({
-            success: function (res) {
+            success: function(res) {
               that.setData({
                 userInfo: res.userInfo,
                 logModalShow: true
@@ -62,16 +62,11 @@ Page({
               // 发送 res.code 到后台换取 openId, sessionKey, unionId
               wx.request({
                 url: app.globalData.server + 'api/XcxUserInfo?js_code=' + res.code,
-                success: function (res) {
+                success: function(res) {
                   let codeData = JSON.parse(res.data).openid
                   app.globalData.WXOpenId = codeData
-                  console.log(res)
                   that.bindVerOpenId(that)
-                },
-                fail: function (res) {
-                  console.log(res)
-                },
-                complete: function (res) { },
+                }
               })
             }
           })
@@ -83,42 +78,29 @@ Page({
       }
     })
     // 处理方法
-    that.getCarCls()
+
   },
   // 获取车类
-  getCarCls: function () {
+  getCarCls: function() {
     let that = this
     wx.request({
       url: that.data.server + 'api/TruckType?Name=',
-      data: '',
-      header: {},
-      method: 'GET',
-      dataType: 'json',
-      responseType: 'text',
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
         that.setData({
           carData: res.data,
           carInfo: res.data[0]
         })
-      },
-      fail: function (res) {
-        console.log(res)
-      },
-      complete: function (res) { },
+      }
     })
   },
-  bindVerOpenId: function (that) {
-    // console.log(app.globalData.WXOpenId)
+  bindVerOpenId: function(that) {
     wx.request({
       url: that.data.server + 'api/XcxUserInfo',
-      // url: that.data.server + 'api/XcxUserInfo?WxOpenID=' + app.globalData.WXOpenId,
       method: "post",
       data: {
         WxOpenID: app.globalData.WXOpenId
       },
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
         if (res.data.status) {
           that.setData({
             telModalShow: true,
@@ -130,14 +112,12 @@ Page({
             telModalShow: false,
           })
         }
-      },
-      fail: function (res) {
-        console.log(res)
       }
     })
   },
+
   // 获取手机号
-  bindTelValue: function (e) {
+  bindTelValue: function(e) {
     let phone = e.detail.value
     if (!(/^1[34578]\d{9}$/.test(phone))) {
       this.setData({
@@ -155,7 +135,7 @@ Page({
     }
   },
   // 取短信验证码
-  bindCodeValue: function (e) {
+  bindCodeValue: function(e) {
     let smsCode = e.detail.value
     if (smsCode == "") {
       this.setData({
@@ -170,7 +150,7 @@ Page({
     }
   },
   // 获取短信验证码
-  getCode: function () {
+  getCode: function() {
     let _this = this;
     if (!this.data.ajxTelTrue) {
       wx.showToast({
@@ -180,7 +160,7 @@ Page({
       })
     } else {
       var num = 61;
-      var timer = setInterval(function () {
+      var timer = setInterval(function() {
         num--;
         if (num <= 0) {
           clearInterval(timer);
@@ -197,16 +177,14 @@ Page({
       wx.request({
         url: _this.data.server + 'api/SmsCode?PhoneNum=' + _this.data.tel + '&type=change',
         success(res) {
-          console.log(res)
           _this.setData({
-            // iscode: res.data.data,
             disabled: true
           })
         }
       })
     }
   },
-  bindGetUserInfo: function (e) {
+  bindGetUserInfo: function(e) {
     console.log(e)
     let that = this
     that.setData({
@@ -218,28 +196,21 @@ Page({
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         wx.request({
           url: app.globalData.server + 'api/XcxUserInfo?js_code=' + res.code,
-          success: function (res) {
+          success: function(res) {
             let codeData = JSON.parse(res.data).openid
             app.globalData.WXOpenId = codeData
-            console.log(res)
             that.bindVerOpenId(that)
           },
-          fail: function (res) {
-            console.log(res)
-          },
-          complete: function (res) { },
         })
       }
     })
   },
   // 验证手机号
-  verifyTel: function (data) {
+  verifyTel: function(data) {
     let that = this
-    // console.log(data)
     wx.request({
       url: this.data.server + 'api/XcxUserInfo?PhoneNum=' + data,
-      success: function (res) {
-        console.log(res)
+      success: function(res) {
         that.setData({
           telStatus: res.data.status
         })
@@ -248,16 +219,13 @@ Page({
     })
   },
   // 用户处理
-  bindAddUser: function () {
-    console.log(app.globalData.WXOpenId)
-    console.log(app.globalData.UserID)
+  bindAddUser: function() {
     let that = this
     if (this.data.telStatus == 3) {
       // 注册
       wx.request({
         url: this.data.server + 'api/User?PhoneNum=' + this.data.tel + '&SmsCode=' + this.data.code + '&DriverID=0&Company=&WxOpenID=' + app.globalData.WXOpenId,
-        success: function (res) {
-          console.log(res)
+        success: function(res) {
           that.bindVerOpenId(that)
         }
       })
@@ -271,8 +239,7 @@ Page({
       wx.request({
         url: this.data.server + "api/User?UserID=" + app.globalData.UserID + "&PhoneNum=" + this.data.tel + "&SmsCode=" + this.data.code + "&WxOpenID=" + app.globalData.WXOpenId,
         method: 'post',
-        success: function (res) {
-          console.log(res)
+        success: function(res) {
           that.bindVerOpenId(that)
         }
       })
@@ -281,15 +248,17 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () { },
-  swichNav: function (e) {
+  onReady: function() {
+    this.getCarCls()
+  },
+  swichNav: function(e) {
     this.setData({
       currentTab: e.currentTarget.dataset.current,
       carInfo: this.data.carData[e.currentTarget.dataset.current],
     })
     this.checkCor();
   },
-  checkCor: function () {
+  checkCor: function() {
     if (this.data.currentTab > 3) {
       this.setData({
         scrollLeft: 300
@@ -300,17 +269,17 @@ Page({
       })
     }
   },
-  bindGoGetAddress: function (e) {
+  bindGoGetAddress: function(e) {
     wx.navigateTo({
       url: '../../index/pages/getAddress/getAddress?form=' + e.currentTarget.dataset.form,
     })
   },
-  bindGoGetContact: function () {
+  bindGoGetContact: function() {
     wx.navigateTo({
       url: '../../index/pages/contact/contact',
     })
   },
-  bindGoOrder: function () {
+  bindGoOrder: function() {
     if (this.data.back == "请选择发货地址") {
       wx.showToast({
         title: '请输入发货地址',
@@ -342,33 +311,30 @@ Page({
       })
     }
   },
-  facility: function () {
+  facility: function() {
     wx.navigateTo({
       url: '../../index/pages/instant/instant',
     })
   },
-  bindDateChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  bindDateChange: function(e) {
     this.setData({
       date: e.detail.value
     })
   },
-  bindTimeChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+  bindTimeChange: function(e) {
     this.setData({
       time: e.detail.value
     })
   },
-  bindOneKey: function (e) {
+  bindOneKey: function(e) {
     let that = this
-    console.log(app.globalData.UserID)
     wx.request({
       url: this.data.server + 'api/OneKey',
       method: 'post',
       data: {
         UserID: app.globalData.UserID
       },
-      success: function (res) {
+      success: function(res) {
         if (res.data.status) {
           wx.navigateTo({
             url: '../../index/pages/instant/instant?page=onekey',
@@ -380,42 +346,42 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
 
   },
 
   /**
    * 生命周期函数--监听页面卸载
    */
-  onUnload: function () {
+  onUnload: function() {
 
   },
 
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
-  onPullDownRefresh: function () {
+  onPullDownRefresh: function() {
 
   },
 
   /**
    * 页面上拉触底事件的处理函数
    */
-  onReachBottom: function () {
+  onReachBottom: function() {
 
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

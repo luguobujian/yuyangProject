@@ -12,3 +12,13 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
+.nodata-view {
+  text-align: center;
+  margin-top: 400rpx;
+}
+
+.nodata image {
+  width: 128rpx;
+  height: 128rpx;
+}

@@ -4,33 +4,33 @@
     <view class='header mb-8'>
       <view wx:if="{{current != 1}}" class='clearfix bb'>
         <view class='car fl'>
-          <view>豫A 88666</view>
-          <view>中型货车</view>
+          <view>{{ driverData.Num }}</view>
+          <view>{{ driverData.TruckName }}</view>
         </view>
         <view class='fl'>
-          <image class='avatar'></image>
+          <image class='avatar' src='{{ driverData.Face }}'></image>
         </view>
         <view class='user fl'>
-          <view>李大宝</view>
+          <view>{{ driverData.Name }}</view>
           <view class='header-grade'>
-            <image src='../../../../image/icon/star.png'></image>
-            <image src='../../../../image/icon/star.png'></image>
-            <image src='../../../../image/icon/star.png'></image>
-            <image src='../../../../image/icon/star.png'></image>
-            <image src='../../../../image/icon/star.png'></image>
+            <image wx:if="{{ starData >= 1 }}" src='../../../../image/icon/star.png'></image>
+            <image wx:if="{{ starData >= 2 }}" src='../../../../image/icon/star.png'></image>
+            <image wx:if="{{ starData >= 3 }}" src='../../../../image/icon/star.png'></image>
+            <image wx:if="{{ starData >= 4 }}" src='../../../../image/icon/star.png'></image>
+            <image wx:if="{{ starData >= 5 }}" src='../../../../image/icon/star.png'></image>
           </view>
         </view>
       </view>
-      <view  wx:if="{{current != 1}}" class='something clearfix'>
-        <view class='fl br'>
+      <view wx:if="{{current != 1}}" class='something clearfix'>
+        <view class='fl br' data-tel='{{ driverData.PhoneNum }}' bindtap='bindCallThisMan'>
           <image src='../../../../image/icon/tel01.png'></image>
           拨打电话
         </view>
-        <view class='fl br'>
+        <view class='fl br' data-tel='{{ someSysInfo.ServerTel }}' bindtap='bindCallThisMan'>
           <image src='../../../../image/icon/serv.png'></image>
           联系客服
         </view>
-        <view class='fl'>
+        <view class='fl' data-tel='{{ someSysInfo.ComplaintTel }}' bindtap='bindCallThisMan'>
           <image src='../../../../image/icon/complain.png'></image>
           投诉举报
         </view>
@@ -59,15 +59,15 @@
         <image src='../../../../image/icon/tel.png'></image>
         {{ data.RecivePhone }}
       </view>
-      <view  wx:if="{{current != 1}}" class='info clearfix'>
+      <view wx:if="{{current != 1}}" class='info clearfix'>
         <image class='fl' src='../../../../image/icon/info.png'></image>
-        <view class='fl'>济南</view>
+        <view class='fl'>{{ data.Notes }}</view>
       </view>
     </view>
     <view wx:if="{{current == 1}}" class='btns'>
       <!-- <button class='go-map'> -->
-        <!-- <image src='../../../../image/icon/go-address.png'></image> 查看当前位置</button> -->
-        <button  class='no' bindtap='bindDel'>取消订单</button>
+      <!-- <image src='../../../../image/icon/go-address.png'></image> 查看当前位置</button> -->
+      <button class='no' bindtap='bindDel'>取消订单</button>
     </view>
     <view wx:if="{{current == 2}}" class='btns'>
       <button class='go-map' bindtap='bindGoMap'>
@@ -86,9 +86,9 @@
         </view>
       </view>
       <view class='textarea-view'>
-        <textarea class='textarea' placeholder='待评价。。。'></textarea>
+        <textarea class='textarea' placeholder='待评价。。。' bindinput='bindGiveRemark'></textarea>
       </view>
-      <button class='grade'>评价</button>
+      <button class='grade' bindtap="bindGiveStar">评价</button>
     </view>
     <view wx:if="{{current == 2}}" class='over-order'>
       <view class='btns'>

@@ -8,6 +8,7 @@ Page({
   data: {
     server: app.globalData.server,
     data: "",
+    dataLen: 1
   },
 
   /**
@@ -16,11 +17,12 @@ Page({
   onLoad: function(options) {
     let that = this
     wx.request({
-      url: this.data.server + 'api/Notice?Title=&Notes=&pageIndex=0&pageSize=9999',
+      url: this.data.server + 'api/Notice?Title=&Notes=&Type=1&pageIndex=0&pageSize=9999',
       success: function(res) {
         console.log(res)
         that.setData({
-          data: res.data.Results
+          data: res.data.Results,
+          dataLen: res.data.Results.length
         })
       }
     })

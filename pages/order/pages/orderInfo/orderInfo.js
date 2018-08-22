@@ -8,22 +8,27 @@ Page({
   data: {
     server: app.globalData.server,
     star: 3,
+    someSysInfo: '',
     data: "",
     orderId: "",
     current: 1,
+    driverData: "",
+    starData: "",
+    remark: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options)
+    // console.log(options)
     let that = this
     that.setData({
       current: options.current,
       orderId: options.id
     })
     that.getOrderData()
+    that.getSysInfo()
   },
   getOrderData: function() {
     let that = this
@@ -39,16 +44,50 @@ Page({
     })
   },
   getDriverID: function(id) {
+    let that = this
     wx.request({
-      url: this.data.server + 'api/Truck?DriverID=1',
+      url: this.data.server + 'api/Driver?driverid=' + id,
       success: function(res) {
         console.log(res)
+        that.setData({
+          driverData: res.data
+        })
+        that.getStarData()
       }
+    })
+  },
+  getStarData: function() {
+    let that = this
+    wx.request({
+      url: this.data.server + 'api/Stars?DriverID=' + that.data.data.DriverID,
+      success: function(res) {
+        // console.log(res)
+        that.setData({
+          starData: res.data.Stars
+        })
+      }
+    })
+  },
+  getSysInfo: function() {
+    let that = this
+    wx.request({
+      url: this.data.server + 'api/SystemInfo',
+      success: function(res) {
+        console.log(res)
+        that.setData({
+          someSysInfo: res.data
+        })
+      }
+    })
+  },
+  bindCallThisMan: function(e) {
+    wx.makePhoneCall({
+      phoneNumber: e.currentTarget.dataset.tel,
     })
   },
   bindDel: function() {
     let that = this
-    console.log(app.globalData.ticket)
+    // console.log(app.globalData.ticket)
     wx.request({
       url: this.data.server + 'api/Order/' + this.data.orderId,
       method: "delete",
@@ -59,7 +98,7 @@ Page({
         console.log(res)
         that.backPage()
       },
-      fail: function (res) {
+      fail: function(res) {
         console.log(res)
       }
     })
@@ -67,6 +106,28 @@ Page({
   geiStar: function(e) {
     this.setData({
       star: e.currentTarget.dataset.star
+    })
+  },
+  bindGiveRemark: function(e) {
+    this.setData({
+      remark: e.detail.value
+    })
+  },
+  bindGiveStar: function() {
+    let that = this
+    wx.request({
+      url: this.data.server + 'api/Stars',
+      method: 'post',
+      data: {
+        OrderID: that.data.orderId,
+        DriverID: 1,
+        Star: that.data.star,
+        Notes: that.data.remark
+      },
+      success: function(res) {
+        console.log(res)
+        that.backPage()
+      }
     })
   },
   backPage: function() {
@@ -77,9 +138,9 @@ Page({
       delta: 1
     })
   },
-  bindGoMap: function () {
+  bindGoMap: function() {
     wx.navigateTo({
-      url: '../map/map',
+      url: '../map/map?DriverID=' + this.data.data.DriverID,
     })
   },
   /**

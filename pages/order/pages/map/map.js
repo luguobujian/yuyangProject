@@ -1,19 +1,21 @@
 // pages/order/pages/map/map.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    server: app.globalData.server,
     latitude: "",
     longitude: "",
     markers: [{
       id: 1,
       latitude: 33.638406,
       longitude: 116.972672,
-      width: 30,
-      height: 30,
-      // iconPath: that.data.iconP[id],
+      width: 32,
+      height: 42,
+      iconPath: '../../../../image/icon/Truck32.gif',
       callout: {
         content: "车车",
         color: "#ffffff",
@@ -29,6 +31,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    console.log(options)
+    let that = this
     wx.getSetting({
       success: (res) => {
         if (res.authSetting['scope.userLocation'] != undefined && res.authSetting['scope.userLocation'] != true) { //非初始化进入该页面,且未授权
@@ -72,6 +76,15 @@ Page({
         }
       }
     })
+
+    // let timer = setInterval(function() {
+    //   wx.request({
+    //     url: that.data.server + 'api/Driver?driverid=' + options.DriverID,
+    //     success: function(res) {
+    //       console.log(res)
+    //     }
+    //   })
+    // }, 1000)
   },
   getLocation: (that) => {
     wx.getLocation({

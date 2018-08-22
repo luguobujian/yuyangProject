@@ -64,8 +64,19 @@
 .go-time-view > view:last-child {
   font-size: 26rpx;
 }
+
 .setAddress {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.nodata-view {
+  text-align: center;
+  margin-top: 300rpx;
+}
+
+.nodata image {
+  width: 128rpx;
+  height: 128rpx;
 }

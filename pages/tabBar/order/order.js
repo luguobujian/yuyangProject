@@ -9,6 +9,7 @@ Page({
     server: app.globalData.server,
     current: '1',
     data: '',
+    dataLen: 1,
     limit: 0,
   },
 
@@ -32,9 +33,10 @@ Page({
     wx.request({
       url: this.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex1&pageSize=' + limit,
       success: function(res) {
-        // console.log(res)
         that.setData({
-          data: res.data.Results
+          data: res.data.Results,
+          dataLen: res.data.Results.length,
+          limit
         })
       }
     })
@@ -88,8 +90,7 @@ Page({
     let State = this.data.current
     wx.request({
       url: that.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex1&pageSize=' + limit,
-      success: function (res) {
-        // console.log(res)
+      success: function(res) {
         that.setData({
           data: res.data.Results,
           limit

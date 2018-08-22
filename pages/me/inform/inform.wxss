@@ -18,3 +18,13 @@
   font-size: 26rpx;
   padding: 16rpx 0;
 }
+
+.nodata-view {
+  text-align: center;
+  margin-top: 400rpx;
+}
+
+.nodata image {
+  width: 128rpx;
+  height: 128rpx;
+}

@@ -24,68 +24,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // console.log(options)
     let that = this
     that.setData({
       form: options.form
     })
-    wx.getSetting({
-      success: function(res) {
-        // console.log(res)
-        if (res.authSetting['scope.userLocation'] !== undefined && res.authSetting['scope.userLocation'] !== true) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-          wx.showModal({
-            title: '是否授权当前位置',
-            content: '需要获取您的地理位置，请确认授权，否则无法获取您所需数据',
-            success: function(res) {
-              if (res.cancel) {
-                wx.showToast({
-                  title: '授权失败',
-                  icon: 'success',
-                  duration: 1000
-                })
-              } else if (res.confirm) {
-                wx.openSetting({
-                  success: function(dataAu) {
-                    if (dataAu.authSetting["scope.userLocation"] == true) {
-                      wx.showToast({
-                        title: '授权成功',
-                        icon: 'success',
-                        duration: 1000
-                      })
-                      //再次授权，调用getLocationt的API
-                      that.getLocation(that);
-                    } else {
-                      wx.showToast({
-                        title: '授权失败',
-                        icon: 'success',
-                        duration: 1000
-                      })
-                    }
-                  }
-                })
-              }
-            }
-          })
-        } else {
-          that.getLocation(that);
-        }
-      }
-    })
+
   },
   getLocation: (that) => {
     wx.getLocation({
       type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标  
       success: (res) => {
-        // console.log(res);
         that.loadCity(res.latitude, res.longitude);
         that.setData({
           latitude: res.latitude,
           longitude: res.longitude,
         })
-      },
-      fail: function(res) {
-        // console.log(res);
       }
     })
   },
@@ -94,7 +47,6 @@ Page({
     wx.request({
       url: 'https://api.map.baidu.com/geocoder/v2/?ak=F2HqMyAayTiaaxYOHeagngK4Ck3nLxeH&location=' + latitude + ',' + longitude + '&output=json',
       success: function(res) {
-        // console.log(res)
         let address = res.data.result;
         that.setData({
           tempAddress: address.formatted_address + address.sematic_description,
@@ -186,7 +138,7 @@ Page({
       prevPage.setData({
         back: e.currentTarget.dataset.address,
         SendLong: e.currentTarget.dataset.lng,
-        SendLat: e.currentTarget.dataset.lat,  
+        SendLat: e.currentTarget.dataset.lat,
       })
     } else if (this.data.form == "go") {
       prevPage.setData({
@@ -212,7 +164,48 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    let that = this
+    wx.getSetting({
+      success: function(res) {
+        if (res.authSetting['scope.userLocation'] !== undefined && res.authSetting['scope.userLocation'] !== true) {
+          wx.showModal({
+            title: '是否授权当前位置',
+            content: '需要获取您的地理位置，请确认授权，否则无法获取您所需数据',
+            success: function(res) {
+              if (res.cancel) {
+                wx.showToast({
+                  title: '授权失败',
+                  icon: 'success',
+                  duration: 1000
+                })
+              } else if (res.confirm) {
+                wx.openSetting({
+                  success: function(dataAu) {
+                    if (dataAu.authSetting["scope.userLocation"] == true) {
+                      wx.showToast({
+                        title: '授权成功',
+                        icon: 'success',
+                        duration: 1000
+                      })
+                      //再次授权，调用getLocationt的API
+                      that.getLocation(that);
+                    } else {
+                      wx.showToast({
+                        title: '授权失败',
+                        icon: 'success',
+                        duration: 1000
+                      })
+                    }
+                  }
+                })
+              }
+            }
+          })
+        } else {
+          that.getLocation(that);
+        }
+      }
+    })
   },
 
   /**

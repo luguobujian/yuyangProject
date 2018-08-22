@@ -15,3 +15,13 @@
   color: #c91111;
   font-size: 26rpx;
 }
+
+.nodata-view {
+  text-align: center;
+  margin-top: 400rpx;
+}
+
+.nodata image {
+  width: 128rpx;
+  height: 128rpx;
+}

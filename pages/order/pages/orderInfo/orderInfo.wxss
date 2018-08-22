@@ -145,7 +145,7 @@
 .grade {
   color: #fff;
   line-height: 80rpx;
-  margin: 62rpx 32rpx 8rpx;
+  margin: 62rpx 32rpx;
   background-color: #f90;
 }
 .over-order .no {

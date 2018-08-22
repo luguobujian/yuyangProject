@@ -10,7 +10,7 @@
     </view>
     <view class='car-info-view'>
       <view class='car-image-view'>
-        <image src='{{ carInfo.Image }}'></image>
+        <image src='{{ server }}{{ carInfo.Image }}'></image>
       </view>
       <view class='car-txt-info'>
         <view class='car-txt-item one'>

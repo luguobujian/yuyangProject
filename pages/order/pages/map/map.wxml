@@ -1,6 +1,6 @@
 <!--pages/order/pages/map/map.wxml-->
 <view class='container'>
   <view class='box'>
-    <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="12" markers="{{markers}}"></map>
+    <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" show-location scale="16" markers="{{markers}}"></map>
   </view>
 </view>

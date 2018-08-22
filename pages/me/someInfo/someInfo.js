@@ -15,13 +15,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(options.pages)
+    // console.log(options)
     let that = this
     if (options.pages == "someInfo") {
       wx.request({
-        url: this.data.server + 'api/' + options.pages + '/' + options.id,
+        url: this.data.server + 'api/SystemInfo',
         success: function(res) {
           console.log(res)
+          let content = WxParse.wxParse('article', 'html', res.data.FeeScale, that, 5);
+        }
+      })
+    } else {
+      wx.request({
+        url: this.data.server + 'api/' + options.pages + '/' + options.id,
+        success: function(res) {
+          // console.log(res)
           if (options.pages == "Notice") {
             let content = WxParse.wxParse('article', 'html', res.data.Notes, that, 5);
             that.setData({
@@ -33,15 +41,6 @@ Page({
               info: res.data.Ask
             })
           }
-
-        }
-      })
-    } else {
-      wx.request({
-        url: this.data.server + 'api/SystemInfo',
-        success: function(res) {
-          console.log(res)
-          let content = WxParse.wxParse('article', 'html', res.data.FeeScale, that, 5);
         }
       })
     }

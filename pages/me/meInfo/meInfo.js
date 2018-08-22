@@ -13,21 +13,35 @@ Page({
     ajxTelTrue03: "",
 
 
-    Name: app.globalData.userInfo.nickName,
-    Tel1: "未设置",
-    Tel2: "未设置",
-    Tel3: "未设置",
-    Company: "未设置",
+    Name: "",
+    Tel1: "",
+    Tel2: "",
+    Tel3: "",
+    Company: "",
     Face: app.globalData.userInfo.avatarUrl
-
-
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(app.globalData.userInfo)
+    // let that = this
+    // that.getSomeUserInfo()
+  },
+  getSomeUserInfo: function(id) {
+    let that = this
+    wx.request({
+      url: that.data.server + 'api/User/' + app.globalData.UserID + '?user=',
+      success: function(res) {
+        that.setData({
+          Name: res.data.Name,
+          Tel1: res.data.Tel1,
+          Tel2: res.data.Tel2,
+          Tel3: res.data.Tel3,
+          Company: res.data.Company,
+        })
+      }
+    })
   },
   bindGetName: function(e) {
     let Name = e.detail.value
@@ -48,7 +62,6 @@ Page({
       ajxTelTrue02: true,
       Tel2: e.detail.value
     })
-
   },
   bindGetCallTel03: function(e) {
     let phone = e.detail.value
@@ -64,14 +77,10 @@ Page({
     })
   },
   bindPullData: function() {
-    // console.log(this.data.Tel1)
-    // console.log(this.data.Tel2)
-    // console.log(app.globalData.ticket)
+    let that = this
     let ajxTelTrue01 = (/^1[34578]\d{9}$/.test(this.data.Tel1))
     let ajxTelTrue02 = (/^1[34578]\d{9}$/.test(this.data.Tel2))
     let ajxTelTrue03 = (/^1[34578]\d{9}$/.test(this.data.Tel3))
-    // console.log(ajxTelTrue01)
-    // console.log(ajxTelTrue02)
     console.log('BasicAuth ' + app.globalData.ticket)
     if (ajxTelTrue01 && ajxTelTrue02 && ajxTelTrue03) {
       wx.request({
@@ -90,6 +99,7 @@ Page({
         },
         success: function(res) {
           console.log(res)
+          that.backPage()
         },
         fail: function(res) {
           console.log(res)
@@ -103,11 +113,20 @@ Page({
       })
     }
   },
+  backPage: function() {
+    let pages = getCurrentPages();
+    console.log(pages)
+    pages[0].onReady()
+    wx.navigateBack({
+      delta: 1
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    let that = this
+    that.getSomeUserInfo()
   },
 
   /**

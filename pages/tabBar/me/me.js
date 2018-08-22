@@ -6,47 +6,29 @@ Page({
    * 页面的初始数据
    */
   data: {
+    server: app.globalData.server,
+    wxUserInfo: "",
     userInfo: "",
-
+    phone: "",
     logModalShow: "false",
     telModalShow: "",
-
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log(this.data.canIUse)
-    let that = this
-    wx.getSetting({
-      success: function(res) {
-        if (res.authSetting['scope.userInfo']) {
-          // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-          wx.getUserInfo({
-            success: function(res) {
-              console.log(res.userInfo)
-              that.setData({
-                userInfo: res.userInfo,
-                logModalShow: true
-              })
-            }
-          })
-        } else {
-          that.setData({
-            logModalShow: false
-          })
-        }
-      }
-    })
+    this.getSomeUserInfo() //获取用户信息
   },
-  bindGetUserInfo: function (e) {
-    console.log(e)
+  getSomeUserInfo: function(id) {
     let that = this
-    that.setData({
-      userInfo: e.detail.userInfo,
-      logModalShow: true
+    wx.request({
+      url: that.data.server + 'api/User/' + app.globalData.UserID + '?user=',
+      success: function(res) {
+        that.setData({
+          userInfo: res.data,
+        })
+      }
     })
   },
   /**
@@ -56,10 +38,15 @@ Page({
 
   },
   bindGoItem: function(e) {
-    console.log(e.currentTarget.dataset.item);
     let item = e.currentTarget.dataset.item;
     wx.navigateTo({
       url: '../../me/' + item + '/' + item
+    })
+  },
+  bindGoBZ: function(e) {
+    let item = e.currentTarget.dataset.item;
+    wx.navigateTo({
+      url: '../../me/someInfo/someInfo?pages=someInfo'
     })
   },
   /**

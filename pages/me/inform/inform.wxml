@@ -1,9 +1,15 @@
 <!--pages/me/inform/inform.wxml-->
 <view class='container'>
   <view>
-    <view wx:for="{{ data }}" wx:key="{{item.id}}" data-id='{{ item.ID }}' class='item bb' bindtap='bindOpenInfo'>
+    <view wx:if='{{ dataLen != 0 }}' wx:for="{{ data }}" wx:key="{{item.id}}" data-id='{{ item.ID }}' class='item bb' bindtap='bindOpenInfo'>
       <view>{{ item.Title }}</view>
       <view>时间：{{ item.AddTime }}</view>
+    </view>
+    <view wx:if='{{ dataLen == 0 }}' class='nodata-view'>
+      <view class='nodata'>
+        <image src='../../../image/icon/norec.png'></image>
+        <view>暂无数据</view>
+      </view>
     </view>
   </view>
 </view>

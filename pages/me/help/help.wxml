@@ -1,8 +1,15 @@
 <!--pages/me/help/help.wxml-->
 <view class='container'>
   <view>
-    <view wx:for="{{ data }}" wx:key="{{ item.ID }}" data-id='{{ item.ID }}' class='item bb clearfix' bindtap='bindOpenInfo'>
-      <view class='fl'>{{ item.Ask }}</view><view class='fr'>›</view>
+    <view wx:if='{{ dataLen != 0 }}' wx:for="{{ data }}" wx:key="{{ item.ID }}" data-id='{{ item.ID }}' class='item bb clearfix' bindtap='bindOpenInfo'>
+      <view class='fl'>{{ item.Ask }}</view>
+      <view class='fr'>›</view>
+    </view>
+    <view wx:if='{{ dataLen == 0 }}' class='nodata-view'>
+      <view class='nodata'>
+        <image src='../../../image/icon/norec.png'></image>
+        <view>暂无数据</view>
+      </view>
     </view>
   </view>
 </view>

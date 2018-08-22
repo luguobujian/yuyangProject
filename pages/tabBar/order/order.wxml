@@ -7,7 +7,7 @@
     <view class="tab-item {{current == 4? 'active': ''}}" data-index="4" bindtap='navSwitch'>已完成</view>
   </view>
   <view class='main-item-view'>
-    <view wx:for="{{ data }}" wx:key="{{ item.ID }}" class='item bb' data-current='{{ current }}' data-id='{{ item.ID }}' bindtap='bindGoOrderInfo'>
+    <view wx:if='{{ dataLen != 0 }}' wx:for="{{ data }}" wx:key="{{ item.ID }}" class='item bb' data-current='{{ current }}' data-id='{{ item.ID }}' bindtap='bindGoOrderInfo'>
       <view class='car-menoy-view clearfix'>
         <view class='fl'>{{ item.Name }}</view>
         <view class='fr'>￥{{item.Price}}</view>
@@ -27,6 +27,12 @@
           <image src='../../../image/icon/time.png'></image>
           {{ item.SendTime }}
         </view>
+      </view>
+    </view>
+    <view wx:if='{{ dataLen == 0 }}' class='nodata-view'>
+      <view class='nodata'>
+        <image src='../../../image/icon/nodata.png'></image>
+        <view>暂无订单</view>
       </view>
     </view>
   </view>

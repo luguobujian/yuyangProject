@@ -3,16 +3,16 @@
   <view>
     <view class='header mb-8'>
       <view class='clearfix small-logo-view'>
-        <view class='small-logo fr'>定价</view>
+        <view wx:if="{{ userInfo.Type }}" class='small-logo fr'>定价</view>
       </view>
       <view class='avatar-name-something-view clearfix' data-item='meInfo' bindtap='bindGoItem'>
-        <image class='fl' src='{{ userInfo.avatarUrl }}'></image>
+        <image class='fl' src='{{ userInfo.Face }}'></image>
         <view class='fl'>
           <view class='clearfix'>
-            <view class='fl name'>{{ userInfo.nickName || '未登录' }}</view>
-            <view class='fl job'>拾粪者</view>
+            <view class='fl name'>{{ userInfo.Name || '未登录' }}</view>
+            <view class='fl job'>{{ userInfo.Company }}</view>
           </view>
-          <view class='tel'>{{ "未设置" }}</view>
+          <view class='tel'>{{ userInfo.PhoneNum }}</view>
         </view>
         <view class='arrow'>›</view>
       </view>
@@ -32,7 +32,7 @@
         </view>
         <view class='fl arrow'>›</view>
       </view>
-      <view class='bb clearfix mb-8' data-item="someInfo" bindtap='bindGoItem'>
+      <view class='bb clearfix mb-8' data-item="someInfo" bindtap='bindGoBZ'>
         <image class='fl' src='../../../image/icon/3.png'></image>
         <view class="fl address-info">
           收费标准
@@ -62,15 +62,4 @@
       </view>
     </view>
   </view>
-  <view class='modal' wx:if="{{ !logModalShow }}">
-    <view>
-      <view class='info bb'>检测到您未登录，是否登陆？</view>
-      <view class='btns'>
-        <button>取消</button>
-        <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
-      </view>
-    </view>
-
-  </view>
-  <!-- <button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">授权登录</button> -->
 </view>
