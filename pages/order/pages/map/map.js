@@ -77,14 +77,32 @@ Page({
       }
     })
 
-    // let timer = setInterval(function() {
-    //   wx.request({
-    //     url: that.data.server + 'api/Driver?driverid=' + options.DriverID,
-    //     success: function(res) {
-    //       console.log(res)
-    //     }
-    //   })
-    // }, 1000)
+    let timer = setInterval(function() {
+      wx.request({
+        url: that.data.server + 'api/Driver?driverid=' + options.DriverID,
+        success: function(res) {
+          console.log(res)
+          that.setData({
+            markers: [{
+              id: 1,
+              latitude: ret.data.Lat,
+              longitude: ret.data.Long,
+              width: 32,
+              height: 42,
+              iconPath: '../../../../image/icon/Truck32.gif',
+              callout: {
+                content: "车车",
+                color: "#ffffff",
+                fontSize: 12,
+                padding: 4,
+                borderRadius: 8,
+                bgColor: '#ca0000',
+              }
+            }]
+          })
+        }
+      })
+    }, 30000)
   },
   getLocation: (that) => {
     wx.getLocation({

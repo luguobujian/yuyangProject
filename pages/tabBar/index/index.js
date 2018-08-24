@@ -86,6 +86,7 @@ Page({
     wx.request({
       url: that.data.server + 'api/TruckType?Name=',
       success: function(res) {
+        console.log(res)
         that.setData({
           carData: res.data,
           carInfo: res.data[0]
@@ -101,6 +102,7 @@ Page({
         WxOpenID: app.globalData.WXOpenId
       },
       success: function(res) {
+        console.log(res)
         if (res.data.status) {
           that.setData({
             telModalShow: true,
@@ -111,6 +113,10 @@ Page({
           that.setData({
             telModalShow: false,
           })
+          // wx.showToast({
+          //   icon: 'none',
+          //   title: res.data.msg,
+          // })
         }
       }
     })
@@ -211,6 +217,7 @@ Page({
     wx.request({
       url: this.data.server + 'api/XcxUserInfo?PhoneNum=' + data,
       success: function(res) {
+        console.log(res)
         that.setData({
           telStatus: res.data.status
         })
@@ -221,12 +228,22 @@ Page({
   // 用户处理
   bindAddUser: function() {
     let that = this
+    console.log(app.globalData.WXOpenId)
     if (this.data.telStatus == 3) {
       // 注册
       wx.request({
         url: this.data.server + 'api/User?PhoneNum=' + this.data.tel + '&SmsCode=' + this.data.code + '&DriverID=0&Company=&WxOpenID=' + app.globalData.WXOpenId,
         success: function(res) {
-          that.bindVerOpenId(that)
+          console.log(res)
+          if (res.data.status) {
+            that.bindVerOpenId(that)
+          } else {
+            wx.showToast({
+              icon: 'none',
+              title: res.data.msg,
+            })
+          }
+         
         }
       })
     } else if (this.data.telStatus == 2) {
@@ -240,6 +257,7 @@ Page({
         url: this.data.server + "api/User?UserID=" + app.globalData.UserID + "&PhoneNum=" + this.data.tel + "&SmsCode=" + this.data.code + "&WxOpenID=" + app.globalData.WXOpenId,
         method: 'post',
         success: function(res) {
+          console.log(res)
           that.bindVerOpenId(that)
         }
       })
@@ -306,8 +324,9 @@ Page({
       })
     } else {
       let SendTime = this.data.date + " " + this.data.time + ":00"
+      console.log(this.data.carInfo)
       wx.navigateTo({
-        url: '../../index/pages/goOrder/goOrder?TruckID=' + this.data.carInfo.ID + '&SendAddr=' + this.data.back + '&ReciveAddr=' + this.data.go + '&ReciveName=' + this.data.callName + '&RecivePhone=' + this.data.callTel + '&SendTime=' + SendTime + '&SendLong=' + this.data.SendLong + '&SendLat=' + this.data.SendLat + '&ReciveLong=' + this.data.ReciveLong + '&ReciveLat=' + this.data.ReciveLat + '&Notes=&Price=0' + "&PreviewPrice=" + this.data.carInfo.PreviewPrice + "&StartPrice=" + this.data.carInfo.StartPrice + "&AddUser=" + app.globalData.UserID,
+        url: '../../index/pages/goOrder/goOrder?TruckType=' + this.data.carInfo.Name+'&TruckID=' + this.data.carInfo.ID + '&SendAddr=' + this.data.back + '&ReciveAddr=' + this.data.go + '&ReciveName=' + this.data.callName + '&RecivePhone=' + this.data.callTel + '&SendTime=' + SendTime + '&SendLong=' + this.data.SendLong + '&SendLat=' + this.data.SendLat + '&ReciveLong=' + this.data.ReciveLong + '&ReciveLat=' + this.data.ReciveLat + '&Notes=&Price=0' + "&PreviewPrice=" + this.data.carInfo.PreviewPrice + "&StartPrice=" + this.data.carInfo.StartPrice + "&AddUser=" + app.globalData.UserID,
       })
     }
   },

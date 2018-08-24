@@ -8,7 +8,7 @@
           <view>{{ driverData.TruckName }}</view>
         </view>
         <view class='fl'>
-          <image class='avatar' src='{{ driverData.Face }}'></image>
+          <image class='avatar' src='{{ server + driverData.Face }}'></image>
         </view>
         <view class='user fl'>
           <view>{{ driverData.Name }}</view>

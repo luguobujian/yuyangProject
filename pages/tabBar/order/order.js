@@ -28,10 +28,10 @@ Page({
   },
   getData: function() {
     let that = this
-    let limit = that.data.limit + 8;
+    let limit = that.data.limit + 5;
     let State = this.data.current
     wx.request({
-      url: this.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex1&pageSize=' + limit,
+      url: this.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit,
       success: function(res) {
         that.setData({
           data: res.data.Results,
@@ -86,10 +86,10 @@ Page({
    */
   onReachBottom: function() {
     let that = this;
-    let limit = that.data.limit + 6;
+    let limit = that.data.limit + 5;
     let State = this.data.current
     wx.request({
-      url: that.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex1&pageSize=' + limit,
+      url: that.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit,
       success: function(res) {
         that.setData({
           data: res.data.Results,

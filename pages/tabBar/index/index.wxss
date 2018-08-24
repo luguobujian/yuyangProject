@@ -5,6 +5,9 @@
   height: 92rpx;
   background-color: #f6f6f6;
   border-bottom: 1rpx solid #dedede;
+  position: fixed;
+  top: 0;
+  left: 0;
 }
 
 .tab-h {
@@ -30,7 +33,9 @@
   color: #f90;
   border-bottom: 4rpx solid #f90;
 }
-
+.null {
+  padding-top: 92rpx;
+}
 .car-info-view {
   border-top: 1rpx solid #fff;
   background-color: #fff;

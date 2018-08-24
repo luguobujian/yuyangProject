@@ -26,7 +26,15 @@
   background-color: #fff;
   padding-bottom: 50rpx;
 }
-
+.typeN {
+  text-align: center;
+  background-color: #fff;
+}
+.typeN > view {
+  height: 280rpx;
+  font-size: 30rpx;
+  line-height: 280rpx;
+}
 .money-info-view {
   text-align: center;
 }

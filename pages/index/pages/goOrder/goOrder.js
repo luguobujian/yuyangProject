@@ -9,7 +9,7 @@ Page({
     server: app.globalData.server,
     orderData: "",
     Notes: "",
-
+    userInfo: ""
   },
 
   /**
@@ -21,21 +21,42 @@ Page({
     this.setData({
       orderData: options
     })
-    let jl = (that.getFlatternDistance(options.SendLat, options.SendLong, options.ReciveLat, options.ReciveLong)).toFixed(3)
-    let pri = jl * options.PreviewPrice
-    let str = "orderData.Price"
-    if (pri > options.StartPrice) {
-      let Price = jl * options.PreviewPrice
-      that.setData({
-        [str]: Price
-      })
-    } else {
-      let Price = options.StartPrice
-      that.setData({
-        [str]: Price
-      })
-    }
+    // let jl = (that.getFlatternDistance(options.SendLat, options.SendLong, options.ReciveLat, options.ReciveLong)).toFixed(3)
 
+    wx.request({
+      url: that.data.server + 'api/User/' + app.globalData.UserID + '?user=',
+      success: function(res) {
+        that.setData({
+          userInfo: res.data,
+        })
+        if (res.data.Type) {
+
+        } else {
+          wx.request({
+            url: 'https://api.map.baidu.com/direction/v2/driving?origin=' + options.SendLat + ',' + options.SendLong + '&destination=' + options.ReciveLat + ',' + options.ReciveLong + '&ak=8Lt4avKN0k3vnUF5gKyQqT5oEU6pTqmZ',
+            success: function(res) {
+              console.log(res)
+              let jl = res.data.result.routes[0].distance / 1000
+              if (res.data.message == "成功") {
+                let pri = jl * options.PreviewPrice
+                let str = "orderData.Price"
+                if (pri > options.StartPrice) {
+                  let Price = (jl * options.PreviewPrice - 0).toFixed(2)
+                  that.setData({
+                    [str]: Price
+                  })
+                } else {
+                  let Price = (options.StartPrice - 0).toFixed(2)
+                  that.setData({
+                    [str]: Price
+                  })
+                }
+              }
+            }
+          })
+        }
+      }
+    })
   },
   bindGetNotes: function(e) {
     // console.log(e.detail.value)

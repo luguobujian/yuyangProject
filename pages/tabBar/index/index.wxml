@@ -8,6 +8,7 @@
         </block>
       </scroll-view>
     </view>
+    <view class='null'></view>
     <view class='car-info-view'>
       <view class='car-image-view'>
         <image src='{{ server }}{{ carInfo.Image }}'></image>
