@@ -14,9 +14,9 @@ Page({
 
 
     Name: "",
-    Tel1: "",
-    Tel2: "",
-    Tel3: "",
+    Tel1: "未设置",
+    Tel2: "未设置",
+    Tel3: "未设置",
     Company: "",
     Face: app.globalData.userInfo.avatarUrl
   },

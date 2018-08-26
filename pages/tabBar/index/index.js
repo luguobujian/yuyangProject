@@ -50,10 +50,15 @@ Page({
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称
           wx.getUserInfo({
             success: function(res) {
+              console.log(res)
               that.setData({
                 userInfo: res.userInfo,
                 logModalShow: true
               })
+              
+            },
+            fail: function (res) {
+              console.log(res)
             }
           })
           // openId查验
@@ -197,6 +202,7 @@ Page({
       userInfo: e.detail.userInfo,
       logModalShow: true
     })
+    app.globalData.userInfo = e.detail.userInfo
     wx.login({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
@@ -232,7 +238,7 @@ Page({
     if (this.data.telStatus == 3) {
       // 注册
       wx.request({
-        url: this.data.server + 'api/User?PhoneNum=' + this.data.tel + '&SmsCode=' + this.data.code + '&DriverID=0&Company=&WxOpenID=' + app.globalData.WXOpenId,
+        url: this.data.server + 'api/User?Name=' + this.data.userInfo.nickName +'&PhoneNum=' + this.data.tel + '&SmsCode=' + this.data.code + '&DriverID=0&Company=&WxOpenID=' + app.globalData.WXOpenId,
         success: function(res) {
           console.log(res)
           if (res.data.status) {

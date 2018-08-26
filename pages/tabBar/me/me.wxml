@@ -6,11 +6,11 @@
         <view wx:if="{{ userInfo.Type }}" class='small-logo fr'>定价</view>
       </view>
       <view class='avatar-name-something-view clearfix' data-item='meInfo' bindtap='bindGoItem'>
-        <image class='fl' src='{{ userInfo.Face }}'></image>
+        <image class='fl' src='{{ userInfo.Face || wxUserInfo.userInfo.avatarUrl }}'></image>
         <view class='fl'>
           <view class='clearfix'>
             <view class='fl name'>{{ userInfo.Name || '未登录' }}</view>
-            <view class='fl job'>{{ userInfo.Company }}</view>
+            <view wx:if="{{ userInfo.Company }}" class='fl job'>{{ userInfo.Company }}</view>
           </view>
           <view class='tel'>{{ userInfo.PhoneNum }}</view>
         </view>

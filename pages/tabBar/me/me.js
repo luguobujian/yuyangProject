@@ -7,7 +7,7 @@ Page({
    */
   data: {
     server: app.globalData.server,
-    wxUserInfo: "",
+    wxUserInfo: app.globalData,
     userInfo: "",
     phone: "",
     logModalShow: "false",
@@ -19,6 +19,8 @@ Page({
    */
   onLoad: function(options) {
     this.getSomeUserInfo() //获取用户信息
+    console.log(this.data.wxUserInfo)
+    console.log(this.data.userInfo)
   },
   getSomeUserInfo: function(id) {
     let that = this
