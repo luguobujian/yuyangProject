@@ -38,30 +38,35 @@
     </view>
     <view class='some-address mb-8'>
       <view class='bb'>
-        <image src='../../../../image/icon/car.png'></image>
+        <!-- <image src='../../../../image/icon/car.png'></image> -->
+        <text>起运地：</text>
         {{ data.ReciveAddr }}
       </view>
       <view class='bb'>
-        <image src='../../../../image/icon/add.png'></image>
+        <!-- <image src='../../../../image/icon/add.png'></image> -->
+        <text>目的地：</text>
         {{ data.SendAddr }}
       </view>
     </view>
     <view class='some-address'>
       <view class='bb'>
-        <image src='../../../../image/icon/time.png'></image>
+        <!-- <image src='../../../../image/icon/time.png'></image> -->
+        <text>时间：</text>
         {{ data.SendTime }}
       </view>
       <view class='bb'>
-        <image src='../../../../image/icon/who.png'></image>
-        {{ data.ReciveName }}
+        <!-- <image src='../../../../image/icon/who.png'></image> -->
+        <text>收货人：</text>
+        {{ data.TempReciveUser }}
       </view>
       <view class='bb'>
-        <image src='../../../../image/icon/tel.png'></image>
+        <!-- <image src='../../../../image/icon/tel.png'></image> -->
+        <text>电话：</text>
         {{ data.RecivePhone }}
       </view>
       <view wx:if="{{current != 1}}" class='info clearfix'>
         <image class='fl' src='../../../../image/icon/info.png'></image>
-        <view class='fl'>{{ data.Notes }}</view>
+        <view class='fl'>{{ data.Notes || "无" }}</view>
       </view>
     </view>
     <view wx:if="{{current == 1}}" class='btns'>
@@ -92,7 +97,7 @@
     </view>
     <view wx:if="{{current == 2}}" class='over-order'>
       <view class='btns'>
-        <button class='go-map'>立即支付</button>
+        <button class='go-map' bindtap='bindPay'>立即支付</button>
         <button class='no'>完成订单</button>
       </view>
     </view>

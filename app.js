@@ -24,6 +24,7 @@ App({
   },
   globalData: {
     server: 'https://www.15865267910.com/',
+    // server: 'http://wee168.gicp.net:54070/',
     UserID: null,
     userInfo: null,
     PhoneNum: "",

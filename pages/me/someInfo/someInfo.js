@@ -15,7 +15,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // console.log(options)
+    console.log(options)
     let that = this
     if (options.pages == "someInfo") {
       wx.request({
@@ -29,18 +29,38 @@ Page({
       wx.request({
         url: this.data.server + 'api/' + options.pages + '/' + options.id,
         success: function(res) {
-          // console.log(res)
+          console.log(res)
+
           if (options.pages == "Notice") {
-            let content = WxParse.wxParse('article', 'html', res.data.Notes, that, 5);
             that.setData({
               info: res.data.Title
             })
+            if (res.data.Notes) {
+              let content = WxParse.wxParse('article', 'html', res.data.Notes, that, 5);
+
+            } else {
+              wx.showToast({
+                title: '暂无内容',
+                icon: "none",
+                duration: 2000
+              })
+            }
           } else if (options.pages == "Faq") {
-            let content = WxParse.wxParse('article', 'html', res.data.Answer, that, 5);
             that.setData({
               info: res.data.Ask
             })
+            if (res.data.Answer) {
+              let content = WxParse.wxParse('article', 'html', res.data.Answer, that, 5);
+
+            } else {
+              wx.showToast({
+                title: '暂无内容',
+                icon: "none",
+                duration: 2000
+              })
+            }
           }
+
         }
       })
     }

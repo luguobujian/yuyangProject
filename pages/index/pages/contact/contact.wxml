@@ -1,9 +1,16 @@
 <!--pages/index/pages/Contact/contact.wxml-->
 <view class='container'>
   <view>
-    <view wx:for="{{ data }}" class='contact-item bb' wx:key="{{ item.ID }}" data-name='{{ item.Name }}' data-tel='{{ item.PhoneNum }}' bindtap='bindChsWho'>
+    <view wx:if='{{ dataLen != 0 }}' wx:for="{{ data }}" class='contact-item bb' wx:key="{{ item.ID }}" data-id='{{ item.ID }}' data-name='{{ item.Name }}' data-tel='{{ item.PhoneNum }}' bindtap='bindChsWho'>
       <view class='contact-name'>{{ item.Name }}</view>
       <view class='contact-tel'>{{ item.PhoneNum }}</view>
+    </view>
+    <view wx:if='{{ dataLen == 0 }}' class='nodata-view'>
+      <view class='nodata'>
+        <!-- <image src='../../../image/icon/nodata.png'></image> -->
+        <view>暂无联系人</view>
+        <view>(请到'我的'-'联系人管理'中添加)</view>
+      </view>
     </view>
     <!-- <view class='contact-item bb'>
       <view class='contact-name'>张大壮</view>

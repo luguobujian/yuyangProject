@@ -63,15 +63,15 @@
 }
 
 .car-txt-item.one {
-  width: 27%;
+  width: 25%;
 }
 
 .car-txt-item.two {
-  width: 46%;
+  width: 50%;
 }
 
 .car-txt-item view {
-  display: inline-block;
+  /* display: inline-block; */
   color: #343434;
 }
 
@@ -94,15 +94,24 @@
 .address-view view view {
   display: inline-block;
   font-size: 28rpx;
+  line-height: 85rpx;
+}
+.address-info {
+  /* text-indent: 20rpx; */
+}
+.bb > view.tt {
+  width: 120rpx;
+  text-indent: 20rpx;
 }
 .picker-view {
   width: 70%;
 }
 .address-view view view.address-view {
-  width: 76%;
+  width: 65%;
   line-height: 86rpx;
   overflow: hidden;
   text-overflow: ellipsis;
+  text-indent: 16rpx;
   white-space: nowrap;
 }
 
@@ -118,13 +127,13 @@
 }
 
 .add-info .user-info-con {
-  color: #343434;
-  margin-left: 90rpx;
+  /* color: #343434; */
+  /* margin-left: 50rpx; */
 }
 
 .add-info .user-info-con.o1 {
   margin-left: 0rpx;
-  padding: 20rpx 56rpx;
+  padding: 0rpx 56rpx;
 }
 
 .btn-view {

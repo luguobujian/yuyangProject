@@ -10,6 +10,13 @@
   vertical-align: middle;
 }
 
+.city {
+  width: 58rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .header-view .vertical {
   height: 54rpx;
   width: 1rpx;

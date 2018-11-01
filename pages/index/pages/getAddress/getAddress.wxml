@@ -13,9 +13,9 @@
       <image src='../../../../image/icon/clean.png'></image>
     </view>
   </view>
-  <view>
+  <view wx:if="{{ address }}">
     <view>
-      <view class='now-item bb' data-address="{{ address }}" data-lng='{{ longitude }}' data-lat='{{ latitude }}' bindtap='bindAddress'>
+      <view  class='now-item bb' data-address="{{ address }}" data-lng='{{ longitude }}' data-lat='{{ latitude }}' bindtap='bindAddress'>
         <image src='../../../../image/icon/address-icon.png'></image>
         <view>
           <view class='address-tit'>{{ addressName }}</view>

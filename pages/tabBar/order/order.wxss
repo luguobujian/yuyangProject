@@ -64,7 +64,7 @@
 }
 
 .go-time-view > view {
-  width: 50%;
+  width: 100%;
 }
 
 .go-time-view > view:last-child {

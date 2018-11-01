@@ -75,8 +75,8 @@ Page({
       method: 'post',
       data: this.data.orderData,
       success: function(res) {
-        // console.log(res)
-        if (res.data.state) {
+        console.log(res)
+        if (res.data.status) {
           wx.redirectTo({
             url: '../instant/instant?page=sure',
             success: function(res) {},

@@ -16,7 +16,7 @@ Page({
     addressName: "当前位置",
     tempAddress: "",
     address: "",
-    city: "",
+    city: "定位",
     sugData: ''
   },
 

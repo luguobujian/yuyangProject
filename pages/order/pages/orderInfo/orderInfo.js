@@ -21,7 +21,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // console.log(options)
+    console.log(options)
     let that = this
     that.setData({
       current: options.current,
@@ -48,7 +48,7 @@ Page({
     wx.request({
       url: this.data.server + 'api/Driver?driverid=' + id,
       success: function(res) {
-        console.log(res)
+        // console.log(res)
         that.setData({
           driverData: res.data
         })
@@ -73,7 +73,7 @@ Page({
     wx.request({
       url: this.data.server + 'api/SystemInfo',
       success: function(res) {
-        console.log(res)
+        // console.log(res)
         that.setData({
           someSysInfo: res.data
         })
@@ -141,6 +141,28 @@ Page({
   bindGoMap: function() {
     wx.navigateTo({
       url: '../map/map?DriverID=' + this.data.data.DriverID,
+    })
+  },
+  bindPay: function() {
+    console.log(this.data.data.Money )
+    wx.request({
+      url: this.data.server + 'api/PayJsApi?UserID=' + app.globalData.UserID + '&amount=' + this.data.data.Money + '&orderid=' + this.data.data.ID + '&openid=' + app.globalData.WXOpenId,
+      success: function(res) {
+        console.log(res)
+        wx.requestPayment({
+          'timeStamp': String(res.data.message.timestamp),
+          'nonceStr': String(res.data.message.noncestr),
+          'package': String(res.data.message.package),
+          'signType': 'MD5',
+          'paySign': String(res.data.message.sign),
+          'success': function(res) {
+            console.log(res)
+          },
+          'fail': function(res) {
+            console.log(res)
+          }
+        })
+      }
     })
   },
   /**

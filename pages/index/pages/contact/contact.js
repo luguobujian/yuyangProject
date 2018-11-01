@@ -12,7 +12,8 @@ Page({
     name: "",
     ajxNameTrue: "",
     tel: "",
-    ajxTelTrue: ""
+    ajxTelTrue: "",
+    dataLen: 1,
   },
 
   /**
@@ -25,15 +26,18 @@ Page({
       success: function(res) {
         console.log(res)
         that.setData({
-          data: res.data.Results
+          data: res.data.Results,
+          dataLen: res.data.Results.length,
         })
       }
     })
   },
   bindChsWho: function(e) {
+    console.log(e)
     let pages = getCurrentPages()
     let prevPages = pages[pages.length - 2]
     prevPages.setData({
+      callId: e.currentTarget.dataset.id,
       callName: e.currentTarget.dataset.name,
       callTel: e.currentTarget.dataset.tel
     })

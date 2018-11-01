@@ -15,17 +15,19 @@
       <view class='this_address'>
         <view class='setAddress'>
           <image src='../../../image/icon/car.png'></image>
-          {{ item.SendAddr }}
+          起运地： {{ item.SendAddr }}
         </view>
       </view>
       <view class='go-time-view clearfix'>
         <view class='fl setAddress'>
           <image src='../../../image/icon/add.png'></image>
-          {{ item.ReciveAddr }}
+          目的地： {{ item.ReciveAddr }}
         </view>
+      </view>
+      <view class='go-time-view clearfix'>
         <view class='fl'>
           <image src='../../../image/icon/time.png'></image>
-          {{ item.SendTime }}
+          时间： {{ item.SendTime }}
         </view>
       </view>
     </view>

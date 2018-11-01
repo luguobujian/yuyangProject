@@ -19,3 +19,7 @@
   float: right;
   margin-right: 114rpx;
 }
+.nodata {
+  text-align: center;
+  margin-top: 300rpx;
+}

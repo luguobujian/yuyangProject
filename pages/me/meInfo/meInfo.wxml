@@ -2,23 +2,23 @@
 <view class='container'>
   <view class='name clearfix bb'>
     <view class='fl'>姓名:</view>
-    <input class='fr' value='' maxlength='4' placeholder='{{ Name }}' bindinput='bindGetName'></input>
+    <input class='fr' value='{{ Name }}' maxlength='4' placeholder='请输入姓名' bindinput='bindGetName'></input>
   </view>
   <view class='tel clearfix bb'>
     <view class='fl'>电话:</view>
-    <input class='fr' value='' maxlength='11' placeholder='{{ Tel1 }}' bindinput='bindGetCallTel01'></input>
+    <input class='fr' value='{{ Tel1 }}' maxlength='11' placeholder='请输入电话号码' bindinput='bindGetCallTel01'></input>
   </view>
   <view class='tel clearfix bb'>
     <view class='fl'></view>
-    <input class='fr' value='' maxlength='11' placeholder='{{ Tel2 }}' bindinput='bindGetCallTel02'></input>
+    <input class='fr' value='{{ Tel2 }}' maxlength='11' placeholder='请输入电话号码' bindinput='bindGetCallTel02'></input>
   </view>
   <view class='tel clearfix bb'>
     <view class='fl'></view>
-    <input class='fr' value='' maxlength='11' placeholder='{{ Tel3 }}' bindinput='bindGetCallTel03'></input>
+    <input class='fr' value='{{ Tel3 }}' maxlength='11' placeholder='请输入电话号码' bindinput='bindGetCallTel03'></input>
   </view>
   <view class='company clearfix bb'>
     <view class='fl'>公司:</view>
-    <input class='fr' value='' placeholder='{{ Company }}' bindinput='bindGetCompany'></input>
+    <input class='fr' value='{{ Company }}' placeholder='请输入公司' bindinput='bindGetCompany'></input>
   </view>
   <view class='avatar clearfix bb'>
     <view class='fl'>头像:</view>

@@ -15,26 +15,28 @@
       </view>
       <view class='car-txt-info'>
         <view class='car-txt-item one'>
-          <view>载重 : </view> {{ carInfo.ZaiZhong }}
+          <view>载重</view> {{ carInfo.ZaiZhong }}
         </view>
         <view class='car-txt-item two'>
-          <view>尺寸 : </view> {{ carInfo.ChiCun }}
+          <view>尺寸</view> {{ carInfo.ChiCun }}
         </view>
         <view class='car-txt-item one'>
-          <view>体积 : </view> {{ carInfo.TiJi }}
+          <view>体积</view> {{ carInfo.TiJi }}
         </view>
       </view>
     </view>
     <view class='address-view'>
       <view class='back clearfix bb' data-form="back" bindtap='bindGoGetAddress'>
         <image class='fl' src='../../../image/icon/car.png'></image>
+        <view class='fl'>起运地:</view>
         <view class="address-view address-info fl">
           {{ back }}
         </view>
         <view class='arrow fl'>›</view>
       </view>
-      <view class='go clearfix' data-form="go" bindtap='bindGoGetAddress'>
+      <view class='go clearfix bb' data-form="go" bindtap='bindGoGetAddress'>
         <image class='fl' src='../../../image/icon/add.png'></image>
+        <view class='fl'>目的地:</view>
         <view class="address-view address-info fl">
           {{ go }}
         </view>
@@ -44,6 +46,7 @@
     <view class='add-info address-view'>
       <view class='bb'>
         <image src='../../../image/icon/time.png'></image>
+        <!-- <view class='fl'>日期:</view> -->
         <view class="address-info picker-view">
           <picker mode="date" value="{{date}}" start="2015-09-01" end="2099-09-01" bindchange="bindDateChange">
             <view class="picker">
@@ -58,6 +61,7 @@
       </view>
       <view class='bb'>
         <image src='../../../image/icon/time.png'></image>
+        <!-- <view class='fl'>时间:</view> -->
         <view class="address-info picker-view">
           <picker mode="time" value="{{time}}" start="2015-09-01" end="2099-09-01" bindchange="bindTimeChange">
             <view class="picker">
@@ -70,20 +74,22 @@
         </view>
         <!-- <image class='rimg' src='../../../image/icon/time_btn.png'></image> -->
       </view>
-      <view class='bb'>
+      <view class='bb'  bindtap="bindGoGetContact">
         <image src='../../../image/icon/who.png'></image>
+        <!-- <view class='fl'>姓名:</view> -->
         <view class="address-info">
-          联系人姓名
+          收货人：
         </view>
         <view class='user-info-con'>
           {{ callName }}
         </view>
-        <image class='rimg' src='../../../image/icon/tel_btn.png' bindtap="bindGoGetContact"></image>
+        <image class='rimg' src='../../../image/icon/tel_btn.png'></image>
       </view>
-      <view class=''>
+      <view class='bb' bindtap="bindGoGetContact">
         <image src='../../../image/icon/tel.png'></image>
+        <!-- <view class='fl'>电话:</view> -->
         <view class="address-info">
-          联系人姓名
+          收货人电话：
         </view>
         <view class='user-info-con'>
           {{ callTel }}

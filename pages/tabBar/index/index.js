@@ -31,8 +31,8 @@ Page({
     ReciveLat: "",
     date: '',
     time: '',
-    callName: "",
-    callTel: "",
+    callName: "请选择发货人",
+    callTel: "请选择发货人电话",
 
     currentTab: 0,
     scrollLeft: 0,
@@ -54,8 +54,7 @@ Page({
               that.setData({
                 userInfo: res.userInfo,
                 logModalShow: true
-              })
-              
+              })        
             },
             fail: function (res) {
               console.log(res)
@@ -248,8 +247,7 @@ Page({
               icon: 'none',
               title: res.data.msg,
             })
-          }
-         
+          }      
         }
       })
     } else if (this.data.telStatus == 2) {
@@ -304,13 +302,13 @@ Page({
     })
   },
   bindGoOrder: function() {
-    if (this.data.back == "请选择发货地址") {
+    if (this.data.back == "请选择发货地址" || this.data.back == "") {
       wx.showToast({
         title: '请输入发货地址',
         icon: "none",
         duration: 2000
       })
-    } else if (this.data.go == "请选择收货地址") {
+    } else if (this.data.go == "请选择收货地址" || this.data.go == "") {
       wx.showToast({
         title: '请输入收货地址',
         icon: "none",
@@ -330,9 +328,25 @@ Page({
       })
     } else {
       let SendTime = this.data.date + " " + this.data.time + ":00"
-      console.log(this.data.carInfo)
+      console.log(app.globalData)
       wx.navigateTo({
-        url: '../../index/pages/goOrder/goOrder?TruckType=' + this.data.carInfo.Name+'&TruckID=' + this.data.carInfo.ID + '&SendAddr=' + this.data.back + '&ReciveAddr=' + this.data.go + '&ReciveName=' + this.data.callName + '&RecivePhone=' + this.data.callTel + '&SendTime=' + SendTime + '&SendLong=' + this.data.SendLong + '&SendLat=' + this.data.SendLat + '&ReciveLong=' + this.data.ReciveLong + '&ReciveLat=' + this.data.ReciveLat + '&Notes=&Price=0' + "&PreviewPrice=" + this.data.carInfo.PreviewPrice + "&StartPrice=" + this.data.carInfo.StartPrice + "&AddUser=" + app.globalData.UserID,
+        url: '../../index/pages/goOrder/goOrder?TruckType=' + this.data.carInfo.Name+
+        '&TruckID=' + this.data.carInfo.ID + 
+        '&SendAddr=' + this.data.back + 
+        '&UserPhone=' + app.globalData.PhoneNum +
+        '&ReciveAddr=' + this.data.go + 
+        '&TempReciveUser=' + this.data.callName + 
+        '&ReciveUser=0'  +
+        '&RecivePhone=' + this.data.callTel + 
+        '&SendTime=' + SendTime + 
+        '&SendLong=' + this.data.SendLong + 
+        '&SendLat=' + this.data.SendLat + 
+        '&ReciveLong=' + this.data.ReciveLong + 
+        '&ReciveLat=' + this.data.ReciveLat + 
+        '&Notes=&Price=0' + 
+        "&PreviewPrice=" + this.data.carInfo.PreviewPrice + 
+        "&StartPrice=" + this.data.carInfo.StartPrice + 
+        "&AddUser=" + app.globalData.UserID,
       })
     }
   },
