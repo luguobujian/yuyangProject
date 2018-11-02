@@ -30,6 +30,8 @@ Page({
         that.setData({
           userInfo: res.data,
         })
+        app.globalData.PhoneNum = res.data.PhoneNum
+        console.log(app.globalData)
       }
     })
   },

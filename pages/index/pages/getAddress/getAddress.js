@@ -135,17 +135,33 @@ Page({
     let prevPage = pages[pages.length - 2]
     // console.log(this.data.form)
     if (this.data.form == "back") {
-      prevPage.setData({
-        back: e.currentTarget.dataset.address,
-        SendLong: e.currentTarget.dataset.lng,
-        SendLat: e.currentTarget.dataset.lat,
-      })
+      // if (prevPage.data.go != prevPage.data.back) {
+        prevPage.setData({
+          back: e.currentTarget.dataset.address,
+          SendLong: e.currentTarget.dataset.lng,
+          SendLat: e.currentTarget.dataset.lat,
+        })
+      // } else {
+      //   wx.showToast({
+      //     title: '位置重复',
+      //     icon: 'success',
+      //     duration: 1000
+      //   })
+      // }
     } else if (this.data.form == "go") {
-      prevPage.setData({
-        go: e.currentTarget.dataset.address,
-        ReciveLong: e.currentTarget.dataset.lng,
-        ReciveLat: e.currentTarget.dataset.lat,
-      })
+      // if (prevPage.data.go != prevPage.data.back) {
+        prevPage.setData({
+          go: e.currentTarget.dataset.address,
+          ReciveLong: e.currentTarget.dataset.lng,
+          ReciveLat: e.currentTarget.dataset.lat,
+        })
+      // } else {
+      //   wx.showToast({
+      //     title: '位置重复',
+      //     icon: 'success',
+      //     duration: 1000
+      //   })
+      // }
     }
     // console.log(prevPage)
     wx.navigateBack({

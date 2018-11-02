@@ -1,8 +1,8 @@
 <!--pages/me/record/record.wxml-->
 <view class='container'>
   <view>
-    <view wx:if='{{ dataLen != 0 }}' class='item bb clearfix'>
-      <view class='fl'>运输服务（中型货车）</view><view class='money fr'>-160</view>
+    <view wx:if='{{ dataLen != 0 }}' wx:for='{{ data }}'  wx:key='{{ data.ID }}' class='item bb clearfix'>
+      <view class='fl'>{{ item.PayType }}( {{ item.AddTime }} )</view><view class='money fr'>-{{ item.Amount }}</view>
     </view>
     <view wx:if='{{ dataLen == 0 }}' class='nodata-view'>
       <view class='nodata'>

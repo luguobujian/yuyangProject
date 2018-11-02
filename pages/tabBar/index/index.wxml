@@ -74,26 +74,22 @@
         </view>
         <!-- <image class='rimg' src='../../../image/icon/time_btn.png'></image> -->
       </view>
-      <view class='bb'  bindtap="bindGoGetContact">
+      <view class='bb'>
         <image src='../../../image/icon/who.png'></image>
         <!-- <view class='fl'>姓名:</view> -->
         <view class="address-info">
           收货人：
         </view>
-        <view class='user-info-con'>
-          {{ callName }}
-        </view>
-        <image class='rimg' src='../../../image/icon/tel_btn.png'></image>
+        <input class='user-info-con' value='{{ callName }}' placeholder='请选择发货人' bindinput='bindCallName'></input>
+        <image class='rimg' src='../../../image/icon/tel_btn.png' bindtap='bindGoGetContact'></image>
       </view>
-      <view class='bb' bindtap="bindGoGetContact">
+      <view class='bb'>
         <image src='../../../image/icon/tel.png'></image>
         <!-- <view class='fl'>电话:</view> -->
         <view class="address-info">
           收货人电话：
         </view>
-        <view class='user-info-con'>
-          {{ callTel }}
-        </view>
+        <input class='user-info-con' value='{{ callTel }}' placeholder='请选择发货人电话' bindinput='bindCallTel'></input>
       </view>
     </view>
     <view class='btn-view'>

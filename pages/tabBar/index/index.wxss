@@ -129,6 +129,8 @@
 .add-info .user-info-con {
   /* color: #343434; */
   /* margin-left: 50rpx; */
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .add-info .user-info-con.o1 {

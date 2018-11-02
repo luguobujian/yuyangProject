@@ -11,6 +11,8 @@ Page({
     logModalShow: false,
     telModalShow: true,
 
+    PhoneNum: '',
+
     tel: '', //手机号
     ajxTelTrue: '',
     telStatus: '',
@@ -31,8 +33,8 @@ Page({
     ReciveLat: "",
     date: '',
     time: '',
-    callName: "请选择发货人",
-    callTel: "请选择发货人电话",
+    callName: "",
+    callTel: "",
 
     currentTab: 0,
     scrollLeft: 0,
@@ -44,6 +46,7 @@ Page({
    */
   onLoad: function(options) {
     let that = this
+    
     wx.getSetting({
       success: function(res) {
         if (res.authSetting['scope.userInfo']) {
@@ -82,7 +85,6 @@ Page({
       }
     })
     // 处理方法
-
   },
   // 获取车类
   getCarCls: function() {
@@ -296,12 +298,36 @@ Page({
       url: '../../index/pages/getAddress/getAddress?form=' + e.currentTarget.dataset.form,
     })
   },
+  bindCallName: function (e) {
+    console.log(e)
+    this.setData({
+      callName: e.detail.value
+    })
+  },
+  bindCallTel: function (e) {
+    console.log(e)
+    this.setData({
+      callTel: e.detail.value
+    })
+  },
   bindGoGetContact: function() {
+    let that = this
+    wx.request({
+      url: that.data.server + 'api/User/' + app.globalData.UserID + '?user=',
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          PhoneNum: res.data.PhoneNum
+        })
+      }
+    })
     wx.navigateTo({
       url: '../../index/pages/contact/contact',
     })
   },
+  
   bindGoOrder: function() {
+    let that = this
     if (this.data.back == "请选择发货地址" || this.data.back == "") {
       wx.showToast({
         title: '请输入发货地址',
@@ -311,6 +337,12 @@ Page({
     } else if (this.data.go == "请选择收货地址" || this.data.go == "") {
       wx.showToast({
         title: '请输入收货地址',
+        icon: "none",
+        duration: 2000
+      })
+    } else if (this.data.go == this.data.back) {
+      wx.showToast({
+        title: '地址位置重复',
         icon: "none",
         duration: 2000
       })
@@ -327,13 +359,13 @@ Page({
         duration: 2000
       })
     } else {
+        
       let SendTime = this.data.date + " " + this.data.time + ":00"
-      console.log(app.globalData)
       wx.navigateTo({
         url: '../../index/pages/goOrder/goOrder?TruckType=' + this.data.carInfo.Name+
         '&TruckID=' + this.data.carInfo.ID + 
         '&SendAddr=' + this.data.back + 
-        '&UserPhone=' + app.globalData.PhoneNum +
+        '&UserPhone=' + this.data.PhoneNum +
         '&ReciveAddr=' + this.data.go + 
         '&TempReciveUser=' + this.data.callName + 
         '&ReciveUser=0'  +

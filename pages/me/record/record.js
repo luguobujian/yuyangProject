@@ -1,10 +1,13 @@
 // pages/me/record/record.js
+const app = getApp()
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
+    server: app.globalData.server,
+    WXOpenId: app.globalData.WXOpenId,
     data: "",
     dataLen: ""
   },
@@ -13,7 +16,17 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    let that = this
+    wx.request({
+      url: that.data.server + 'api/PayRecord?PhoneNum=&Name=&UserID=' + app.globalData.UserID +'&pageSize=9999&pageIndex=0',
+      success: function (res) {
+        console.log(res)
+        that.setData({
+          data: res.data.Results,
+          dataLen: res.data.Results.length
+        })
+      }
+    })
   },
 
   /**

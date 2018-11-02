@@ -37,7 +37,8 @@ Page({
       success: function(res) {
         console.log(res)
         that.setData({
-          data: res.data
+          data: res.data,
+          current: res.State     
         })
         that.getDriverID(res.data.DriverID)
       }
@@ -61,7 +62,7 @@ Page({
     wx.request({
       url: this.data.server + 'api/Stars?DriverID=' + that.data.data.DriverID,
       success: function(res) {
-        // console.log(res)
+        console.log(res)
         that.setData({
           starData: res.data.Stars
         })
@@ -144,6 +145,8 @@ Page({
     })
   },
   bindPay: function() {
+    let that = this
+    
     console.log(this.data.data.Money )
     wx.request({
       url: this.data.server + 'api/PayJsApi?UserID=' + app.globalData.UserID + '&amount=' + this.data.data.Money + '&orderid=' + this.data.data.ID + '&openid=' + app.globalData.WXOpenId,
@@ -157,9 +160,18 @@ Page({
           'paySign': String(res.data.message.sign),
           'success': function(res) {
             console.log(res)
+            that.getOrderData()
+            let pages = getCurrentPages()
+            let prevPages = pages[pages.length - 2]
+            prevPages.getData()
           },
           'fail': function(res) {
             console.log(res)
+            wx.showToast({
+              title: res.requestPayment,
+              icon: 'none',
+              duration: 2000
+            })
           }
         })
       }
