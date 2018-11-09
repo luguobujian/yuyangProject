@@ -1,8 +1,43 @@
 /* pages/index/pages/onekey.wxss */
-.make-view textarea{
+.make-view {
+  border-top: 1rpx solid #fff;
+}
+.make-view textarea {
   width: 88%;
   padding: 20rpx;
   margin: 16rpx auto;
   border: 1rpx solid #dedede;
   border-radius: 10rpx;
+}
+
+.img-box {
+  width: 92%;
+  margin: 16rpx auto;
+}
+
+.chs-img {
+  width: 140rpx;
+  height: 140rpx;
+}
+
+.add-img {
+  width: 140rpx;
+  height: 140rpx;
+  color: #dedede;
+  font-size: 40rpx;
+  line-height: 140rpx;
+  text-align: center;
+  border: 1rpx dashed #dedede;
+}
+
+#myAudio {
+  margin-left: 26rpx;
+}
+
+.mp3-btn {
+  margin: 20rpx;
+}
+
+.go-btn {
+  margin: 140rpx 20rpx 0;
 }
