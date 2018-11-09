@@ -7,9 +7,9 @@
     </view>
     <view class='vertical'></view>
     <view class='input-view'>
-      <input bindinput='bindKeyInput'></input>
+      <input value='{{ serach }}' bindinput='bindKeyInput'></input>
     </view>
-    <view class='clean-view'>
+    <view class='clean-view' bindtap='clearInput'>
       <image src='../../../../image/icon/clean.png'></image>
     </view>
   </view>

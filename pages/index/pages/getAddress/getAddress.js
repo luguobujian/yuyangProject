@@ -14,6 +14,7 @@ Page({
     latitude: "",
     longitude: "",
     addressName: "当前位置",
+    serach: '',
     tempAddress: "",
     address: "",
     city: "定位",
@@ -50,7 +51,7 @@ Page({
         let address = res.data.result;
         that.setData({
           tempAddress: address.formatted_address + address.sematic_description,
-          address: address.formatted_address + address.sematic_description,
+          address: res.data.result.addressComponent.city + res.data.result.addressComponent.district + res.data.result.addressComponent.street + res.data.result.sematic_description,
           city: address.addressComponent.city.substr(0, 2)
         });
       },
@@ -89,10 +90,10 @@ Page({
             wx.request({
               url: 'https://api.map.baidu.com/geocoder/v2/?ak=F2HqMyAayTiaaxYOHeagngK4Ck3nLxeH&location=' + data.result[i].location.lat + ',' + data.result[i].location.lng + '&output=json',
               success: function(res) {
-                // console.log(res)
+                console.log(res)
                 sugData.push({
                   name: data.result[i].name,
-                  address: res.data.result.formatted_address + res.data.result.sematic_description,
+                  address: res.data.result.addressComponent.city + res.data.result.addressComponent.district + res.data.result.addressComponent.street + res.data.result.sematic_description,
                   lng: data.result[i].location.lng,
                   lat: data.result[i].location.lat
                 })
@@ -106,10 +107,7 @@ Page({
               fail: function() {},
             })
           }
-
         }
-
-
       }
       BMap.suggestion({
         query: e.detail.value,
@@ -120,6 +118,12 @@ Page({
       });
     }
 
+  },
+  clearInput: function() {
+    this.setData({
+      serach: '',
+      sugData: []
+    })
   },
   bindChosCity: function() {
     wx.navigateTo({
@@ -136,11 +140,11 @@ Page({
     // console.log(this.data.form)
     if (this.data.form == "back") {
       // if (prevPage.data.go != prevPage.data.back) {
-        prevPage.setData({
-          back: e.currentTarget.dataset.address,
-          SendLong: e.currentTarget.dataset.lng,
-          SendLat: e.currentTarget.dataset.lat,
-        })
+      prevPage.setData({
+        back: e.currentTarget.dataset.address,
+        SendLong: e.currentTarget.dataset.lng,
+        SendLat: e.currentTarget.dataset.lat,
+      })
       // } else {
       //   wx.showToast({
       //     title: '位置重复',
@@ -150,11 +154,11 @@ Page({
       // }
     } else if (this.data.form == "go") {
       // if (prevPage.data.go != prevPage.data.back) {
-        prevPage.setData({
-          go: e.currentTarget.dataset.address,
-          ReciveLong: e.currentTarget.dataset.lng,
-          ReciveLat: e.currentTarget.dataset.lat,
-        })
+      prevPage.setData({
+        go: e.currentTarget.dataset.address,
+        ReciveLong: e.currentTarget.dataset.lng,
+        ReciveLat: e.currentTarget.dataset.lat,
+      })
       // } else {
       //   wx.showToast({
       //     title: '位置重复',

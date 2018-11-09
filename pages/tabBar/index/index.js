@@ -32,7 +32,7 @@ Page({
     ReciveLong: "",
     ReciveLat: "",
     date: '',
-    time: '',
+    timeChs: '',
     callName: "",
     callTel: "",
 
@@ -40,13 +40,13 @@ Page({
     scrollLeft: 0,
 
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
     let that = this
-    
+    that.getCarCls()
+    // that.clearTime()
     wx.getSetting({
       success: function(res) {
         if (res.authSetting['scope.userInfo']) {
@@ -57,16 +57,15 @@ Page({
               that.setData({
                 userInfo: res.userInfo,
                 logModalShow: true
-              })        
+              })
             },
-            fail: function (res) {
+            fail: function(res) {
               console.log(res)
             }
           })
           // openId查验
           wx.login({
             success: res => {
-              // 发送 res.code 到后台换取 openId, sessionKey, unionId
               wx.request({
                 url: app.globalData.server + 'api/XcxUserInfo?js_code=' + res.code,
                 success: function(res) {
@@ -84,7 +83,11 @@ Page({
         }
       }
     })
-    // 处理方法
+  },
+  clearTime: function() {
+    this.setData({
+      timeChs: ''
+    })
   },
   // 获取车类
   getCarCls: function() {
@@ -115,14 +118,19 @@ Page({
           })
           app.globalData.ticket = res.data.Ticket
           app.globalData.UserID = res.data.UserID
+          wx.request({
+            url: that.data.server + 'api/User/' + app.globalData.UserID + '?user=',
+            success: function(res) {
+              console.log(res)
+              that.setData({
+                PhoneNum: res.data.PhoneNum
+              })
+            }
+          })
         } else {
           that.setData({
             telModalShow: false,
           })
-          // wx.showToast({
-          //   icon: 'none',
-          //   title: res.data.msg,
-          // })
         }
       }
     })
@@ -239,7 +247,7 @@ Page({
     if (this.data.telStatus == 3) {
       // 注册
       wx.request({
-        url: this.data.server + 'api/User?Name=' + this.data.userInfo.nickName +'&PhoneNum=' + this.data.tel + '&SmsCode=' + this.data.code + '&DriverID=0&Company=&WxOpenID=' + app.globalData.WXOpenId,
+        url: this.data.server + 'api/User?Name=' + this.data.userInfo.nickName + '&PhoneNum=' + this.data.tel + '&SmsCode=' + this.data.code + '&DriverID=0&Company=&WxOpenID=' + app.globalData.WXOpenId,
         success: function(res) {
           console.log(res)
           if (res.data.status) {
@@ -249,7 +257,7 @@ Page({
               icon: 'none',
               title: res.data.msg,
             })
-          }      
+          }
         }
       })
     } else if (this.data.telStatus == 2) {
@@ -298,36 +306,28 @@ Page({
       url: '../../index/pages/getAddress/getAddress?form=' + e.currentTarget.dataset.form,
     })
   },
-  bindCallName: function (e) {
+  bindCallName: function(e) {
     console.log(e)
     this.setData({
       callName: e.detail.value
     })
   },
-  bindCallTel: function (e) {
+  bindCallTel: function(e) {
     console.log(e)
     this.setData({
       callTel: e.detail.value
     })
   },
   bindGoGetContact: function() {
-    let that = this
-    wx.request({
-      url: that.data.server + 'api/User/' + app.globalData.UserID + '?user=',
-      success: function (res) {
-        console.log(res)
-        that.setData({
-          PhoneNum: res.data.PhoneNum
-        })
-      }
-    })
     wx.navigateTo({
       url: '../../index/pages/contact/contact',
     })
   },
-  
-  bindGoOrder: function() {
+
+  submit: function(e) {
+    console.log(e)
     let that = this
+    let phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/;
     if (this.data.back == "请选择发货地址" || this.data.back == "") {
       wx.showToast({
         title: '请输入发货地址',
@@ -354,31 +354,37 @@ Page({
       })
     } else if (this.data.callName == "") {
       wx.showToast({
-        title: '请选择收货人',
+        title: '请选择或输入收货人',
+        icon: "none",
+        duration: 2000
+      })
+    } else if (this.data.callTel == "" || !phoneReg.test(this.data.callTel)) {
+      wx.showToast({
+        title: '请选择或输入正确的收货人电话',
         icon: "none",
         duration: 2000
       })
     } else {
-        
-      let SendTime = this.data.date + " " + this.data.time + ":00"
+      let SendTime = this.data.date + " " + this.data.timeChs + ":00"
       wx.navigateTo({
-        url: '../../index/pages/goOrder/goOrder?TruckType=' + this.data.carInfo.Name+
-        '&TruckID=' + this.data.carInfo.ID + 
-        '&SendAddr=' + this.data.back + 
-        '&UserPhone=' + this.data.PhoneNum +
-        '&ReciveAddr=' + this.data.go + 
-        '&TempReciveUser=' + this.data.callName + 
-        '&ReciveUser=0'  +
-        '&RecivePhone=' + this.data.callTel + 
-        '&SendTime=' + SendTime + 
-        '&SendLong=' + this.data.SendLong + 
-        '&SendLat=' + this.data.SendLat + 
-        '&ReciveLong=' + this.data.ReciveLong + 
-        '&ReciveLat=' + this.data.ReciveLat + 
-        '&Notes=&Price=0' + 
-        "&PreviewPrice=" + this.data.carInfo.PreviewPrice + 
-        "&StartPrice=" + this.data.carInfo.StartPrice + 
-        "&AddUser=" + app.globalData.UserID,
+        url: '../../index/pages/goOrder/goOrder?TruckType=' + this.data.carInfo.Name +
+          '&TruckID=' + this.data.carInfo.ID +
+          '&SendAddr=' + this.data.back +
+          '&UserPhone=' + this.data.PhoneNum +
+          '&ReciveAddr=' + this.data.go +
+          '&TempReciveUser=' + this.data.callName +
+          '&ReciveUser=0' +
+          '&RecivePhone=' + this.data.callTel +
+          '&SendTime=' + SendTime +
+          '&SendLong=' + this.data.SendLong +
+          '&SendLat=' + this.data.SendLat +
+          '&ReciveLong=' + this.data.ReciveLong +
+          '&ReciveLat=' + this.data.ReciveLat +
+          '&Notes=&Price=0' +
+          "&PreviewPrice=" + this.data.carInfo.PreviewPrice +
+          "&StartPrice=" + this.data.carInfo.StartPrice +
+          "&AddUser=" + app.globalData.UserID +
+          "&form_id=" + e.detail.formId
       })
     }
   },
@@ -394,25 +400,25 @@ Page({
   },
   bindTimeChange: function(e) {
     this.setData({
-      time: e.detail.value
+      timeChs: e.detail.value
     })
   },
   bindOneKey: function(e) {
-    let that = this
-    wx.request({
-      url: this.data.server + 'api/OneKey',
-      method: 'post',
-      data: {
-        UserID: app.globalData.UserID
-      },
-      success: function(res) {
-        if (res.data.status) {
-          wx.navigateTo({
-            url: '../../index/pages/instant/instant?page=onekey',
-          })
-        }
-      }
+    // let that = this
+    // wx.request({
+    //   url: this.data.server + 'api/OneKey',
+    //   method: 'post',
+    //   data: {
+    //     UserID: app.globalData.UserID
+    //   },
+    //   success: function(res) {
+    //     if (res.data.status) {
+    wx.navigateTo({
+      url: '../../index/pages/onekey/onekey',
     })
+    //     }
+    //   }
+    // })
   },
   /**
    * 生命周期函数--监听页面显示

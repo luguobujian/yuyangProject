@@ -1,0 +1,8 @@
+/* pages/index/pages/onekey.wxss */
+.make-view textarea{
+  width: 88%;
+  padding: 20rpx;
+  margin: 16rpx auto;
+  border: 1rpx solid #dedede;
+  border-radius: 10rpx;
+}

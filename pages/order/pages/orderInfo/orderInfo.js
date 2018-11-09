@@ -7,7 +7,7 @@ Page({
    */
   data: {
     server: app.globalData.server,
-    star: 3,
+    star: 0,
     someSysInfo: '',
     data: "",
     orderId: "",
@@ -38,9 +38,11 @@ Page({
         console.log(res)
         that.setData({
           data: res.data,
-          current: res.State     
+          current: res.State
         })
-        that.getDriverID(res.data.DriverID)
+        if (res.data.DriverID) {
+          that.getDriverID(res.data.DriverID)
+        }  
       }
     })
   },
@@ -49,7 +51,7 @@ Page({
     wx.request({
       url: this.data.server + 'api/Driver?driverid=' + id,
       success: function(res) {
-        // console.log(res)
+        console.log(res)
         that.setData({
           driverData: res.data
         })
@@ -88,21 +90,46 @@ Page({
   },
   bindDel: function() {
     let that = this
-    // console.log(app.globalData.ticket)
-    wx.request({
-      url: this.data.server + 'api/Order/' + this.data.orderId,
-      method: "delete",
-      header: {
-        'Authorization': 'BasicAuth ' + app.globalData.ticket
-      },
-      success: function(res) {
-        console.log(res)
-        that.backPage()
-      },
-      fail: function(res) {
-        console.log(res)
+    wx.showModal({
+      title: '提示',
+      content: '您要取消这个订单吗？',
+      success(res) {
+        if (res.confirm) {
+          wx.request({
+            url: that.data.server + 'api/Order/' + that.data.orderId + '?UserID=' + app.globalData.UserID,
+            method: "delete",
+            header: {
+              'Authorization': 'BasicAuth ' + app.globalData.ticket
+            },
+            success: function(res) {
+              console.log(res)
+              that.backPage()
+            },
+            fail: function(res) {
+              console.log(res)
+            }
+          })
+        } else if (res.cancel) {
+          console.log('用户点击取消')
+        }
       }
     })
+    
+    // console.log(app.globalData.ticket)
+    // wx.request({
+    //   url: this.data.server + 'api/Order/' + this.data.orderId + '?UserID=' + app.globalData.UserID,
+    //   method: "delete",
+    //   header: {
+    //     'Authorization': 'BasicAuth ' + app.globalData.ticket
+    //   },
+    //   success: function(res) {
+    //     console.log(res)
+    //     that.backPage()
+    //   },
+    //   fail: function(res) {
+    //     console.log(res)
+    //   }
+    // })
   },
   geiStar: function(e) {
     this.setData({
@@ -116,12 +143,20 @@ Page({
   },
   bindGiveStar: function() {
     let that = this
+    if (!that.data.star) {
+      wx.showToast({
+        title: '请选择评分',
+        icon: "none",
+        duration: 2000
+      })
+      return
+    }
     wx.request({
       url: this.data.server + 'api/Stars',
       method: 'post',
       data: {
         OrderID: that.data.orderId,
-        DriverID: 1,
+        DriverID: that.data.DriverID,
         Star: that.data.star,
         Notes: that.data.remark
       },
@@ -146,8 +181,8 @@ Page({
   },
   bindPay: function() {
     let that = this
-    
-    console.log(this.data.data.Money )
+
+    console.log(this.data.data.Money)
     wx.request({
       url: this.data.server + 'api/PayJsApi?UserID=' + app.globalData.UserID + '&amount=' + this.data.data.Money + '&orderid=' + this.data.data.ID + '&openid=' + app.globalData.WXOpenId,
       success: function(res) {
@@ -174,6 +209,30 @@ Page({
             })
           }
         })
+      }
+    })
+  },
+  submit: function (e) {
+    let str = 'data.form_id'
+    console.log(e)
+    this.setData({
+      [str] : e.detail.formId
+    })
+    console.log(this.data.data)
+    wx.request({
+      url: this.data.server + 'api/Order',
+      method: 'post',
+      data: this.data,
+      success: function (res) {
+        console.log(res)
+        if (res.data.status) {
+          wx.redirectTo({
+            url: '../../../index/pages/instant/instant?page=sure',
+            success: function (res) { },
+            fail: function (res) { },
+            complete: function (res) { },
+          })
+        }
       }
     })
   },

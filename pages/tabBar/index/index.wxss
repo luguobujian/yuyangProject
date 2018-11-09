@@ -107,7 +107,7 @@
   width: 70%;
 }
 .address-view view view.address-view {
-  width: 65%;
+  width: 66%;
   line-height: 86rpx;
   overflow: hidden;
   text-overflow: ellipsis;

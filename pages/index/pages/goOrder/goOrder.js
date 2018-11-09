@@ -38,12 +38,14 @@ Page({
               console.log(res)
               let jl = res.data.result.routes[0].distance / 1000
               if (res.data.message == "成功") {
-                let pri = jl * options.PreviewPrice
+                let pri = (jl - 3) * options.PreviewPrice + options.StartPrice
+                console.log((jl - 3) * options.PreviewPrice)
+                console.log(options.StartPrice)
                 let str = "orderData.Price"
-                if (pri > options.StartPrice) {
-                  let Price = (jl * options.PreviewPrice - 0).toFixed(2)
+                if (pri > (options.StartPrice - 0)) {
+                  let Price = (jl - 3) * options.PreviewPrice - (-options.StartPrice)
                   that.setData({
-                    [str]: Price
+                    [str]: Price.toFixed(2)
                   })
                 } else {
                   let Price = (options.StartPrice - 0).toFixed(2)

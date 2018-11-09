@@ -45,8 +45,7 @@
     </view>
     <view class='add-info address-view'>
       <view class='bb'>
-        <image src='../../../image/icon/time.png'></image>
-        <!-- <view class='fl'>日期:</view> -->
+        <image src='../../../image/icon/time_btn.png'></image>
         <view class="address-info picker-view">
           <picker mode="date" value="{{date}}" start="2015-09-01" end="2099-09-01" bindchange="bindDateChange">
             <view class="picker">
@@ -57,17 +56,16 @@
             </view>
           </picker>
         </view>
-        <image class='rimg' src='../../../image/icon/time_btn.png'></image>
+        <!-- <image class='rimg' src='../../../image/icon/time_btn.png'></image> -->
       </view>
       <view class='bb'>
         <image src='../../../image/icon/time.png'></image>
-        <!-- <view class='fl'>时间:</view> -->
         <view class="address-info picker-view">
-          <picker mode="time" value="{{time}}" start="2015-09-01" end="2099-09-01" bindchange="bindTimeChange">
+          <picker mode="time" value="{{timeChs}}" bindchange="bindTimeChange">
             <view class="picker">
               选择发货时间
               <view class='user-info-con o1'>
-                {{time}}
+                {{timeChs}}
               </view>
             </view>
           </picker>
@@ -76,7 +74,6 @@
       </view>
       <view class='bb'>
         <image src='../../../image/icon/who.png'></image>
-        <!-- <view class='fl'>姓名:</view> -->
         <view class="address-info">
           收货人：
         </view>
@@ -85,16 +82,17 @@
       </view>
       <view class='bb'>
         <image src='../../../image/icon/tel.png'></image>
-        <!-- <view class='fl'>电话:</view> -->
         <view class="address-info">
           收货人电话：
         </view>
-        <input class='user-info-con' value='{{ callTel }}' placeholder='请选择发货人电话' bindinput='bindCallTel'></input>
+        <input class='user-info-con' type='number' value='{{ callTel }}' placeholder='请选择发货人电话' bindinput='bindCallTel'></input>
       </view>
     </view>
     <view class='btn-view'>
       <button class='btn01' bindtap='facility' bindtap='bindOneKey'>一键叫车</button>
-      <button class='btn02' bindtap='bindGoOrder'>确认用车</button>
+      <form bindsubmit="submit" report-submit='true'>
+        <button class='btn02' form-type='submit'>确认用车</button>
+      </form>     
     </view>
     <view class='btm-info'>
       不知道怎样操作？试试“一键叫车”吧。

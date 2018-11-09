@@ -30,6 +30,7 @@ Page({
       ReciveLong: "",
       ReciveLat: "",
       date: '',
+      timeChs: '',
       callName: "",
       callTel: "",
     })

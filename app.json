@@ -5,7 +5,7 @@
     "pages/tabBar/me/me"
   ],
   "window": {
-    "backgroundTextStyle": "light",
+    "backgroundTextStyle": "dark",
     "navigationBarBackgroundColor": "#03a9f4",
     "navigationBarTitleText": "煜阳商配",
     "navigationBarTextStyle": "light"
@@ -46,6 +46,7 @@
         "pages/getAddress/getAddress",
         "pages/contact/contact",
         "pages/instant/instant",
+        "pages/onekey/onekey",
         "pages/goOrder/goOrder",
         "pages/protocol/protocol",
         "pages/city/city"

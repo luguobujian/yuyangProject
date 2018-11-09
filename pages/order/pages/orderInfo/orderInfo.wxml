@@ -2,7 +2,7 @@
 <view class='container'>
   <view class='box'>
     <view class='header mb-8'>
-      <view wx:if="{{current != 1}}" class='clearfix bb'>
+      <view wx:if="{{ data.DriverID }}" class='clearfix bb'>
         <view class='car fl'>
           <view>{{ driverData.Num || ''}}</view>
           <view>{{ driverData.TruckName || ''}}</view>
@@ -21,7 +21,7 @@
           </view>
         </view>
       </view>
-      <view wx:if="{{current != 1}}" class='something clearfix'>
+      <view wx:if="{{current != 10}}" class='something clearfix'>
         <view class='fl br' data-tel='{{ driverData.PhoneNum }}' bindtap='bindCallThisMan'>
           <image src='../../../../image/icon/tel01.png'></image>
           拨打电话
@@ -38,33 +38,27 @@
     </view>
     <view class='some-address mb-8'>
       <view class='bb'>
-        <text>起运地：</text>
-        {{ data.ReciveAddr }}
+        <text>起运地：</text> {{ data.ReciveAddr }}
       </view>
       <view class='bb'>
-        <text>目的地：</text>
-        {{ data.SendAddr }}
+        <text>目的地：</text> {{ data.SendAddr }}
       </view>
     </view>
     <view class='some-address'>
       <view class='bb'>
-        <text>时间：</text>
-        {{ data.SendTime }}
+        <text>时间：</text> {{ data.SendTime }}
       </view>
       <view class='bb'>
-        <text>收货人：</text>
-        {{ data.TempSendUser }}
+        <text>收货人：</text> {{ data.TempReciveUser }}
       </view>
       <view class='bb'>
-        <text>电话：</text>
-        {{ data.RecivePhone }}
+        <text>电话：</text> {{ data.RecivePhone }}
       </view>
-      <view wx:if="{{current != 1}}" class='info clearfix'>
-         <text>备注：</text>
-        {{ data.Notes || "无" }}
+      <view wx:if="{{current != 10}}" class='info clearfix'>
+        <text>备注：</text> {{ data.Notes || "无" }}
       </view>
     </view>
-    <view wx:if="{{current == 1}}" class='btns'>
+    <view wx:if="{{current == 10}}" class='btns'>
       <!-- <button class='go-map'> -->
       <!-- <image src='../../../../image/icon/go-address.png'></image> 查看当前位置</button> -->
       <button class='no' bindtap='bindDel'>取消订单</button>
@@ -74,7 +68,7 @@
         <image src='../../../../image/icon/go-address.png'></image> 查看当前位置</button>
       <!-- <button class='no'>取消订单</button> -->
     </view>
-    <view wx:if="{{current == 3}}" class='grade-box'>
+    <view wx:if="{{current == 30}}" class='grade-box'>
       <view class='star-view clearfix'>
         <view class='fl'>评分:</view>
         <view class='stars fl clearfix'>
@@ -94,6 +88,13 @@
       <view class='btns'>
         <button class='go-map' bindtap='bindPay'>立即支付</button>
         <button class='no'>完成订单</button>
+      </view>
+    </view>
+    <view wx:if="{{current == 40}}" class='over-order'>
+      <view class='btns'>
+        <form  bindsubmit="submit" report-submit='true'>
+          <button class='no' form-type='submit'>再次下单</button>
+        </form>
       </view>
     </view>
   </view>

@@ -7,7 +7,7 @@ Page({
    */
   data: {
     server: app.globalData.server,
-    current: '1',
+    current: '10',
     data: '',
     dataLen: 1,
     limit: 0,
@@ -28,11 +28,12 @@ Page({
   },
   getData: function() {
     let that = this
-    let limit = that.data.limit + 5;
+    let limit = that.data.limit + 10;
     let State = this.data.current
     wx.request({
       url: this.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit,
       success: function(res) {
+        console.log(res)
         that.setData({
           data: res.data.Results,
           dataLen: res.data.Results.length,
@@ -78,7 +79,22 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-
+    wx.showNavigationBarLoading();
+    let that = this;
+    let limit = that.data.limit;
+    let State = this.data.current
+    wx.request({
+      url: that.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit,
+      success: function (res) {
+        that.setData({
+          data: res.data.Results,
+          limit
+        })
+        wx.hideNavigationBarLoading();
+        // 停止下拉动作
+        wx.stopPullDownRefresh();
+      }
+    })
   },
 
   /**

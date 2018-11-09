@@ -1,0 +1,19 @@
+<!--pages/index/pages/onekey.wxml-->
+<!--pages/index/pages/onekey.wxml-->
+<view class='container'>
+  <view>
+    <view class='make-view'>
+      <textarea></textarea>
+    </view>
+    <view>
+      <view>
+        <image></image>
+      </view>
+    </view>
+    <view class='btn-view'>
+      <form bindsubmit="submit" report-submit='true'>
+        <button form-type="submit" type="default" size="mini">提交</button>
+      </form>
+    </view>
+  </view>
+</view>
