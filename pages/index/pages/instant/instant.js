@@ -36,7 +36,7 @@ Page({
     })
     pages[0].onLoad()
     wx.navigateBack({
-      delta: 1,
+      delta: 2,
     })
   },
   /**

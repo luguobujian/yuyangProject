@@ -3,7 +3,7 @@
 <view class='container'>
   <view>
     <view class='make-view'>
-      <textarea></textarea>
+      <textarea placeholder='清楚描述所运送的货物的吨位、体积、车型需求、目的地、送货时间等信息，我们才能更好地满足你的需求。。。'></textarea>
     </view>
     <view class='img-box clearfix'>
       <view wx:if='{{ imgTempFilePath }}' class='img-box fl'>
@@ -14,7 +14,7 @@
       </view>
     </view>
     <view class='btn-view'>
-      <audio wx:if='{{ mp3TempFilePath }}' poster="{{poster}}" name="{{mp3Name}}" author="{{author}}" src="{{ mp3TempFilePath }}" id="myAudio" controls loop></audio>
+      <audio wx:if='{{ mp3TempFilePath }}' poster="{{poster}}" name="{{mp3Name}}" author="{{author}}" src="{{ mp3TempFilePath }}" id="myAudio" controls ></audio>
       <button class='mp3-btn' bindtouchstart='speechStart' bindtouchend='speechStop'>{{ beginCon }}</button>
       <!-- <button wx:if = '{{ mp3TempFilePath }}' class='mp3-btn' type='primary' bindtap='bindPlay'>播放</button> -->
       <form bindsubmit="submit" report-submit='true'>
