@@ -26,6 +26,48 @@
       </view>
     </view>
     <view class='address-view'>
+      <view class='bb'>
+        <radio-group class="radio-group" bindchange="bindRadioChange">
+          <label class="radio">
+            <radio value="0" />
+            <text>提货</text>
+          </label>
+          <label class="radio">
+            <radio value="1" />
+            <text>送货</text>
+          </label>
+        </radio-group>
+      </view>
+    </view>
+    <view class='address-view'>
+      <view class='bb'>
+        <image src='../../../image/icon/time_btn.png'></image>
+        <view class="address-info picker-view">
+          <picker mode="date" value="{{date}}" start="2015-09-01" end="2099-09-01" bindchange="bindDateChange">
+            <view class="picker">
+              选择{{ role }}日期
+              <view class='user-info-con o1'>
+                {{date}}
+              </view>
+            </view>
+          </picker>
+        </view>
+      </view>
+      <view class='bb'>
+        <image src='../../../image/icon/time.png'></image>
+        <view class="address-info picker-view">
+          <picker mode="time" value="{{timeChs}}" bindchange="bindTimeChange">
+            <view class="picker">
+              选择{{ role }}时间
+              <view class='user-info-con o1'>
+                {{timeChs}}
+              </view>
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class='add-info address-view'>
       <view class='back clearfix bb' data-form="back" bindtap='bindGoGetAddress'>
         <image class='fl' src='../../../image/icon/car.png'></image>
         <view class='fl'>起运地:</view>
@@ -34,6 +76,34 @@
         </view>
         <view class='arrow fl'>›</view>
       </view>
+      <view wx:if="{{ radio == 0 }}" class='bb'>
+        <image src='../../../image/icon/who.png'></image>
+        <view class="address-info">
+          发货人：
+        </view>
+        <input class='user-info-con' value='{{ SendName }}' data-role="send" placeholder='请选择发货人' bindinput='bindCallName'></input>
+        <image class='rimg' src='../../../image/icon/tel_btn.png' bindtap='bindGoGetContact'></image>
+      </view>
+      <view class='bb'>
+        <image src='../../../image/icon/tel.png'></image>
+        <view class="address-info">
+          发货人电话：
+        </view>
+        <input class='user-info-con' type='number' value='{{ SendTel }}' data-role="send" placeholder='请选择发货人电话' bindinput='bindCallTel'></input>
+      </view>
+    </view>
+
+    <view wx:if="{{thinks.length != 0}}" class='think'>
+      <view wx:for="{{thinks}}" data-go='{{item.Addr}}' data-lat='{{ item.Lat }}' data-long='{{ item.Long }}' data-name='{{ item.Name }}' data-tel="{{ item.PhoneNum }}" bindtap='chsthinks'>
+        <text>{{ item.Name }}</text>
+        <text>{{ item.PhoneNum }}</text>
+        <text>{{ item.Addr }}</text>
+      </view>
+    </view>
+
+
+
+    <view class='add-info address-view'>
       <view class='go clearfix bb' data-form="go" bindtap='bindGoGetAddress'>
         <image class='fl' src='../../../image/icon/add.png'></image>
         <view class='fl'>目的地:</view>
@@ -42,42 +112,12 @@
         </view>
         <view class='arrow fl'>›</view>
       </view>
-    </view>
-    <view class='add-info address-view'>
-      <view class='bb'>
-        <image src='../../../image/icon/time_btn.png'></image>
-        <view class="address-info picker-view">
-          <picker mode="date" value="{{date}}" start="2015-09-01" end="2099-09-01" bindchange="bindDateChange">
-            <view class="picker">
-              选择发货日期
-              <view class='user-info-con o1'>
-                {{date}}
-              </view>
-            </view>
-          </picker>
-        </view>
-        <!-- <image class='rimg' src='../../../image/icon/time_btn.png'></image> -->
-      </view>
-      <view class='bb'>
-        <image src='../../../image/icon/time.png'></image>
-        <view class="address-info picker-view">
-          <picker mode="time" value="{{timeChs}}" bindchange="bindTimeChange">
-            <view class="picker">
-              选择发货时间
-              <view class='user-info-con o1'>
-                {{timeChs}}
-              </view>
-            </view>
-          </picker>
-        </view>
-        <!-- <image class='rimg' src='../../../image/icon/time_btn.png'></image> -->
-      </view>
-      <view class='bb'>
+      <view wx:if="{{ radio == 1 }}" class='bb'>
         <image src='../../../image/icon/who.png'></image>
         <view class="address-info">
           收货人：
         </view>
-        <input class='user-info-con' value='{{ callName }}' placeholder='请选择发货人' bindinput='bindCallName'></input>
+        <input class='user-info-con' value='{{ ReciveName }}' data-role="recive" placeholder='请选择收货人' bindinput='bindCallName'></input>
         <image class='rimg' src='../../../image/icon/tel_btn.png' bindtap='bindGoGetContact'></image>
       </view>
       <view class='bb'>
@@ -85,14 +125,14 @@
         <view class="address-info">
           收货人电话：
         </view>
-        <input class='user-info-con' type='number' value='{{ callTel }}' placeholder='请选择发货人电话' bindinput='bindCallTel'></input>
+        <input class='user-info-con' type='number' value='{{ ReciveTel }}' data-role="recive" placeholder='请选择收货人电话' bindinput='bindCallTel'></input>
       </view>
     </view>
     <view class='btn-view'>
       <button class='btn01' bindtap='facility' bindtap='bindOneKey'>一键叫车</button>
       <form bindsubmit="submit" report-submit='true'>
         <button class='btn02' form-type='submit'>确认用车</button>
-      </form>     
+      </form>
     </view>
     <view class='btm-info'>
       不知道怎样操作？试试“一键叫车”吧。
@@ -118,7 +158,7 @@
         <button class='fr codeBtn' bindtap='getCode' disabled='{{disabled}}'>{{codename}}</button>
       </view>
       <view class='btns'>
-        <button open-type="getUserInfo" bindgetuserinfo="bindAddUser">确认</button>
+        <button open-type="getUserInfo" bindgetuserinfo="bindVerOpenId">确认</button>
       </view>
     </view>
   </view>

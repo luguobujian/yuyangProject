@@ -23,6 +23,8 @@ Page({
     console.log(pages)
     pages[0].setData({
       carInfo: "",
+      role: "发货",
+      radio: "",
       back: "请选择发货地址",
       go: "请选择收货地址",
       SendLong: "",
@@ -31,12 +33,14 @@ Page({
       ReciveLat: "",
       date: '',
       timeChs: '',
-      callName: "",
-      callTel: "",
+      ReciveName: "",
+      ReciveTel: "",
+      SendName: "",
+      SendTel: "",
     })
-    pages[0].onLoad()
+    pages[0].onLoad(0)
     wx.navigateBack({
-      delta: 2,
+      delta: 1,
     })
   },
   /**

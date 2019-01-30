@@ -1,7 +1,27 @@
 /* pages/index/pages/onekey.wxss */
-.make-view {
-  border-top: 1rpx solid #fff;
+
+.radio-group {
+  line-height: 90rpx;
 }
+
+.radio text {
+  line-height: 90rpx;
+  vertical-align: -3%;
+}
+
+radio .wx-radio-input, radio .wx-radio-input.wx-radio-input-checked::before {
+  width: 28rpx;
+  height: 28rpx;
+  font-size: 28rpx;
+  /* border-radius: 10rpx; */
+  margin-left: 24rpx;
+  text-indent: -32rpx;
+}
+
+.make-view {
+  border-top: 1rpx solid rgba(0, 0, 0, 0);
+}
+
 .make-view textarea {
   width: 88%;
   padding: 20rpx;

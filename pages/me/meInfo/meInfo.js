@@ -18,6 +18,9 @@ Page({
     Tel2: "",
     Tel3: "",
     Company: "",
+    Addr: "",
+    Lat: "",
+    Long: "",
     Face: app.globalData.userInfo.avatarUrl
   },
 
@@ -33,12 +36,14 @@ Page({
     wx.request({
       url: that.data.server + 'api/User/' + app.globalData.UserID + '?user=',
       success: function(res) {
+        console.log(res)
         that.setData({
           Name: res.data.Name,
           Tel1: res.data.Tel1,
           Tel2: res.data.Tel2,
           Tel3: res.data.Tel3,
           Company: res.data.Company,
+          Addr: res.data.Addr
         })
       }
     })
@@ -76,13 +81,19 @@ Page({
       Company: e.detail.value
     })
   },
+  bindGetAddress: function (e) {
+    wx.navigateTo({
+      url: '../../index/pages/getAddress/getAddress?form=' + e.currentTarget.dataset.form,
+    })
+  },
   bindPullData: function() {
     let that = this
     let ajxTelTrue01 = (/^1[34578]\d{9}$/.test(this.data.Tel1))
     let ajxTelTrue02 = (/^1[34578]\d{9}$/.test(this.data.Tel2))
     let ajxTelTrue03 = (/^1[34578]\d{9}$/.test(this.data.Tel3))
+    let addr = this.data.Addr
     console.log('BasicAuth ' + app.globalData.ticket)
-    if (ajxTelTrue01 && ajxTelTrue02 && ajxTelTrue03) {
+    if (ajxTelTrue01 && ajxTelTrue02 && ajxTelTrue03 && addr) {
       wx.request({
         url: this.data.server + 'api/User/' + app.globalData.UserID,
         header: {
@@ -95,7 +106,10 @@ Page({
           Tel2: this.data.Tel2,
           Tel3: this.data.Tel3,
           Company: this.data.Company,
-          Face: this.data.Face
+          Addr: this.data.Addr,
+          Lat: this.data.Lat,
+          Long: this.data.Long,
+          Face: this.data.Face,
         },
         success: function(res) {
           console.log(res)
@@ -107,7 +121,7 @@ Page({
       })
     } else {
       wx.showToast({
-        title: '手机号有误',
+        title: '请完成填写并确认无误',
         icon: 'none',
         duration: 2000
       })

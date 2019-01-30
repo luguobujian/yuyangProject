@@ -7,10 +7,15 @@ Page({
    */
   data: {
     server: app.globalData.server,
+    search: '',
     current: '10',
     data: '',
     dataLen: 1,
     limit: 0,
+    date1: '',
+    date2: '',
+    time1: '',
+    time2: ''
   },
 
   /**
@@ -42,6 +47,97 @@ Page({
       }
     })
   },
+  bindSearch: function(e) {
+    let that = this
+    let State
+    if (e.detail.value.length) {
+      State = 0
+    } else {
+      State = this.data.current
+    }
+    that.setData({
+      search: e.detail.value
+    })
+    console.log(e)
+    let limit = that.data.limit + 10;
+
+    wx.request({
+      url: this.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit + '&Keywords=' + e.detail.value + '&Time1=&Time2=&APP=1',
+      success: function(res) {
+        console.log(res)
+        // console.log(that.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit + '&Keywords=' + e.detail.value + '&Time1=&Time2=')
+        that.setData({
+          data: res.data.Results,
+          dataLen: res.data.Results.length,
+          limit
+        })
+      }
+    })
+  },
+  bindClear: function() {
+    this.setData({
+      search: '',
+      current: '10',
+      data: '',
+      limit: 0,
+      date1: '',
+      date2: '',
+      time1: '',
+      time2: ''
+    })
+  },
+  bindDate1Change(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      date1: e.detail.value
+    })
+    this.getDateData()
+  },
+  bindDate2Change(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      date2: e.detail.value
+    })
+    this.getDateData()
+  },
+  bindTime1Change(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      time1: e.detail.value
+    })
+    this.getDateData()
+  },
+  bindTime2Change(e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      time2: e.detail.value
+    })
+    this.getDateData()
+  },
+  getDateData() {
+    let that = this
+    let limit = that.data.limit + 10;
+    let State = that.data.current
+    if (!(that.data.date1 && that.data.date2 && that.data.time1 && that.data.time2)) {
+      return
+    }
+    let Time1 = that.data.date1 + " " + that.data.time1 + ':00'
+    let Time2 = that.data.date2 + " " + that.data.time2 + ':00'
+    wx.request({
+      url: that.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=0&DriverID=0&pageIndex=0&pageSize=' + limit + '&Keywords=&Time1=' + Time1 + '&Time2=' + Time2 + '&APP=1',
+      success: function(res) {
+        console.log(res)
+        that.setData({
+          data: res.data.Results,
+          dataLen: res.data.Results.length,
+          search: '时间筛选',
+          limit
+        })
+      }
+    })
+  },
+
+
   bindGoOrderInfo: function(e) {
     wx.navigateTo({
       url: '../../order/pages/orderInfo/orderInfo?id=' + e.currentTarget.dataset.id + '&current=' + e.currentTarget.dataset.current,
@@ -85,7 +181,7 @@ Page({
     let State = this.data.current
     wx.request({
       url: that.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit,
-      success: function (res) {
+      success: function(res) {
         that.setData({
           data: res.data.Results,
           limit

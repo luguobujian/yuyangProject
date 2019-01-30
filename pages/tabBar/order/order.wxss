@@ -1,8 +1,52 @@
 /* pages/tabBar/order/order.wxss */
 
+.view-inp {
+  width: 74%;
+  height: 60rpx;
+  padding: 0 10rpx;
+  margin: 20rpx;
+  border: 1rpx solid #dedede;
+  border-radius: 10rpx;
+}
+
+.btn {
+  width: 16%;
+  height: 60rpx;
+  font-size: 28rpx;
+  line-height: 60rpx;
+  padding: 0 4rpx;
+  margin: 20rpx 10rpx 20rpx 0;
+}
+
+.picker-box {
+  margin: 20rpx 20rpx 0;
+}
+
+.picker-tit {
+  font-size: 30rpx;
+  font-weight: bold;
+  color: #f90;
+}
+
+.picker-item {
+  display: flex;
+}
+
+.flex1 {
+  flex: 1;
+}
+
+.flex2 {
+  flex: 2;
+}
+
+.flex3 {
+  flex: 3;
+}
+
 .tab-h-view {
   width: 100%;
-  height: 92rpx;
+  /* height: 276rpx; */
   background-color: #fff;
   border-bottom: 1rpx solid #dedede;
   position: fixed;
@@ -25,9 +69,15 @@
   color: #f90;
   border-bottom: 4rpx solid #f90;
 }
+
 .main-item-view {
-  padding-top: 92rpx;
+  padding-top: 290rpx;
 }
+
+.main-item-view-s {
+  padding-top: 196rpx;
+}
+
 .item {
   padding: 0 50rpx;
   background-color: #fff;

@@ -19,6 +19,10 @@
           <view class='fl'>电话</view>
           <input class='' maxlength="11" type="number" bindinput='bindTelValue'></input>
         </view>
+        <view class='clearfix' bindtap='bindGetAddress'>
+          <view class='fl'>地址</view>
+          <input class='' value='{{ Addr }}' disabled='true'></input>
+        </view>
         <view class='btns'>
           <button bindtap='bindIsShow'>返回</button>
           <button bindtap='bindThisMan'>确认</button>

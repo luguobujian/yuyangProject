@@ -45,3 +45,7 @@ page, .container {
 .mb-8 {
   margin-bottom: 8rpx;
 }
+
+.hide {
+  display: none;
+}

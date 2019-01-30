@@ -7,5 +7,18 @@
         <button bindtap='bindPullIdea'>提交</button>
       </view>
     </view>
+    <view class='guest-view'>
+      <view class='guest-view-tit'>历史意见：</view>
+      <view class='guest-items' wx:for='{{ data }}'>
+        <view class='guest-items-t'>
+          <view>{{ item.Notes }}</view>
+          <text>{{ item.AddTime || '' }}</text>
+        </view>
+        <view  class='guest-items-b'>
+          <view>回复：{{ item.Reply || '暂无'}}</view>
+          <text>{{ item.ReplyTime || ''}}</text>
+        </view>
+      </view>
+    </view>
   </view>
 </view>

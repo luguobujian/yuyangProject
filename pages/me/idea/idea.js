@@ -7,14 +7,15 @@ Page({
    */
   data: {
     server: app.globalData.server,
-    idea: ""
+    idea: "",
+    data: ""
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    this.getGuest()
   },
 
   bindGetValue: function(e) {
@@ -54,6 +55,27 @@ Page({
       })
     }
   },
+
+  getGuest: function() {
+    let that = this
+    wx.request({
+      url: this.data.server + 'api/Guest?Title=&Notes=&pageIndex={pageIndex}&pageSize={pageSize}',
+      method: 'get',
+      success: function(res) {
+        console.log(res)
+        console.log(that.convertHtmlToText("<p>收到</p>"))
+        for (var i = 0; i < res.data.Results.length; i++ ){
+          if (res.data.Results[i].Reply) {
+            res.data.Results[i].Reply = (that.convertHtmlToText(res.data.Results[i].Reply))
+          }
+        }
+        that.setData({
+          data: res.data.Results
+        })
+      }
+    })
+  },
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -101,5 +123,41 @@ Page({
    */
   onShareAppMessage: function() {
 
+  },
+  convertHtmlToText: function (inputText) {
+    var returnText = "" + inputText;
+    returnText = returnText.replace(/<\/div>/ig, '\r\n');
+    returnText = returnText.replace(/<\/li>/ig, '\r\n');
+    returnText = returnText.replace(/<li>/ig, '  *  ');
+    returnText = returnText.replace(/<\/ul>/ig, '\r\n');
+    //-- remove BR tags and replace them with line break
+    returnText = returnText.replace(/<br\s*[\/]?>/gi, "\r\n");
+
+    //-- remove P and A tags but preserve what's inside of them
+    returnText = returnText.replace(/<p.*?>/gi, "\r\n");
+    returnText = returnText.replace(/<a.*href="(.*?)".*>(.*?)<\/a>/gi, " $2 ($1)");
+
+    //-- remove all inside SCRIPT and STYLE tags
+    returnText = returnText.replace(/<script.*>[\w\W]{1,}(.*?)[\w\W]{1,}<\/script>/gi, "");
+    returnText = returnText.replace(/<style.*>[\w\W]{1,}(.*?)[\w\W]{1,}<\/style>/gi, "");
+    //-- remove all else
+    returnText = returnText.replace(/<(?:.|\s)*?>/g, "");
+
+    //-- get rid of more than 2 multiple line breaks:
+    returnText = returnText.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/gim, "\r\n\r\n");
+
+    //-- get rid of more than 2 spaces:
+    returnText = returnText.replace(/ +(?= )/g, '');
+
+    //-- get rid of html-encoded characters:
+    returnText = returnText.replace(/ /gi, " ");
+    returnText = returnText.replace(/&/gi, "&");
+    returnText = returnText.replace(/"/gi, '"');
+    returnText = returnText.replace(/</gi, '<');
+    returnText = returnText.replace(/>/gi, '>');
+
+    return returnText;
   }
 })
+
+

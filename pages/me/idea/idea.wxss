@@ -25,3 +25,41 @@ button {
   font-size: 30rpx;
   background-color: #6c3;
 }
+
+.guest-view {
+  margin: 36rpx;
+}
+
+.guest-view-tit {
+  margin-left: 22rpx;
+}
+
+.guest-items {
+  background-color: #fff;
+  border-radius: 11rpx;
+  padding: 22rpx;
+  margin: 22rpx 0;
+}
+
+.guest-items-t view{
+  color: #333;
+  font-size: 26rpx;
+}
+.guest-items-t text{
+  color: #999;
+  font-size: 22rpx;
+}
+
+.guest-items-b {
+  margin-top: 26rpx;
+}
+
+.guest-items-b view {
+  color: #999;
+  font-size: 26rpx;
+}
+
+.guest-items-b text{
+  color: #999;
+  font-size: 22rpx;
+}

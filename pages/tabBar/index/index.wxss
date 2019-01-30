@@ -33,9 +33,11 @@
   color: #f90;
   border-bottom: 4rpx solid #f90;
 }
+
 .null {
   padding-top: 92rpx;
 }
+
 .car-info-view {
   border-top: 1rpx solid #fff;
   background-color: #fff;
@@ -96,16 +98,20 @@
   font-size: 28rpx;
   line-height: 85rpx;
 }
+
 .address-info {
   /* text-indent: 20rpx; */
 }
+
 .bb > view.tt {
   width: 120rpx;
   text-indent: 20rpx;
 }
+
 .picker-view {
   width: 70%;
 }
+
 .address-view view view.address-view {
   width: 66%;
   line-height: 86rpx;
@@ -127,8 +133,7 @@
 }
 
 .add-info .user-info-con {
-  /* color: #343434; */
-  /* margin-left: 50rpx; */
+  /* color: #343434; *//* margin-left: 50rpx; */
   display: inline-block;
   vertical-align: middle;
 }
@@ -136,6 +141,31 @@
 .add-info .user-info-con.o1 {
   margin-left: 0rpx;
   padding: 0rpx 56rpx;
+}
+
+.radio-group {
+  line-height: 90rpx;
+}
+
+.radio text {
+  font-weight: 900;
+  line-height: 90rpx;
+  vertical-align: -3%;
+  /* margin-left: 8rpx; */
+}
+
+/* radio {
+  display: block;
+} */
+
+radio .wx-radio-input, radio .wx-radio-input.wx-radio-input-checked::before {
+  width: 28rpx;
+  height: 28rpx;
+  font-size: 28rpx;
+  margin-left: 24rpx;
+  text-indent: -32rpx;
+  border-width: 4rpx;
+  border-color: #6c3;
 }
 
 .btn-view {
@@ -241,4 +271,36 @@
   height: 80rpx;
   margin-top: 10rpx;
   border-top: 1rpx solid #f8f8f8;
+}
+
+.think {
+  padding: 0 20rpx;
+  background-color: #fff;
+  margin-bottom: 20rpx;
+}
+
+.think view {
+  display: flex;
+}
+
+.think view text {
+  text-align: center;
+  line-height: 80rpx;
+  
+}
+
+.think view text:nth-child(1) {
+  flex: 1;
+  color: skyblue;
+}
+
+.think view text:nth-child(2) {
+  flex: 2;
+}
+
+.think view text:nth-child(3) {
+  flex: 3;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }

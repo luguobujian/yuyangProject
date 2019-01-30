@@ -20,6 +20,10 @@
     <view class='fl'>公司:</view>
     <input class='fr' value='{{ Company }}' placeholder='请输入公司' bindinput='bindGetCompany'></input>
   </view>
+  <view class='company clearfix bb'  data-form="meInfo" bindtap='bindGetAddress'>
+    <view class='fl'>地址:</view>
+    <input class='fr' value='{{ Addr }}'  placeholder='请选择地址' disabled="true"></input>
+  </view>
   <view class='avatar clearfix bb'>
     <view class='fl'>头像:</view>
     <image class='fr' src='{{ Face }}'></image>

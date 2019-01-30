@@ -135,7 +135,7 @@ Page({
   },
   bindAddress: function(e) {
     let pages = getCurrentPages();
-    // console.log(e)
+    console.log(e)
     let prevPage = pages[pages.length - 2]
     // console.log(this.data.form)
     if (this.data.form == "back") {
@@ -166,6 +166,13 @@ Page({
       //     duration: 1000
       //   })
       // }
+    } else  {
+
+      prevPage.setData({
+        Addr: e.currentTarget.dataset.address,
+        Long: e.currentTarget.dataset.lng,
+        Lat: e.currentTarget.dataset.lat,
+      })
     }
     // console.log(prevPage)
     wx.navigateBack({

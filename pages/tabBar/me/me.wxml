@@ -61,5 +61,8 @@
         <view class='fl arrow'>›</view>
       </view>
     </view>
+    <!-- <view class='signout'>
+      <view class='signout-btn' bindtap='bindsignout'>退出</view>
+    </view> -->
   </view>
 </view>

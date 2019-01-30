@@ -65,6 +65,21 @@ input {
   padding-left: 96rpx;
 }
 
+.inp-view > view:nth-child(3) {
+  padding-top: 34rpx;
+  padding-left: 96rpx;
+  
+}
+
+.inp-view > view:nth-child(3) input {
+  width: 430rpx;
+  padding-left: 0rpx;
+  /* border: none; */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
 .btns {
   width: 572rpx;
   padding: 40rpx 50rpx;

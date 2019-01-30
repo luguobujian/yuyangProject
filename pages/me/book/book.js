@@ -12,6 +12,9 @@ Page({
     name: "",
     ajxNameTrue: "",
     tel: "",
+    Addr: "",
+    Lat: "",
+    Long: "",
     ajxTelTrue: ""
   },
 
@@ -79,6 +82,11 @@ Page({
       })
     }
   },
+  bindGetAddress: function(e) {
+    wx.navigateTo({
+      url: '../../index/pages/getAddress/getAddress?form=' + e.currentTarget.dataset.form,
+    })
+  },
   bindThisMan: function() {
     let that = this
     if (!this.data.ajxNameTrue) {
@@ -93,6 +101,12 @@ Page({
         icon: 'none',
         duration: 2000
       })
+    } else if (!this.data.Addr) {
+      wx.showToast({
+        title: '提示 : 地址有误',
+        icon: 'none',
+        duration: 2000
+      })
     } else {
       wx.request({
         url: this.data.server + 'api/Contacts',
@@ -100,7 +114,10 @@ Page({
         data: {
           Name: this.data.name,
           PhoneNum: this.data.tel,
-          AddUser: App.globalData.UserID
+          AddUser: App.globalData.UserID,
+          Addr: this.data.Addr,
+          Long: this.data.Long,
+          Lat: this.data.Lat
         },
         success: function(res) {
           console.log(res)

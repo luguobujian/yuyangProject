@@ -1,13 +1,39 @@
 <!--pages/tabBar/order/order.wxml-->
 <view class='container'>
   <view class="tab-h-view">
-    <view class="tab-item {{current == 10? 'active': ''}}" data-index="10" bindtap='navSwitch'>待配送</view>
-    <view class="tab-item {{current == 20? 'active': ''}}" data-index="20" bindtap='navSwitch'>进行中</view>
-    <view class="tab-item {{current == 21? 'active': ''}}" data-index="21" bindtap='navSwitch'>待付款</view>
-    <view class="tab-item {{current == 30? 'active': ''}}" data-index="30" bindtap='navSwitch'>待评价</view>
-    <view class="tab-item {{current == 40? 'active': ''}}" data-index="40" bindtap='navSwitch'>已完成</view>
+    <view class='clearfix'>
+      <input class='fl view-inp' confirm-type="search" placeholder='输入关键词' bindinput='bindSearch'></input>
+      <button class='fr btn' type='primary' bindtap='bindClear'>清除</button>
+    </view>
+    <view class='picker-box'>
+      <view class='picker-item clearfix'>
+        <view class="fl flex1 section__title picker-tit">筛选</view>
+        <picker class='fl flex3' mode="date" value="{{date1}}" start="" end="" bindchange="bindDate1Change">
+          <view class="picker"> 开始日期: {{date1}} </view>
+        </picker>
+        <picker class='fl flex3' mode="time" value="{{time1}}" start="" end="" bindchange="bindTime1Change">
+          <view class="picker"> 时间: {{time1}} </view>
+        </picker>
+      </view>
+      <view class='picker-item clearfix'>
+        <view class="fl flex1 section__title"></view>
+        <picker class='fl  flex3' mode="date" value="{{date2}}" start="" end="" bindchange="bindDate2Change">
+          <view class="picker"> 结束日期: {{date2}} </view>
+        </picker>
+        <picker class='fl flex3' mode="time" value="{{time2}}" start="" end="" bindchange="bindTime2Change">
+          <view class="picker"> 时间: {{time2}} </view>
+        </picker>
+      </view>
+    </view>
+    <view class="{{ search.length? 'hide': '' }}">
+      <view class="tab-item {{current == 10? 'active': ''}}" data-index="10" bindtap='navSwitch'>待配送</view>
+      <view class="tab-item {{current == 20? 'active': ''}}" data-index="20" bindtap='navSwitch'>进行中</view>
+      <view class="tab-item {{current == 21? 'active': ''}}" data-index="21" bindtap='navSwitch'>待付款</view>
+      <view class="tab-item {{current == 30? 'active': ''}}" data-index="30" bindtap='navSwitch'>待评价</view>
+      <view class="tab-item {{current == 40? 'active': ''}}" data-index="40" bindtap='navSwitch'>已完成</view>
+    </view>
   </view>
-  <view class='main-item-view'>
+  <view class="{{ search.length? 'main-item-view-s': 'main-item-view' }}">
     <view wx:if='{{ dataLen != 0 }}' wx:for="{{ data }}" wx:key="{{ item.ID }}" class='item bb' data-current='{{ current }}' data-id='{{ item.ID }}' bindtap='bindGoOrderInfo'>
       <view class='car-menoy-view clearfix'>
         <view class='fl'>{{ item.Name }}</view>
