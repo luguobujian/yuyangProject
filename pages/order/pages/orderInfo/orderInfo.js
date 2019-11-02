@@ -10,6 +10,7 @@ Page({
     star: 0,
     someSysInfo: '',
     data: "",
+    imgs: [],
     orderId: "",
     current: 1,
     driverData: "",
@@ -36,13 +37,22 @@ Page({
       url: that.data.server + 'api/Order/' + this.data.orderId,
       success: function(res) {
         console.log(res)
-        that.setData({
-          data: res.data,
-          current: res.State
-        })
+        if (res.data.Stars) {
+          for (var i = 0; i < res.data.Stars.length; i++) {
+            if (res.data.Stars[i].ReplyContents) {
+              res.data.Stars[i].ReplyContents = (that.convertHtmlToText(res.data.Stars[i].ReplyContents))
+            }
+          }
+          that.setData({
+            data: res.data,
+            imgs: res.data.Images && JSON.parse(res.data.Images),
+            current: res.State
+          })
+        }
+
         if (res.data.DriverID) {
           that.getDriverID(res.data.DriverID)
-        }  
+        }
       }
     })
   },
@@ -55,7 +65,7 @@ Page({
         that.setData({
           driverData: res.data
         })
-        that.getStarData()
+        // that.getStarData()
       }
     })
   },
@@ -88,6 +98,14 @@ Page({
       phoneNumber: e.currentTarget.dataset.tel,
     })
   },
+  bindOpenImage: function(e) {
+    console.log(e)
+    let urls = []
+    urls.push(this.data.server + e.currentTarget.dataset.image)
+    wx.previewImage({
+      urls: urls
+    })
+  },
   bindDel: function() {
     let that = this
     wx.showModal({
@@ -114,7 +132,7 @@ Page({
         }
       }
     })
-    
+
     // console.log(app.globalData.ticket)
     // wx.request({
     //   url: this.data.server + 'api/Order/' + this.data.orderId + '?UserID=' + app.globalData.UserID,
@@ -212,29 +230,63 @@ Page({
       }
     })
   },
-  submit: function (e) {
+  submit: function(e) {
     let str = 'data.form_id'
     console.log(e)
     this.setData({
-      [str] : e.detail.formId
+      [str]: e.detail.formId
     })
     console.log(this.data.data)
     wx.request({
       url: this.data.server + 'api/Order',
       method: 'post',
       data: this.data,
-      success: function (res) {
+      success: function(res) {
         console.log(res)
         if (res.data.status) {
           wx.redirectTo({
             url: '../../../index/pages/instant/instant?page=sure',
-            success: function (res) { },
-            fail: function (res) { },
-            complete: function (res) { },
+            success: function(res) {},
+            fail: function(res) {},
+            complete: function(res) {},
           })
         }
       }
     })
+  },
+  convertHtmlToText: function(inputText) {
+    var returnText = "" + inputText;
+    returnText = returnText.replace(/<\/div>/ig, '\r\n');
+    returnText = returnText.replace(/<\/li>/ig, '\r\n');
+    returnText = returnText.replace(/<li>/ig, '  *  ');
+    returnText = returnText.replace(/<\/ul>/ig, '\r\n');
+    //-- remove BR tags and replace them with line break
+    returnText = returnText.replace(/<br\s*[\/]?>/gi, "\r\n");
+
+    //-- remove P and A tags but preserve what's inside of them
+    returnText = returnText.replace(/<p.*?>/gi, "\r\n");
+    returnText = returnText.replace(/<a.*href="(.*?)".*>(.*?)<\/a>/gi, " $2 ($1)");
+
+    //-- remove all inside SCRIPT and STYLE tags
+    returnText = returnText.replace(/<script.*>[\w\W]{1,}(.*?)[\w\W]{1,}<\/script>/gi, "");
+    returnText = returnText.replace(/<style.*>[\w\W]{1,}(.*?)[\w\W]{1,}<\/style>/gi, "");
+    //-- remove all else
+    returnText = returnText.replace(/<(?:.|\s)*?>/g, "");
+
+    //-- get rid of more than 2 multiple line breaks:
+    returnText = returnText.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/gim, "\r\n\r\n");
+
+    //-- get rid of more than 2 spaces:
+    returnText = returnText.replace(/ +(?= )/g, '');
+
+    //-- get rid of html-encoded characters:
+    returnText = returnText.replace(/ /gi, " ");
+    returnText = returnText.replace(/&/gi, "&");
+    returnText = returnText.replace(/"/gi, '"');
+    returnText = returnText.replace(/</gi, '<');
+    returnText = returnText.replace(/>/gi, '>');
+    returnText = returnText.replace(/&nbsp;/ig, '');
+    return returnText;
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

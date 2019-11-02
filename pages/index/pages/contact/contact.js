@@ -14,6 +14,7 @@ Page({
     tel: "",
     ajxTelTrue: "",
     dataLen: 1,
+    form: ''
   },
 
   /**
@@ -21,6 +22,9 @@ Page({
    */
   onLoad: function(options) {
     let that = this
+    that.setData({
+      form: options.form
+    })
     wx.request({
       url: that.data.server + 'api/Contacts?&AddUser=' + App.globalData.UserID + '&Name=&PhoneNum=&pageIndex=0&pageSize=9999',
       success: function(res) {
@@ -36,11 +40,26 @@ Page({
     console.log(e)
     let pages = getCurrentPages()
     let prevPages = pages[pages.length - 2]
-    prevPages.setData({
-      callId: e.currentTarget.dataset.id,
-      callName: e.currentTarget.dataset.name,
-      callTel: e.currentTarget.dataset.tel
-    })
+    console.log(prevPages)
+    if (this.data.form == "back") {
+      prevPages.setData({
+        // callId: e.currentTarget.dataset.id,
+        back: e.currentTarget.dataset.val.Addr,
+        SendLong: e.currentTarget.dataset.val.Long,
+        SendLat: e.currentTarget.dataset.val.Lat,
+        SendName: e.currentTarget.dataset.val.Name,
+        SendTel: e.currentTarget.dataset.val.PhoneNum
+      })
+    } else if (this.data.form == "go") {
+      prevPages.setData({
+        // callId: e.currentTarget.dataset.id,
+        go: e.currentTarget.dataset.val.Addr,
+        ReciveLong: e.currentTarget.dataset.val.Long,
+        ReciveLat: e.currentTarget.dataset.val.Lat,
+        ReciveName: e.currentTarget.dataset.val.Name,
+        ReciveTel: e.currentTarget.dataset.val.PhoneNum
+      })
+    }
     wx.navigateBack({
       delta: 1,
     })

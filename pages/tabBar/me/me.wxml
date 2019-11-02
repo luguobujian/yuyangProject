@@ -6,13 +6,13 @@
         <view wx:if="{{ userInfo.Type }}" class='small-logo fr'>定价</view>
       </view>
       <view class='avatar-name-something-view clearfix' data-item='meInfo' bindtap='bindGoItem'>
-        <image class='fl' src='{{ userInfo.Face || wxUserInfo.userInfo.avatarUrl }}'></image>
+        <image class='fl' src='{{ wxUserInfo.avatarUrl }}'></image>
         <view class='fl'>
           <view class='clearfix'>
-            <view class='fl name'>{{ userInfo.Name || '未登录' }}</view>
+            <view class='fl name'>{{ userInfo.Name || '点击登录' }}</view>
             <view wx:if="{{ userInfo.Company }}" class='fl job'>{{ userInfo.Company }}</view>
           </view>
-          <view class='tel'>{{ userInfo.PhoneNum }}</view>
+          <view wx:if="{{userInfo.PhoneNum}}" class='tel'>{{ userInfo.PhoneNum }}</view>
         </view>
         <view class='arrow'>›</view>
       </view>
@@ -64,5 +64,29 @@
     <!-- <view class='signout'>
       <view class='signout-btn' bindtap='bindsignout'>退出</view>
     </view> -->
+  </view>
+  <view class='modal' wx:if="{{ !logModalShow }}">
+    <view>
+      <view class='info bb'>检测到您未登录，是否登陆？</view>
+      <view class='btns'>
+        <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
+      </view>
+    </view>
+  </view>
+
+  <view class='modal telModal' wx:if="{{ !telModalShow }}">
+    <view>
+      <view class='info bb'>应用：需要获取你的手机号</view>
+      <view>
+        <input class='tel' placeholder='请输入手机号' bindinput='bindTelValue'></input>
+      </view>
+      <view class='sms-view clearfix'>
+        <input class='smsCode fl' placeholder='请输入验证码' bindinput='bindCodeValue'></input>
+        <button class='fr codeBtn' bindtap='getCode' disabled='{{disabled}}'>{{codename}}</button>
+      </view>
+      <view class='btns'>
+        <button open-type="getUserInfo" bindgetuserinfo="bindVerOpenId">确认</button>
+      </view>
+    </view>
   </view>
 </view>

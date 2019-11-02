@@ -11,7 +11,7 @@ Page({
     current: '10',
     data: '',
     dataLen: 1,
-    limit: 0,
+    limit: 99999,
     date1: '',
     date2: '',
     time1: '',
@@ -33,15 +33,17 @@ Page({
   },
   getData: function() {
     let that = this
-    let limit = that.data.limit + 10;
+    let limit = that.data.limit;
     let State = this.data.current
+    // console.log(this.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit)
+    console.log(app.globalData)
     wx.request({
-      url: this.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit,
+      url: this.data.server + 'api/Order?AddUser=' + app.globalData.SomeUserInfo.ID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit + '&APP=1',
       success: function(res) {
         console.log(res)
         that.setData({
-          data: res.data.Results,
-          dataLen: res.data.Results.length,
+          data: res.data.Results || [],
+          dataLen: (res.data.Results && res.data.Results.length) || 0,
           limit
         })
       }

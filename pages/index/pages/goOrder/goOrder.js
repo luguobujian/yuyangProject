@@ -67,7 +67,7 @@ Page({
     })
   },
   sure: function(e) {
-    let str = 'orderData.Notes'
+    let str = 'orderData.UserContents'
     this.setData({
       [str]: this.data.Notes
     })

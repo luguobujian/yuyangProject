@@ -44,7 +44,7 @@
         <text>目的地：</text> {{ data.SendAddr }}
       </view>
     </view>
-    <view class='some-address'>
+    <view class='some-address  mb-8'>
       <view class='bb'>
         <text>时间：</text> {{ data.SendTime }}
       </view>
@@ -54,21 +54,43 @@
       <view class='bb'>
         <text>电话：</text> {{ data.RecivePhone }}
       </view>
-      <view wx:if="{{current != 10}}" class='info clearfix'>
+      <!-- <view class='info bb clearfix'>
         <text>备注：</text> {{ data.Notes || "无" }}
+      </view> -->
+    </view>
+
+    <view wx:if="{{data.WaitTimesList.WaitTimes.length !=0}}" class='some-address'>
+      <view wx:for="{{ data.WaitTimesList.WaitTimes }}" class='bb'>
+        <text>时长：</text> {{ item.WaitTime }}
+        <text>时间：</text> {{ item.AddTime }}
       </view>
+    </view>
+
+    <view class='add-img-n bb' wx:if="{{data.Pic}}" data-image='{{ server }}{{data.Pic}}' bindtap='bindOpenImage'>
+      <view>下单图片：</view>
+      <image src='{{ server }}{{ data.Pic }}'></image>
+    </view>
+    <view class='add-img-n bb' wx:if="{{imgs.length > 0}}" wx:for="{{ imgs}}" data-image='{{item}}' bindtap='bindOpenImage'>
+      <view>回单图片：</view>
+      <image src='{{ server }}{{item}}'></image>
+    </view>
+    <view class='add-img-n' wx:for="{{data.Stars}}">
+      <view>评价：</view>
+      <view class='bb'>{{item.Notes}}</view>
+      <view>回复：</view>
+      <view class='bb'>{{item.ReplyContents}}</view>
     </view>
     <view wx:if="{{current == 10}}" class='btns'>
       <!-- <button class='go-map'> -->
       <!-- <image src='../../../../image/icon/go-address.png'></image> 查看当前位置</button> -->
       <button class='no' bindtap='bindDel'>取消订单</button>
     </view>
-    <view wx:if="{{current == 21}}" class='btns'>
+    <view wx:if="{{current == 21 && data.ShowGps}}" class='btns'>
       <button class='go-map' bindtap='bindGoMap'>
         <image src='../../../../image/icon/go-address.png'></image> 查看当前位置</button>
       <!-- <button class='no'>取消订单</button> -->
     </view>
-    <view wx:if="{{current == 30}}" class='grade-box'>
+    <view wx:if="{{current == 3040}}" class='grade-box'>
       <view class='star-view clearfix'>
         <view class='fl'>评分:</view>
         <view class='stars fl clearfix'>
@@ -84,15 +106,15 @@
       </view>
       <button class='grade' bindtap="bindGiveStar">评价</button>
     </view>
-    <view wx:if="{{current == 21}}" class='over-order'>
+    <view wx:if="{{current == 20212223}}" class='over-order'>
       <view class='btns'>
         <button class='go-map' bindtap='bindPay'>立即支付</button>
-        <button class='no'>完成订单</button>
+        <!-- <button class='no'>完成订单</button> -->
       </view>
     </view>
-    <view wx:if="{{current == 40}}" class='over-order'>
+    <view wx:if="{{current == 3040}}" class='over-order'>
       <view class='btns'>
-        <form  bindsubmit="submit" report-submit='true'>
+        <form bindsubmit="submit" report-submit='true'>
           <button class='no' form-type='submit'>再次下单</button>
         </form>
       </view>

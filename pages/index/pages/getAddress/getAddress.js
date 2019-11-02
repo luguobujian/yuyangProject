@@ -137,7 +137,7 @@ Page({
     let pages = getCurrentPages();
     console.log(e)
     let prevPage = pages[pages.length - 2]
-    // console.log(this.data.form)
+    // console.log(prevPage)
     if (this.data.form == "back") {
       // if (prevPage.data.go != prevPage.data.back) {
       prevPage.setData({

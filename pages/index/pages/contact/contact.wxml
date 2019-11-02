@@ -1,7 +1,7 @@
 <!--pages/index/pages/Contact/contact.wxml-->
 <view class='container'>
   <view>
-    <view wx:if='{{ dataLen != 0 }}' wx:for="{{ data }}" class='contact-item bb' wx:key="{{ item.ID }}" data-id='{{ item.ID }}' data-name='{{ item.Name }}' data-tel='{{ item.PhoneNum }}' bindtap='bindChsWho'>
+    <view wx:if='{{ dataLen != 0 }}' wx:for="{{ data }}" class='contact-item bb' wx:key="{{ item.ID }}" data-val="{{item}}" data-id='{{ item.ID }}' data-name='{{ item.Name }}' data-tel='{{ item.PhoneNum }}' bindtap='bindChsWho'>
       <view class='contact-name'>{{ item.Name }}</view>
       <view class='contact-tel'>{{ item.PhoneNum }}</view>
     </view>

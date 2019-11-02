@@ -1,5 +1,6 @@
 <!--pages/tabBar/index/index.wxml-->
 <view class='container'>
+
   <view>
     <view class='tab-h-view'>
       <scroll-view scroll-x="true" class="tab-h" scroll-left="{{scrollLeft}}">
@@ -82,7 +83,7 @@
           发货人：
         </view>
         <input class='user-info-con' value='{{ SendName }}' data-role="send" placeholder='请选择发货人' bindinput='bindCallName'></input>
-        <image class='rimg' src='../../../image/icon/tel_btn.png' bindtap='bindGoGetContact'></image>
+        <image class='rimg' src='../../../image/icon/tel_btn.png' data-form="back" bindtap='bindGoGetContact'></image>
       </view>
       <view class='bb'>
         <image src='../../../image/icon/tel.png'></image>
@@ -95,9 +96,9 @@
 
     <view wx:if="{{thinks.length != 0}}" class='think'>
       <view wx:for="{{thinks}}" data-go='{{item.Addr}}' data-lat='{{ item.Lat }}' data-long='{{ item.Long }}' data-name='{{ item.Name }}' data-tel="{{ item.PhoneNum }}" bindtap='chsthinks'>
-        <text>{{ item.Name }}</text>
-        <text>{{ item.PhoneNum }}</text>
-        <text>{{ item.Addr }}</text>
+        <text>{{ item.Name || '' }}</text>
+        <text>{{ item.PhoneNum || ''}}</text>
+        <text>{{ item.Addr || '' }}</text>
       </view>
     </view>
 
@@ -118,7 +119,7 @@
           收货人：
         </view>
         <input class='user-info-con' value='{{ ReciveName }}' data-role="recive" placeholder='请选择收货人' bindinput='bindCallName'></input>
-        <image class='rimg' src='../../../image/icon/tel_btn.png' bindtap='bindGoGetContact'></image>
+        <image class='rimg' src='../../../image/icon/tel_btn.png' data-form="go" bindtap='bindGoGetContact'></image>
       </view>
       <view class='bb'>
         <image src='../../../image/icon/tel.png'></image>
@@ -138,15 +139,18 @@
       不知道怎样操作？试试“一键叫车”吧。
     </view>
   </view>
-  <view class='modal' wx:if="{{ !logModalShow }}">
+
+
+  <!-- <view class='modal' wx:if="{{ !logModalShow }}">
     <view>
       <view class='info bb'>检测到您未登录，是否登陆？</view>
       <view class='btns'>
-        <!-- <button>取消</button> -->
         <button open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo">登录</button>
       </view>
     </view>
   </view>
+
+
   <view class='modal telModal' wx:if="{{ !telModalShow }}">
     <view>
       <view class='info bb'>应用：需要获取你的手机号</view>
@@ -161,5 +165,5 @@
         <button open-type="getUserInfo" bindgetuserinfo="bindVerOpenId">确认</button>
       </view>
     </view>
-  </view>
+  </view> -->
 </view>

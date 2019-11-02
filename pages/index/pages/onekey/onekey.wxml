@@ -26,7 +26,9 @@
       <view wx:if='{{ !imgTempFilePath }}' class='add-img fl' bindtap='bindChooseImg'>
         +
       </view>
+
     </view>
+    <view class='img-tit'>拍照或上传图片</view>
     <view class='btn-view'>
       <audio wx:if='{{ mp3TempFilePath }}' poster="{{poster}}" name="{{mp3Name}}" author="{{author}}" src="{{ mp3TempFilePath }}" id="myAudio" controls></audio>
       <button class='mp3-btn' bindtouchstart='speechStart' bindtouchend='speechStop'>{{ beginCon }}</button>

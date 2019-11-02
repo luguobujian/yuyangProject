@@ -28,9 +28,8 @@
     <view class="{{ search.length? 'hide': '' }}">
       <view class="tab-item {{current == 10? 'active': ''}}" data-index="10" bindtap='navSwitch'>待配送</view>
       <view class="tab-item {{current == 20? 'active': ''}}" data-index="20" bindtap='navSwitch'>进行中</view>
-      <view class="tab-item {{current == 21? 'active': ''}}" data-index="21" bindtap='navSwitch'>待付款</view>
-      <view class="tab-item {{current == 30? 'active': ''}}" data-index="30" bindtap='navSwitch'>待评价</view>
-      <view class="tab-item {{current == 40? 'active': ''}}" data-index="40" bindtap='navSwitch'>已完成</view>
+      <view class="tab-item {{current == 20212223? 'active': ''}}" data-index="20212223" bindtap='navSwitch'>待付款</view>
+      <view class="tab-item {{current == 3040? 'active': ''}}" data-index="3040" bindtap='navSwitch'>已完成</view>
     </view>
   </view>
   <view class="{{ search.length? 'main-item-view-s': 'main-item-view' }}">
