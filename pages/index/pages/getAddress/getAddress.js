@@ -63,6 +63,7 @@ Page({
     })
   },
   bindKeyInput: function(e) {
+    console.log(e)
     let that = this;
     if (e.detail.value == '') {
       that.setData({

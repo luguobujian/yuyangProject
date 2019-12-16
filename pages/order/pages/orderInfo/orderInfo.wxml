@@ -38,10 +38,10 @@
     </view>
     <view class='some-address mb-8'>
       <view class='bb'>
-        <text>起运地：</text> {{ data.ReciveAddr }}
+        <text>起运地：</text> {{ data.SendAddr }}
       </view>
       <view class='bb'>
-        <text>目的地：</text> {{ data.SendAddr }}
+        <text>目的地：</text> {{ data.ReciveAddr }}
       </view>
     </view>
     <view class='some-address  mb-8'>
@@ -83,7 +83,7 @@
     <view wx:if="{{current == 10}}" class='btns'>
       <!-- <button class='go-map'> -->
       <!-- <image src='../../../../image/icon/go-address.png'></image> 查看当前位置</button> -->
-      <button class='no' bindtap='bindDel'>取消订单</button>
+      <button class='no' bindtap='bindDel'>(待配送)取消订单</button>
     </view>
     <view wx:if="{{current == 21 && data.ShowGps}}" class='btns'>
       <button class='go-map' bindtap='bindGoMap'>
@@ -106,16 +106,16 @@
       </view>
       <button class='grade' bindtap="bindGiveStar">评价</button>
     </view>
-    <view wx:if="{{current == 20212223}}" class='over-order'>
+    <view wx:if="{{current == 212223}}" class='over-order'>
       <view class='btns'>
-        <button class='go-map' bindtap='bindPay'>立即支付</button>
+        <button class='go-map' bindtap='bindPay'>(待付款)立即支付</button>
         <!-- <button class='no'>完成订单</button> -->
       </view>
     </view>
     <view wx:if="{{current == 3040}}" class='over-order'>
       <view class='btns'>
         <form bindsubmit="submit" report-submit='true'>
-          <button class='no' form-type='submit'>再次下单</button>
+          <button class='no' form-type='submit'>(已完成)再次下单</button>
         </form>
       </view>
     </view>

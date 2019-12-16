@@ -286,31 +286,40 @@ Page({
       })
       return
     }
-
+    if (that.data.radio == 0) {
+      that.setData({
+        SendName: e.detail.value,
+      })
+    } else if (that.data.radio == 1) {
+      that.setData({
+        ReciveName: e.detail.value,
+      })
+    }
     let role = e.currentTarget.dataset.role
     wx.request({
       url: that.data.server + 'api/Contacts?Name=' + e.detail.value + '&PhoneNum=&AddUser=' + app.globalData.UserID + '&pageIndex=0&pageSize=999',
       success: function(res) {
+        console.log(res)
         if (res.data.Results.length) {
           that.setData({
             thinks: res.data.Results
           })
           // if (that.data.radio == 0) {
           //   that.setData({
-          //     back: res.data.Results[0].Addr,
-          //     SendLong: res.data.Results[0].Long,
-          //     SendLat: res.data.Results[0].Lat,
-          //     SendName: e.detail.value,
-          //     SendTel: res.data.Results[0].PhoneNum
-          //   })
+          // back: res.data.Results[0].Addr,
+          // SendLong: res.data.Results[0].Long,
+          // SendLat: res.data.Results[0].Lat,
+          // SendName: e.detail.value,
+          // SendTel: res.data.Results[0].PhoneNum
+          // })
           // } else if (that.data.radio == 1) {
           //   that.setData({
-          //     go: res.data.Results[0].Addr,
-          //     ReciveLong: res.data.Results[0].Long,
-          //     ReciveLat: res.data.Results[0].Lat,
-          //     ReciveName: e.detail.value,
-          //     ReciveTel: res.data.Results[0].PhoneNum
-          //   })
+          // go: res.data.Results[0].Addr,
+          // ReciveLong: res.data.Results[0].Long,
+          // ReciveLat: res.data.Results[0].Lat,
+          // ReciveName: e.detail.value,
+          // ReciveTel: res.data.Results[0].PhoneNum
+          // })
           // }
         }
       }
@@ -465,6 +474,7 @@ Page({
           '&TempSendUser=' + this.data.SendName +
           '&TempReciveUser=' + this.data.ReciveName
       }
+      console.log(roleCon)
       wx.navigateTo({
         url: '../../index/pages/goOrder/goOrder?TruckType=' + this.data.carInfo.Name +
           '&TruckID=' + this.data.carInfo.ID +
@@ -480,7 +490,8 @@ Page({
           "&PreviewPrice=" + this.data.carInfo.PreviewPrice +
           "&StartPrice=" + this.data.carInfo.StartPrice +
           "&form_id=" + e.detail.formId +
-          '&AddOrder=30'
+          '&AddOrder=30' +
+          '&Urgent=0'
       })
     }
   },

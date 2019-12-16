@@ -11,7 +11,7 @@ Page({
     current: '10',
     data: '',
     dataLen: 1,
-    limit: 99999,
+    limit: 8,
     date1: '',
     date2: '',
     time1: '',
@@ -30,15 +30,17 @@ Page({
       current: e.currentTarget.dataset.index
     })
     this.getData()
+    this.setData({
+      limit: 8
+    })
   },
   getData: function() {
     let that = this
     let limit = that.data.limit;
     let State = this.data.current
-    // console.log(this.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit)
-    console.log(app.globalData)
+    console.log(this.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit)
     wx.request({
-      url: this.data.server + 'api/Order?AddUser=' + app.globalData.SomeUserInfo.ID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit + '&APP=1',
+      url: this.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit + '&APP=1',
       success: function(res) {
         console.log(res)
         that.setData({
@@ -61,7 +63,7 @@ Page({
       search: e.detail.value
     })
     console.log(e)
-    let limit = that.data.limit + 10;
+    let limit = that.data.limit + 8;
 
     wx.request({
       url: this.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit + '&Keywords=' + e.detail.value + '&Time1=&Time2=&APP=1',
@@ -81,7 +83,7 @@ Page({
       search: '',
       current: '10',
       data: '',
-      limit: 0,
+      limit: 8,
       date1: '',
       date2: '',
       time1: '',
@@ -118,7 +120,7 @@ Page({
   },
   getDateData() {
     let that = this
-    let limit = that.data.limit + 10;
+    let limit = that.data.limit + 8;
     let State = that.data.current
     if (!(that.data.date1 && that.data.date2 && that.data.time1 && that.data.time2)) {
       return
@@ -177,22 +179,8 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function() {
-    wx.showNavigationBarLoading();
-    let that = this;
-    let limit = that.data.limit;
-    let State = this.data.current
-    wx.request({
-      url: that.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit,
-      success: function(res) {
-        that.setData({
-          data: res.data.Results,
-          limit
-        })
-        wx.hideNavigationBarLoading();
-        // 停止下拉动作
-        wx.stopPullDownRefresh();
-      }
-    })
+    this.getData()
+    wx.stopPullDownRefresh()
   },
 
   /**
@@ -200,17 +188,11 @@ Page({
    */
   onReachBottom: function() {
     let that = this;
-    let limit = that.data.limit + 5;
-    let State = this.data.current
-    wx.request({
-      url: that.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit,
-      success: function(res) {
-        that.setData({
-          data: res.data.Results,
-          limit
-        })
-      }
+    let limit = that.data.limit + 8;
+    that.setData({
+      limit
     })
+    this.getData()
   },
 
   /**
