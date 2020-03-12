@@ -38,9 +38,11 @@ Page({
     let that = this
     let limit = that.data.limit;
     let State = this.data.current
-    console.log(this.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit)
+    let AddUser = app.globalData.UserID || null
+    console.log(AddUser)
+    console.log(this.data.server + 'api/Order?AddUser=' + AddUser + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit)
     wx.request({
-      url: this.data.server + 'api/Order?AddUser=' + app.globalData.UserID + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit + '&APP=1',
+      url: this.data.server + 'api/Order?AddUser=' + AddUser + '&reciveName=&recivePhone=&State=' + State + '&DriverID=0&pageIndex=0&pageSize=' + limit + '&APP=1',
       success: function(res) {
         console.log(res)
         that.setData({
